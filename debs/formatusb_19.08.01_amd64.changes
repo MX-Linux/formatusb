@@ -15,20 +15,20 @@ Changes:
  .
    * Initial release.
 Checksums-Sha1:
- fc208cf961c463c4c64491a6bb523a22ae703af9 587 formatusb_19.08.01.dsc
- ff111d5f302cdf15b495b63e7db4bceba91440b9 24272 formatusb_19.08.01.tar.xz
- 2982ad72befa5d72a49d921dbfc40b48f4a94947 481110 formatusb-dbgsym_19.08.01_amd64.deb
- 3a513284a2cd0fa2e4a760f4c25c23cad22c236b 10916 formatusb_19.08.01_amd64.buildinfo
- ab774b54982bcb006d1c3215ec108fc903e569af 33202 formatusb_19.08.01_amd64.deb
+ cac06811c462318b02802648604af1708029c0b2 590 formatusb_19.08.01.dsc
+ 62f0a7fc5543de178f7787cda29872249edf4e86 570056 formatusb_19.08.01.tar.xz
+ 68ef77524925be24a0a187df7767787559883c00 478366 formatusb-dbgsym_19.08.01_amd64.deb
+ 54315d03a0905fa8c530c54a3a3a07e5f2825440 10916 formatusb_19.08.01_amd64.buildinfo
+ 7c7c1f5964321bf338ab7b1b4f6328bec3f45a5a 32622 formatusb_19.08.01_amd64.deb
 Checksums-Sha256:
- 85c8e0acb6737e3ec07277863820be1f2ebc89b89569c207fc7f9376953affc1 587 formatusb_19.08.01.dsc
- f740e3d77a73d2b8c6da430ec86b73650600bce3c20ca4de54e00adc3d015651 24272 formatusb_19.08.01.tar.xz
- b2e6b35e44a32879514b780107b9f33832c67382203646881897375eef786515 481110 formatusb-dbgsym_19.08.01_amd64.deb
- e3d515a84f1270febb1b477fc5a5c28b8e06c01a67c44d7a9152aa46d045b948 10916 formatusb_19.08.01_amd64.buildinfo
- 43e42021513bdd2f842b3aab5925b2d749059717a2576fbc453bccb24a693ab4 33202 formatusb_19.08.01_amd64.deb
+ 9b6243b4be48e1b263c5ee66c7f8ca75aa9e2f29fe8531bfe7fbb9ea6e64d442 590 formatusb_19.08.01.dsc
+ 3b33b44eb916e34b37fda196719c6e66bda1ef4df350d12fe124db5a4a6b1eba 570056 formatusb_19.08.01.tar.xz
+ 8dd3266dd7b25d44f24b81c5ac37d287b606a1cabd8bab8d001aac23b8b0c071 478366 formatusb-dbgsym_19.08.01_amd64.deb
+ 4be719dc9d49909031ff55e340127eace5c484d359becbf077d28766b8840f01 10916 formatusb_19.08.01_amd64.buildinfo
+ 97c7343aaa6e6d62bb01f0a35a4b3b3cb33da308a91fec76a6a99f75ddf26da5 32622 formatusb_19.08.01_amd64.deb
 Files:
- 82180acafe9c9ddc01adc7a1d3045e55 587 admin optional formatusb_19.08.01.dsc
- dd515e2dbb471bba2c24139aa3e78d53 24272 admin optional formatusb_19.08.01.tar.xz
- 863bc74f32bc893041d4270639b0aa0f 481110 debug optional formatusb-dbgsym_19.08.01_amd64.deb
- 3f846a4643346e1e3f1c08f6f886c268 10916 admin optional formatusb_19.08.01_amd64.buildinfo
- bd68be2f94115b841dc132dfbf6a3684 33202 admin optional formatusb_19.08.01_amd64.deb
+ 05bf80cea3764e76e11cf1a02f3d8697 590 admin optional formatusb_19.08.01.dsc
+ 244718a9575c3d6e1f06e4db85aea7e1 570056 admin optional formatusb_19.08.01.tar.xz
+ 476fa2224e9faabe711307fe0914405b 478366 debug optional formatusb-dbgsym_19.08.01_amd64.deb
+ 608249a9f41612435e7d30bcd3ac2ce3 10916 admin optional formatusb_19.08.01_amd64.buildinfo
+ eccae8909ad9b2331b66a9699fb876ea 32622 admin optional formatusb_19.08.01_amd64.deb

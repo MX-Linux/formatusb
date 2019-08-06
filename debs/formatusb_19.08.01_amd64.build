@@ -175,18 +175,18 @@ mainwindow.cpp:37:43: warning: unused parameter ‘args’ [-Wunused-parameter]
  MainWindow::MainWindow(const QStringList& args) :
                                            ^~~~
 mainwindow.cpp: In member function ‘void MainWindow::setup()’:
-mainwindow.cpp:93:17: warning: unused variable ‘validator’ [-Wunused-variable]
+mainwindow.cpp:87:17: warning: unused variable ‘validator’ [-Wunused-variable]
      QValidator *validator = new QRegExpValidator(rx, this);
                  ^~~~~~~~~
 mainwindow.cpp: In member function ‘void MainWindow::on_buttonAbout_clicked()’:
-mainwindow.cpp:289:154: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+mainwindow.cpp:283:154: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
              system("su " + user.toUtf8() + " -c \"mx-viewer file:///usr/share/doc/formatusb/license.html 'Format USB " + tr("License").toUtf8() + "'\"&");
                                                                                                                                                           ^
-mainwindow.cpp:291:109: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+mainwindow.cpp:285:109: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
              system("su " + user.toUtf8() + " -c \"xdg-open file:///usr/share/doc/formatusb/license.html\"&");
                                                                                                              ^
 mainwindow.cpp: In member function ‘void MainWindow::on_buttonHelp_clicked()’:
-mainwindow.cpp:326:25: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+mainwindow.cpp:320:25: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
      system(cmd.toUtf8());
                          ^
 g++ -m64 -Wl,-z,relro -o formatusb main.o mainwindow.o qrc_images.o moc_mainwindow.o   -L/usr/X11R6/lib64 -lcmd -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
