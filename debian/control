@@ -1,0 +1,22 @@
+Source: formatusb
+Section: admin
+Priority: optional
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Build-Depends: debhelper (>=9),
+               libcmd,
+               qt5-default,
+               qt5-qmake,
+               qttools5-dev-tools
+Standards-Version: 3.9.8
+
+Package: formatusb
+Architecture: any
+Depends: cli-shell-utils,
+         libcmd,
+         live-usb-maker,
+         menu,
+         xdg-utils | mx-viewer,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: gui wrapper for live-usb-maker (antix) format usb function
+ gui wrapper for live-usb-maker (antix) format usb function
