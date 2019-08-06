@@ -55,12 +55,6 @@ void MainWindow::makeUsb(const QString &options)
 
     // check amount of io on device before copy, this is in sectors
     start_io = cmd->getOutput("cat /sys/block/" + device + "/stat |awk '{print $7}'", QStringList() << "quiet").toInt();
-    //wipe partition table
-    cmd->getOutput("/bin/dd if=/dev/zero of=/dev/%1 bs=512 count=100").arg(device);
-    //format base partition table
-    cmd->getOutput("parted -s /dev/" + device + " mklabel msdos");
-    //make partition
-    cmd->getOutput("parted -s --align optimal /dev/" + device + " mkpart primary 0% 100%");
     ui->progressBar->setMinimum(start_io);
     qDebug() << "start io is " << start_io;
     ui->progressBar->setMaximum(iso_sectors+start_io);
