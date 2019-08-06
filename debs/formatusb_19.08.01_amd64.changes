@@ -1,7 +1,7 @@
 Format: 1.8
 Date: Mon, 05 Aug 2019 21:52:28 -0400
 Source: formatusb
-Binary: formatusb
+Binary: formatusb formatusb-dbgsym
 Architecture: source amd64
 Version: 19.08.01
 Distribution: mx
@@ -15,20 +15,20 @@ Changes:
  .
    * Initial release.
 Checksums-Sha1:
- cac06811c462318b02802648604af1708029c0b2 590 formatusb_19.08.01.dsc
- 62f0a7fc5543de178f7787cda29872249edf4e86 570056 formatusb_19.08.01.tar.xz
- 68ef77524925be24a0a187df7767787559883c00 478366 formatusb-dbgsym_19.08.01_amd64.deb
- 54315d03a0905fa8c530c54a3a3a07e5f2825440 10916 formatusb_19.08.01_amd64.buildinfo
- 7c7c1f5964321bf338ab7b1b4f6328bec3f45a5a 32622 formatusb_19.08.01_amd64.deb
+ ec0f704d8d05bac5fd85f4c80f3c9687ec786165 593 formatusb_19.08.01.dsc
+ 52d20bf7fda028a096554b00469936fdd86c0549 1006132 formatusb_19.08.01.tar.xz
+ d513f66c0367e075d630a71a307165cd21d45a0f 591788 formatusb-dbgsym_19.08.01_amd64.deb
+ 221ac629bdaeb9b9e03b01b9ff79a671aadbb3f4 10170 formatusb_19.08.01_amd64.buildinfo
+ f8fe9012b16173b9d7df92fbf76c5349eb52db18 33212 formatusb_19.08.01_amd64.deb
 Checksums-Sha256:
- 9b6243b4be48e1b263c5ee66c7f8ca75aa9e2f29fe8531bfe7fbb9ea6e64d442 590 formatusb_19.08.01.dsc
- 3b33b44eb916e34b37fda196719c6e66bda1ef4df350d12fe124db5a4a6b1eba 570056 formatusb_19.08.01.tar.xz
- 8dd3266dd7b25d44f24b81c5ac37d287b606a1cabd8bab8d001aac23b8b0c071 478366 formatusb-dbgsym_19.08.01_amd64.deb
- 4be719dc9d49909031ff55e340127eace5c484d359becbf077d28766b8840f01 10916 formatusb_19.08.01_amd64.buildinfo
- 97c7343aaa6e6d62bb01f0a35a4b3b3cb33da308a91fec76a6a99f75ddf26da5 32622 formatusb_19.08.01_amd64.deb
+ a4df373dc80537daaab47db9d408950ddf78d704c769ce3cc8aa67c6f04497c8 593 formatusb_19.08.01.dsc
+ 121ce79760dc2a50a33e0fffe1fb963aed1a441f9e25121322079b3cd674b68d 1006132 formatusb_19.08.01.tar.xz
+ 27337fec81e8796ebbbeb13bce139f9b05080fd7e7f71609e815ac6f2364b807 591788 formatusb-dbgsym_19.08.01_amd64.deb
+ cd30b228d49748660b0f4121bb83d1e5977659de73f2fbcb78f4badaada17bd5 10170 formatusb_19.08.01_amd64.buildinfo
+ 391d1d2b5c6dd5365e8cb976081ce01e490123039b2690be1d300f71b14e91fc 33212 formatusb_19.08.01_amd64.deb
 Files:
- 05bf80cea3764e76e11cf1a02f3d8697 590 admin optional formatusb_19.08.01.dsc
- 244718a9575c3d6e1f06e4db85aea7e1 570056 admin optional formatusb_19.08.01.tar.xz
- 476fa2224e9faabe711307fe0914405b 478366 debug optional formatusb-dbgsym_19.08.01_amd64.deb
- 608249a9f41612435e7d30bcd3ac2ce3 10916 admin optional formatusb_19.08.01_amd64.buildinfo
- eccae8909ad9b2331b66a9699fb876ea 32622 admin optional formatusb_19.08.01_amd64.deb
+ 17b6d2b39b94ca851a83517057d019e5 593 admin optional formatusb_19.08.01.dsc
+ a8f59d828e3f7f6ea8bec3b27e8e7a53 1006132 admin optional formatusb_19.08.01.tar.xz
+ 67ec73f9896f3a234bf9ccde40cbc5ad 591788 debug optional formatusb-dbgsym_19.08.01_amd64.deb
+ 478fc4c465d4c8b34072549fe723c42c 10170 admin optional formatusb_19.08.01_amd64.buildinfo
+ ad80df3947ce86b18838b6bbd65deb96 33212 admin optional formatusb_19.08.01_amd64.deb
