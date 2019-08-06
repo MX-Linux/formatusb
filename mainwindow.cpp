@@ -221,12 +221,22 @@ void MainWindow::updateOutput(QString out)
 // Next button clicked
 void MainWindow::on_buttonNext_clicked()
 {
+
     // on first page
     if (ui->stackedWidget->currentIndex() == 0) {
         if (ui->combo_Usb->currentText() == "") {
             QMessageBox::critical(this, tr("Error"), tr("Please select a USB device to write to"));
             return;
         }
+
+        //confirm action
+        int ans;
+        QString msg = tr("These actions will destroy all data on \n\n") + ui->combo_Usb->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
+                    ans = QMessageBox::warning(this, windowTitle(), msg,
+                                               QMessageBox::Yes, QMessageBox::No);
+                    if (ans != QMessageBox::Yes) {
+                        return;
+                    }
 
         if (cmd->isRunning()) {
             ui->stackedWidget->setCurrentWidget(ui->outputPage);
