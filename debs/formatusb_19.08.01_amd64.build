@@ -1,0 +1,234 @@
+ dpkg-buildpackage -rfakeroot -us -uc
+dpkg-buildpackage: info: source package formatusb
+dpkg-buildpackage: info: source version 19.08.01
+dpkg-buildpackage: info: source distribution mx
+dpkg-buildpackage: info: source changed by Dolphin Oracle <dolphinoracle@gmail.com>
+ dpkg-source --before-build formatusb
+dpkg-buildpackage: info: host architecture amd64
+ fakeroot debian/rules clean
+dh clean --parallel 
+   debian/rules override_dh_auto_clean
+make[1]: Entering directory '/media/dataext/development/working/formatusb'
+dh_auto_clean
+rm -f src/translations/*.qm
+make[1]: Leaving directory '/media/dataext/development/working/formatusb'
+   dh_clean -O--parallel
+ dpkg-source -b formatusb
+dpkg-source: info: using source format '3.0 (native)'
+dpkg-source: info: building formatusb in formatusb_19.08.01.tar.xz
+dpkg-source: info: building formatusb in formatusb_19.08.01.dsc
+ debian/rules build
+dh build --parallel 
+   dh_update_autotools_config -O--parallel
+   dh_auto_configure -O--parallel
+	qmake -makefile "QMAKE_CFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" QMAKE_LFLAGS_RELEASE=-Wl,-z,relro QMAKE_LFLAGS_DEBUG=-Wl,-z,relro QMAKE_STRIP=: PREFIX=/usr
+Info: creating stash file /media/dataext/development/working/formatusb/.qmake.stash
+   debian/rules override_dh_auto_build
+make[1]: Entering directory '/media/dataext/development/working/formatusb'
+lrelease src.pro
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_am.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ar.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_bg.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ca.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_cs.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_da.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_de.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_el.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_es.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_et.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_eu.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_fa.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_fi.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_fr.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_he_IL.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_hi.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_hr.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_hu.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_id.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_is.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_it.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ja.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ja_JP.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_kk.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ko.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_lt.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_mk.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_nb.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_nl.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_pl.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_pt.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_pt_BR.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ro.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_ru.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_sk.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_sl.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_sq.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_sr.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_sv.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_tr.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_uk.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_zh_CN.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+Updating '/media/dataext/development/working/formatusb/translations/formatusb_zh_TW.qm'...
+    Generated 0 translation(s) (0 finished and 0 unfinished)
+    Ignored 36 untranslated source text(s)
+head -n1 debian/changelog | sed -e "s/.*(\([^(]*\)).*/#define VERSION \"\1\"/" > version.h
+dh_auto_build -- QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE"
+	make -j4 QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS=DEFINES\+=NO_DEBUG_ON_CONSOLE
+make[2]: Entering directory '/media/dataext/development/working/formatusb'
+/usr/lib/x86_64-linux-gnu/qt5/bin/uic mainwindow.ui -o ui_mainwindow.h
+g++ -c -m64 -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -o main.o main.cpp
+/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images images.qrc -o qrc_images.cpp
+/usr/lib/x86_64-linux-gnu/qt5/bin/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/media/dataext/development/working/formatusb -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/6 -I/usr/include/x86_64-linux-gnu/c++/6 -I/usr/include/c++/6/backward -I/usr/lib/gcc/x86_64-linux-gnu/6/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+g++ -c -m64 -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -o qrc_images.o qrc_images.cpp
+g++ -c -m64 -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -o mainwindow.o mainwindow.cpp
+g++ -c -m64 -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -o moc_mainwindow.o moc_mainwindow.cpp
+main.cpp: In function ‘int main(int, char**)’:
+main.cpp:58:109: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+     system("[ -f " + log_name.toUtf8() + " ] && mv " + log_name.toUtf8() + " " + log_name.toUtf8() + ".old");
+                                                                                                             ^
+mainwindow.cpp: In constructor ‘MainWindow::MainWindow(const QStringList&)’:
+mainwindow.cpp:37:43: warning: unused parameter ‘args’ [-Wunused-parameter]
+ MainWindow::MainWindow(const QStringList& args) :
+                                           ^~~~
+mainwindow.cpp: In member function ‘void MainWindow::setup()’:
+mainwindow.cpp:93:17: warning: unused variable ‘validator’ [-Wunused-variable]
+     QValidator *validator = new QRegExpValidator(rx, this);
+                 ^~~~~~~~~
+mainwindow.cpp: In member function ‘void MainWindow::on_buttonAbout_clicked()’:
+mainwindow.cpp:289:154: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+             system("su " + user.toUtf8() + " -c \"mx-viewer file:///usr/share/doc/formatusb/license.html 'Format USB " + tr("License").toUtf8() + "'\"&");
+                                                                                                                                                          ^
+mainwindow.cpp:291:109: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+             system("su " + user.toUtf8() + " -c \"xdg-open file:///usr/share/doc/formatusb/license.html\"&");
+                                                                                                             ^
+mainwindow.cpp: In member function ‘void MainWindow::on_buttonHelp_clicked()’:
+mainwindow.cpp:326:25: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+     system(cmd.toUtf8());
+                         ^
+g++ -m64 -Wl,-z,relro -o formatusb main.o mainwindow.o qrc_images.o moc_mainwindow.o   -L/usr/X11R6/lib64 -lcmd -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+make[2]: Leaving directory '/media/dataext/development/working/formatusb'
+make[1]: Leaving directory '/media/dataext/development/working/formatusb'
+   dh_auto_test -O--parallel
+ fakeroot debian/rules binary
+dh binary --parallel 
+   dh_testroot -O--parallel
+   dh_prep -O--parallel
+   debian/rules override_dh_auto_install
+make[1]: Entering directory '/media/dataext/development/working/formatusb'
+dh_auto_install -- QMAKE=qmake-qt5 LRELEASE=lrelease-qt5 QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE"
+make[1]: Leaving directory '/media/dataext/development/working/formatusb'
+   dh_install -O--parallel
+   dh_installdocs -O--parallel
+   dh_installchangelogs -O--parallel
+   dh_installinit -O--parallel
+   dh_perl -O--parallel
+   dh_link -O--parallel
+   dh_strip_nondeterminism -O--parallel
+   dh_compress -O--parallel
+   dh_fixperms -O--parallel
+   dh_missing -O--parallel
+   dh_strip -O--parallel
+   dh_makeshlibs -O--parallel
+   debian/rules override_dh_shlibdeps
+make[1]: Entering directory '/media/dataext/development/working/formatusb'
+dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
+dpkg-shlibdeps: warning: package could avoid a useless dependency if debian/formatusb/usr/bin/formatusb was not linked against libGL.so.1 (it uses none of the library's symbols)
+make[1]: Leaving directory '/media/dataext/development/working/formatusb'
+   dh_installdeb -O--parallel
+   dh_gencontrol -O--parallel
+   dh_md5sums -O--parallel
+   debian/rules override_dh_builddeb
+make[1]: Entering directory '/media/dataext/development/working/formatusb'
+dh_builddeb -- -Z xz
+dpkg-deb: building package 'formatusb-dbgsym' in '../formatusb-dbgsym_19.08.01_amd64.deb'.
+dpkg-deb: building package 'formatusb' in '../formatusb_19.08.01_amd64.deb'.
+make[1]: Leaving directory '/media/dataext/development/working/formatusb'
+ dpkg-genbuildinfo
+ dpkg-genchanges  >../formatusb_19.08.01_amd64.changes
+dpkg-genchanges: info: including full source code in upload
+ dpkg-source --after-build formatusb
+dpkg-buildpackage: info: full upload; Debian-native package (full source is included)
