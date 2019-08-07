@@ -59,7 +59,8 @@ void MainWindow::makeUsb(const QString &options)
     qDebug() << "start io is " << start_io;
     ui->progressBar->setMaximum(iso_sectors+start_io);
     qDebug() << "max progress bar is " << ui->progressBar->maximum();
-
+    //clear partitions
+    qDebug() << cmd->getOutput("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
     setConnections();
     qDebug() << cmd->getOutput(cmdstr, QStringList() << "slowtick");
@@ -98,7 +99,6 @@ QString MainWindow::buildOptionList()
     }
     qDebug() << "usb device" << device << "label " << label;
     QString options;
-
     options = QString("live-usb-maker gui --format=" + format + " --color=off -t " + device);
 
     qDebug() << "Options: " << options;
