@@ -22,7 +22,6 @@ dh build --parallel
    dh_update_autotools_config -O--parallel
    dh_auto_configure -O--parallel
 	qmake -makefile "QMAKE_CFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_RELEASE=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" "QMAKE_CXXFLAGS_DEBUG=-g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2" QMAKE_LFLAGS_RELEASE=-Wl,-z,relro QMAKE_LFLAGS_DEBUG=-Wl,-z,relro QMAKE_STRIP=: PREFIX=/usr
-Info: creating stash file /media/dataext/development/working/formatusb/.qmake.stash
    debian/rules override_dh_auto_build
 make[1]: Entering directory '/media/dataext/development/working/formatusb'
 lrelease src.pro
@@ -167,12 +166,16 @@ g++ -c -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/format
 g++ -c -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -o qrc_images.o qrc_images.cpp
 /usr/lib/qt5/bin/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --include /media/dataext/development/working/formatusb/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/dataext/development/working/formatusb -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -I/usr/include/c++/8/backward -I/usr/lib/gcc/x86_64-linux-gnu/8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 g++ -c -pipe -g -O2 -fdebug-prefix-map=/media/dataext/development/working/formatusb=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -o moc_mainwindow.o moc_mainwindow.cpp
+main.cpp: In function ‘int main(int, char**)’:
+main.cpp:58:11: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
+     system("[ -f " + log_name.toUtf8() + " ] && mv " + log_name.toUtf8() + " " + log_name.toUtf8() + ".old");
+     ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mainwindow.cpp: In constructor ‘MainWindow::MainWindow(const QStringList&)’:
 mainwindow.cpp:37:43: warning: unused parameter ‘args’ [-Wunused-parameter]
  MainWindow::MainWindow(const QStringList& args) :
                         ~~~~~~~~~~~~~~~~~~~^~~~
 mainwindow.cpp: In member function ‘void MainWindow::setup()’:
-mainwindow.cpp:87:17: warning: unused variable ‘validator’ [-Wunused-variable]
+mainwindow.cpp:88:17: warning: unused variable ‘validator’ [-Wunused-variable]
      QValidator *validator = new QRegExpValidator(rx, this);
                  ^~~~~~~~~
 mainwindow.cpp: In member function ‘void MainWindow::on_buttonAbout_clicked()’:
@@ -186,10 +189,6 @@ mainwindow.cpp: In member function ‘void MainWindow::on_buttonHelp_clicked()�
 mainwindow.cpp:330:11: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
      system(cmd.toUtf8());
      ~~~~~~^~~~~~~~~~~~~~
-main.cpp: In function ‘int main(int, char**)’:
-main.cpp:58:11: warning: ignoring return value of ‘int system(const char*)’, declared with attribute warn_unused_result [-Wunused-result]
-     system("[ -f " + log_name.toUtf8() + " ] && mv " + log_name.toUtf8() + " " + log_name.toUtf8() + ".old");
-     ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 g++ -Wl,-z,relro -o formatusb main.o mainwindow.o qrc_images.o moc_mainwindow.o   -lcmd -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 make[2]: Leaving directory '/media/dataext/development/working/formatusb'
 make[1]: Leaving directory '/media/dataext/development/working/formatusb'

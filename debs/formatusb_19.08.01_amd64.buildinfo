@@ -4,20 +4,20 @@ Binary: formatusb
 Architecture: amd64 source
 Version: 19.08.01
 Checksums-Md5:
- 17b6d2b39b94ca851a83517057d019e5 593 formatusb_19.08.01.dsc
- 67ec73f9896f3a234bf9ccde40cbc5ad 591788 formatusb-dbgsym_19.08.01_amd64.deb
- ad80df3947ce86b18838b6bbd65deb96 33212 formatusb_19.08.01_amd64.deb
+ b097bcfce10a9bfdb58fa4f7b5d9b95d 593 formatusb_19.08.01.dsc
+ 979b6374860bb88c83545f60a1951c19 593444 formatusb-dbgsym_19.08.01_amd64.deb
+ 5f83ae4cfc69efe863bf5f37803e0f95 33508 formatusb_19.08.01_amd64.deb
 Checksums-Sha1:
- ec0f704d8d05bac5fd85f4c80f3c9687ec786165 593 formatusb_19.08.01.dsc
- d513f66c0367e075d630a71a307165cd21d45a0f 591788 formatusb-dbgsym_19.08.01_amd64.deb
- f8fe9012b16173b9d7df92fbf76c5349eb52db18 33212 formatusb_19.08.01_amd64.deb
+ 486e4ee4f0d489d997be18a57d864564a9dd0e12 593 formatusb_19.08.01.dsc
+ 61c736fe59798cca4a541690a4155bafc4733d53 593444 formatusb-dbgsym_19.08.01_amd64.deb
+ a9fd724bddc0aedec1504a98f24119f41a0461b4 33508 formatusb_19.08.01_amd64.deb
 Checksums-Sha256:
- a4df373dc80537daaab47db9d408950ddf78d704c769ce3cc8aa67c6f04497c8 593 formatusb_19.08.01.dsc
- 27337fec81e8796ebbbeb13bce139f9b05080fd7e7f71609e815ac6f2364b807 591788 formatusb-dbgsym_19.08.01_amd64.deb
- 391d1d2b5c6dd5365e8cb976081ce01e490123039b2690be1d300f71b14e91fc 33212 formatusb_19.08.01_amd64.deb
+ f0e04c4b72f576381fe5910891697630d7e611d912bc85604abdf51a4037d193 593 formatusb_19.08.01.dsc
+ 7a35d794a88c32daa008bb33e95ba5f49267ec883193c97871645587e2c5b314 593444 formatusb-dbgsym_19.08.01_amd64.deb
+ eca8d4eda663551ec20966c0d52e230699f5231d2824b8dab9a5b8a9dff64d46 33508 formatusb_19.08.01_amd64.deb
 Build-Origin: Debian
 Build-Architecture: amd64
-Build-Date: Tue, 06 Aug 2019 18:47:36 -0400
+Build-Date: Tue, 06 Aug 2019 21:52:09 -0400
 Build-Tainted-By:
  usr-local-has-libraries
  usr-local-has-programs
