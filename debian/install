@@ -3,3 +3,4 @@ formatusb.desktop	usr/share/applications
 authors.txt			usr/share/doc/formatusb
 license.html			usr/share/doc/formatusb
 translations/*.qm		usr/share/formatusb/locale
+help/*					usr/share/doc/formatusb/help

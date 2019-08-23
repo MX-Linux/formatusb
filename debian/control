@@ -18,5 +18,5 @@ Depends: cli-shell-utils,
          xdg-utils | mx-viewer,
          ${misc:Depends},
          ${shlibs:Depends}
-Description: gui wrapper for live-usb-maker (antix) format usb function
+Description: format usb devices
  gui wrapper for live-usb-maker (antix) format usb function
