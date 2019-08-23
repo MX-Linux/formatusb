@@ -318,7 +318,7 @@ void MainWindow::on_buttonAbout_clicked()
 // Help button clicked
 void MainWindow::on_buttonHelp_clicked()
 {
-    QString url = "files:///usr/share/doc/formatusb/help/formatusb.html";
+    QString url = "file:///usr/share/doc/formatusb/help/formatusb.html";
     QString exec = "xdg-open";
     if (system("command -v mx-viewer") == 0) { // use mx-viewer if available
         exec = "mx-viewer";
