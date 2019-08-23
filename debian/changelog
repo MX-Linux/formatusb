@@ -1,3 +1,15 @@
+formatusb (19.08.03) mx; urgency=medium
+
+  * added help file 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 22 Aug 2019 21:56:59 -0400
+
+formatusb (19.08.02) mx; urgency=medium
+
+  * modify control file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Mon, 12 Aug 2019 21:15:04 -0400
+
 formatusb (19.08.01) mx; urgency=medium
 
   * Initial release. 

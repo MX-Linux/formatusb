@@ -1,7 +1,7 @@
 /**********************************************************************
  *  mainwindow.cpp
  **********************************************************************
- * Copyright (C) 2017 MX Authors
+ * Copyright (C) 2019 MX Authors
  *
  * Authors: Dolphin Oracle
  *          MX Linux <http://mxlinux.org>
@@ -34,7 +34,7 @@
 
 #include <QDebug>
 
-MainWindow::MainWindow(const QStringList& args) :
+MainWindow::MainWindow(const QStringList& args)  :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -290,7 +290,7 @@ void MainWindow::on_buttonAbout_clicked()
 
         QString user = cmd.getOutput("logname");
         if (system("command -v mx-viewer") == 0) { // use mx-viewer if available
-            system("su " + user.toUtf8() + " -c \"mx-viewer file:///usr/share/doc/formatusb/license.html 'Format USB " + tr("License").toUtf8() + "'\"&");
+            system("su " + user.toUtf8() + " -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u " + user.toUtf8() + ") mx-viewer file:///usr/share/doc/formatusb/license.html 'Format USB " + tr("License").toUtf8() + "'\"&");
         } else {
             system("su " + user.toUtf8() + " -c \"xdg-open file:///usr/share/doc/formatusb/license.html\"&");
         }
@@ -318,7 +318,7 @@ void MainWindow::on_buttonAbout_clicked()
 // Help button clicked
 void MainWindow::on_buttonHelp_clicked()
 {
-    QString url = "https://mxlinux.org/wiki/help-files/help-format-usb";
+    QString url = "files:///usr/share/doc/formatusb/help/formatusb.html";
     QString exec = "xdg-open";
     if (system("command -v mx-viewer") == 0) { // use mx-viewer if available
         exec = "mx-viewer";
@@ -326,7 +326,7 @@ void MainWindow::on_buttonHelp_clicked()
 
     Cmd c;
     QString user = c.getOutput("logname");
-    QString cmd = QString("su " + user + " -c \"" + exec + " " + url + "\"&");
+    QString cmd = QString("su " + user + " -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u " + user + ") " + exec + " " + url + "\"&");
     system(cmd.toUtf8());
 }
 
