@@ -1,6 +1,6 @@
+authors.txt			usr/share/doc/formatusb
 formatusb		usr/bin
 formatusb.desktop	usr/share/applications
-authors.txt			usr/share/doc/formatusb
+help/*					usr/share/doc/formatusb/help
 license.html			usr/share/doc/formatusb
 translations/*.qm		usr/share/formatusb/locale
-help/*					usr/share/doc/formatusb/help
