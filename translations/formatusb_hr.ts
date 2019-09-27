@@ -4,7 +4,7 @@
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation>Ime_programa</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="46"/>
@@ -64,32 +64,32 @@
     <message>
         <location filename="mainwindow.ui" line="233"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Odaberite ciljani USB uređaj&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="266"/>
         <source>fat32</source>
-        <translation type="unfinished"/>
+        <translation>fat32</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="271"/>
         <source>ext4</source>
-        <translation type="unfinished"/>
+        <translation>ext4</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="276"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>exfat</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="281"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>ntfs</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="289"/>
         <source>Format</source>
-        <translation type="unfinished"/>
+        <translation>Formatiraj</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="309"/>
@@ -114,12 +114,12 @@
     <message>
         <location filename="mainwindow.cpp" line="179"/>
         <source>Format successful!</source>
-        <translation type="unfinished"/>
+        <translation>Uspješno formatiranje!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="181"/>
         <source>Failure</source>
-        <translation type="unfinished"/>
+        <translation>Neuspjeh</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="181"/>
@@ -134,19 +134,21 @@
     <message>
         <location filename="mainwindow.cpp" line="228"/>
         <source>Please select a USB device to write to</source>
-        <translation type="unfinished"/>
+        <translation>Molim odaberite USB uređaj na koji ćete pisati</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="234"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>Ove radnje će uništiti sve podatke na 
+
+</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="234"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>Želite li nastaviti?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="276"/>
@@ -161,7 +163,7 @@
     <message>
         <location filename="mainwindow.cpp" line="278"/>
         <source>Program for formatting USB devices</source>
-        <translation type="unfinished"/>
+        <translation>Program za formatiranje USB uređaja</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="280"/>

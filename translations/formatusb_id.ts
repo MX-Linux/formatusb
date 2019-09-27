@@ -14,7 +14,7 @@
     <message>
         <location filename="mainwindow.ui" line="49"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Tutup</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="56"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="mainwindow.ui" line="82"/>
         <source>Alt+H</source>
-        <translation type="unfinished"/>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="98"/>
@@ -156,7 +156,7 @@
     <message>
         <location filename="mainwindow.cpp" line="277"/>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>Versi:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="278"/>
@@ -166,18 +166,18 @@
     <message>
         <location filename="mainwindow.cpp" line="280"/>
         <source>Copyright (c) MX Linux</source>
-        <translation type="unfinished"/>
+        <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="281"/>
         <location filename="mainwindow.cpp" line="293"/>
         <source>License</source>
-        <translation type="unfinished"/>
+        <translation>Lisensi</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="282"/>
         <source>Changelog</source>
-        <translation type="unfinished"/>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="283"/>
@@ -187,7 +187,7 @@
     <message>
         <location filename="mainwindow.cpp" line="305"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Tutup</translation>
     </message>
 </context>
 <context>

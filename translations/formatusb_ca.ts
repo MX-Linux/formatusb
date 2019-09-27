@@ -69,7 +69,7 @@
     <message>
         <location filename="mainwindow.ui" line="266"/>
         <source>fat32</source>
-        <translation type="unfinished"/>
+        <translation>FAT32</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="271"/>
@@ -79,12 +79,12 @@
     <message>
         <location filename="mainwindow.ui" line="276"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>EXFAT</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="281"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>NTFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="289"/>
@@ -99,12 +99,12 @@
     <message>
         <location filename="mainwindow.ui" line="336"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"/>
+        <translation>USB-DATA</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="343"/>
         <source>File System Label</source>
-        <translation type="unfinished"/>
+        <translation>Etiqueta del Sistema de Fitxers</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="179"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="mainwindow.cpp" line="179"/>
         <source>Format successful!</source>
-        <translation type="unfinished"/>
+        <translation>Formatat correctament!</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="181"/>
@@ -124,7 +124,7 @@
     <message>
         <location filename="mainwindow.cpp" line="181"/>
         <source>Error encountered in the Format process</source>
-        <translation type="unfinished"/>
+        <translation>S&apos;ha trobat un error en el procés de Formatatge</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="228"/>
@@ -141,12 +141,13 @@
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>Aquestes accions destruiran totes les dades a
+</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="234"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>Voleu continuar?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="276"/>
@@ -161,7 +162,7 @@
     <message>
         <location filename="mainwindow.cpp" line="278"/>
         <source>Program for formatting USB devices</source>
-        <translation type="unfinished"/>
+        <translation>Programa per formatar dispositius USB</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="280"/>

@@ -69,27 +69,27 @@
     <message>
         <location filename="mainwindow.ui" line="266"/>
         <source>fat32</source>
-        <translation>fat32</translation>
+        <translation>FAT32</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="271"/>
         <source>ext4</source>
-        <translation>ext4</translation>
+        <translation>EXT4</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="276"/>
         <source>exfat</source>
-        <translation>exfat</translation>
+        <translation>exFAT</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="281"/>
         <source>ntfs</source>
-        <translation>ntfs</translation>
+        <translation>NTFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="289"/>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>Formatuj</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="309"/>
@@ -104,7 +104,7 @@
     <message>
         <location filename="mainwindow.ui" line="343"/>
         <source>File System Label</source>
-        <translation>Etykieta Systemu Plików</translation>
+        <translation>Etykieta systemu plików</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="179"/>

@@ -89,7 +89,7 @@
     <message>
         <location filename="mainwindow.ui" line="289"/>
         <source>Format</source>
-        <translation>Biçimlendirme</translation>
+        <translation>Biçim</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="309"/>
@@ -168,7 +168,7 @@
     <message>
         <location filename="mainwindow.cpp" line="280"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation>Telif Hakkı (c) MX Linux</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="281"/>

@@ -66,6 +66,7 @@ TRANSLATIONS += translations/formatusb_am.ts \
                 translations/formatusb_ko.ts \
                 translations/formatusb_lt.ts \
                 translations/formatusb_mk.ts \
+                translations/formatusb_mr.ts \
                 translations/formatusb_nb.ts \
                 translations/formatusb_nl.ts \
                 translations/formatusb_pl.ts \
