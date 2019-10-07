@@ -23,7 +23,7 @@
  **********************************************************************/
 
 
-
+#include "about.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "version.h"
@@ -37,6 +37,7 @@
 MainWindow::MainWindow(const QStringList& args)  :
     ui(new Ui::MainWindow)
 {
+    qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
     ui->setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     setup();
@@ -54,16 +55,16 @@ void MainWindow::makeUsb(const QString &options)
 {
 
     // check amount of io on device before copy, this is in sectors
-    start_io = cmd->getOutput("cat /sys/block/" + device + "/stat |awk '{print $7}'", QStringList() << "quiet").toInt();
+    start_io = cmd->getCmdOut("cat /sys/block/" + device + "/stat |awk '{print $7}'").toInt();
     ui->progressBar->setMinimum(start_io);
     qDebug() << "start io is " << start_io;
     ui->progressBar->setMaximum(iso_sectors+start_io);
     qDebug() << "max progress bar is " << ui->progressBar->maximum();
     //clear partitions
-    qDebug() << cmd->getOutput("live-usb-maker gui partition-clear --color=off -t " + device);
+    qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
     setConnections();
-    qDebug() << cmd->getOutput(cmdstr, QStringList() << "slowtick");
+    qDebug() << cmd->getCmdOut(cmdstr);
     //label drive
     labeldrive();
 }
@@ -131,7 +132,7 @@ void MainWindow::labeldrive()
         cmdstr = QString("exfatlabel /dev/" + device + partnum + " \"%1\"").arg(label);
     }
     qDebug() << "label string" << cmdstr;
-    cmd->getOutput(cmdstr);
+    cmd->getCmdOut(cmdstr);
 }
 
 // cleanup environment when window is closed
@@ -143,7 +144,7 @@ void MainWindow::cleanup()
 // build the USB list
 QStringList MainWindow::buildUsbList()
 {
-    QString drives = cmd->getOutput("lsblk --nodeps -nlo name,size,model,vendor -I 3,8,22,179,259");
+    QString drives = cmd->getCmdOut("lsblk --nodeps -nlo name,size,model,vendor -I 3,8,22,179,259");
     return removeUnsuitable(drives.split("\n"));
 }
 
@@ -155,7 +156,7 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
     for (const QString &line : devices) {
         name = line.split(" ").at(0);
         if (system(cli_utils.toUtf8() + "is_usb_or_removable " + name.toUtf8()) == 0) {
-            if (cmd->getOutput(cli_utils + "get_drive $(get_live_dev) ") != name) {
+            if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
                 list << line;
             }
         }
@@ -175,47 +176,51 @@ void MainWindow::cmdDone()
     ui->progressBar->setValue(ui->progressBar->maximum());
     setCursor(QCursor(Qt::ArrowCursor));
     ui->buttonBack->setEnabled(true);
-    if (cmd->getExitCode() == 0) {
+    if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
         QMessageBox::information(this, tr("Success"), tr("Format successful!"));
     } else {
         QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
     }
     cmd->disconnect();
+    timer.stop();
 }
 
 // set proc and timer connections
 void MainWindow::setConnections()
 {
-    connect(cmd, &Cmd::outputAvailable, this, &MainWindow::updateOutput);
-    connect(cmd, &Cmd::started, this, &MainWindow::cmdStart);
-    connect(cmd, &Cmd::runTime, this, &MainWindow::updateBar);
-    connect(cmd, &Cmd::finished, this, &MainWindow::cmdDone);
+    timer.start(1000);
+    connect(cmd, &QProcess::readyRead, this, &MainWindow::updateOutput);
+    connect(cmd, &QProcess::started, this, &MainWindow::cmdStart);
+    connect(&timer, &QTimer::timeout, this, &MainWindow::updateBar);
+    connect(cmd, static_cast<void (QProcess::*)(int)>(&QProcess::finished), this, &MainWindow::cmdDone);
 
 }
 
 void MainWindow::updateBar()
 {
-    int current_io = cmdprog->getOutput("cat /sys/block/" + device + "/stat | awk '{print $7}'", QStringList() << "quiet" << "slowtick").toInt();
+    int current_io = cmdprog->getCmdOut("cat /sys/block/" + device + "/stat | awk '{print $7}'").toInt();
     ui->progressBar->setValue(current_io);
 }
 
-void MainWindow::updateOutput(QString out)
+void MainWindow::updateOutput()
 {
     // remove escape sequences that are not handled by code
+    QString out = cmd->readAll();
     out.remove("[0m").remove("]0;").remove("").remove("").remove("[1000D").remove("[74C|").remove("[?25l").remove("[?25h").remove("[0;36m").remove("[1;37m");
-    if (out.contains("[10D[K")) { // escape sequence used to display the progress percentage
-        out.remove("[10D[K");
-        ui->outputBox->moveCursor(QTextCursor::StartOfLine);
-        QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_K, Qt::ControlModifier);
-        QCoreApplication::postEvent(ui->outputBox, event);
-        QString out_prog = out;
-        ui->progressBar->setValue(out_prog.remove(" ").remove("%").toInt());
-    }
+//    if (out.contains("[10D[K")) { // escape sequence used to display the progress percentage
+//        out.remove("[10D[K");
+//        ui->outputBox->moveCursor(QTextCursor::StartOfLine);
+//        QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_K, Qt::ControlModifier);
+//        QCoreApplication::postEvent(ui->outputBox, event);
+//        QString out_prog = out;
+//        ui->progressBar->setValue(out_prog.remove(" ").remove("%").toInt());
+//    }
 
     ui->outputBox->insertPlainText(out);
 
     QScrollBar *sb = ui->outputBox->verticalScrollBar();
     sb->setValue(sb->maximum());
+    qApp->processEvents();
 }
 
 // Next button clicked
@@ -232,13 +237,12 @@ void MainWindow::on_buttonNext_clicked()
         //confirm action
         int ans;
         QString msg = tr("These actions will destroy all data on \n\n") + ui->combo_Usb->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
-                    ans = QMessageBox::warning(this, windowTitle(), msg,
-                                               QMessageBox::Yes, QMessageBox::No);
-                    if (ans != QMessageBox::Yes) {
-                        return;
-                    }
-
-        if (cmd->isRunning()) {
+        ans = QMessageBox::warning(this, windowTitle(), msg,
+                                   QMessageBox::Yes, QMessageBox::No);
+        if (ans != QMessageBox::Yes) {
+            return;
+        }
+        if (cmd->state() != QProcess::NotRunning) {
             ui->stackedWidget->setCurrentWidget(ui->outputPage);
             return;
         }
@@ -272,46 +276,12 @@ void MainWindow::on_buttonBack_clicked()
 void MainWindow::on_buttonAbout_clicked()
 {
     this->hide();
-    QMessageBox msgBox(QMessageBox::NoIcon,
-                       tr("About") + " Format USB", "<p align=\"center\"><b><h2>Format USB</h2></b></p><p align=\"center\">" +
+    displayAboutMsgBox(tr("About %1").arg(this->windowTitle()), "<p align=\"center\"><b><h2>" + this->windowTitle() +"</h2></b></p><p align=\"center\">" +
                        tr("Version: ") + VERSION + "</p><p align=\"center\"><h3>" +
                        tr("Program for formatting USB devices") +
                        "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br /></p><p align=\"center\">" +
-                       tr("Copyright (c) MX Linux") + "<br /><br /></p>");
-    QPushButton *btnLicense = msgBox.addButton(tr("License"), QMessageBox::HelpRole);
-    QPushButton *btnChangelog = msgBox.addButton(tr("Changelog"), QMessageBox::HelpRole);
-    QPushButton *btnCancel = msgBox.addButton(tr("Cancel"), QMessageBox::NoRole);
-    btnCancel->setIcon(QIcon::fromTheme("window-close"));
-
-    msgBox.exec();
-
-    Cmd cmd;
-    if (msgBox.clickedButton() == btnLicense) {
-
-        QString user = cmd.getOutput("logname");
-        if (system("command -v mx-viewer") == 0) { // use mx-viewer if available
-            system("su " + user.toUtf8() + " -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u " + user.toUtf8() + ") mx-viewer file:///usr/share/doc/formatusb/license.html 'Format USB " + tr("License").toUtf8() + "'\"&");
-        } else {
-            system("su " + user.toUtf8() + " -c \"xdg-open file:///usr/share/doc/formatusb/license.html\"&");
-        }
-    } else if (msgBox.clickedButton() == btnChangelog) {
-    QDialog *changelog = new QDialog(this);
-    changelog->resize(600, 500);
-
-    QTextEdit *text = new QTextEdit;
-    text->setReadOnly(true);
-    text->setText(cmd.getOutput("zless /usr/share/doc/" + QFileInfo(QCoreApplication::applicationFilePath()).fileName()  + "/changelog.gz"));
-
-    QPushButton *btnClose = new QPushButton(tr("&Close"));
-    btnClose->setIcon(QIcon::fromTheme("window-close"));
-    connect(btnClose, &QPushButton::clicked, changelog, &QDialog::close);
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(text);
-    layout->addWidget(btnClose);
-    changelog->setLayout(layout);
-    changelog->exec();
-}
+                       tr("Copyright (c) MX Linux") + "<br /><br /></p>",
+                       "/usr/share/doc/formatusb/license.html", tr("%1 License").arg(this->windowTitle()), true);
     this->show();
 }
 
@@ -319,15 +289,7 @@ void MainWindow::on_buttonAbout_clicked()
 void MainWindow::on_buttonHelp_clicked()
 {
     QString url = "file:///usr/share/doc/formatusb/help/formatusb.html";
-    QString exec = "xdg-open";
-    if (system("command -v mx-viewer") == 0) { // use mx-viewer if available
-        exec = "mx-viewer";
-    }
-
-    Cmd c;
-    QString user = c.getOutput("logname");
-    QString cmd = QString("su " + user + " -c \"env XDG_RUNTIME_DIR=/run/user/$(id -u " + user + ") " + exec + " " + url + "\"&");
-    system(cmd.toUtf8());
+    displayDoc(url, tr("%1 Help").arg(this->windowTitle()), true);
 }
 
 void MainWindow::on_buttonRefresh_clicked()

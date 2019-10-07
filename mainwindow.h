@@ -65,7 +65,7 @@ private slots:
     void cmdDone();
     void setConnections();
     void updateBar();
-    void updateOutput(QString line);
+    void updateOutput();
     void on_buttonNext_clicked();
     void on_buttonAbout_clicked();
     void on_buttonHelp_clicked();
@@ -79,7 +79,7 @@ private:
     Cmd *cmdprog;
     QString device;
     QString label;
-    QTimer *timer;
+    QTimer timer;
     bool advancedOptions;
     int height;
     int iso_sectors;
