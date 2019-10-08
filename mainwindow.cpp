@@ -100,7 +100,7 @@ QString MainWindow::buildOptionList()
     }
     qDebug() << "usb device" << device << "label " << label;
     QString options;
-    options = QString("live-usb-maker gui --format=" + format + " --color=off -t " + device);
+        options = QString("live-usb-maker gui --format=" + format + " --color=off -t " + device);
 
     qDebug() << "Options: " << options;
     return options;
@@ -115,6 +115,10 @@ void MainWindow::labeldrive()
     if ( device.contains("mmc")) {
         partnum = "p1";
     }
+
+    cmdstr = ("umount /dev/" + device + partnum);
+    qDebug() << "umount string" << cmdstr;
+    cmd->getCmdOut(cmdstr);
 
     if ( ui->comboBoxDataFormat->currentText() == "fat32") {
         cmdstr = QString("fatlabel /dev/" + device + partnum + " \"%1\"").arg(label);
