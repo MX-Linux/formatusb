@@ -1,3 +1,9 @@
+formatusb (19.10.02) mx; urgency=medium
+
+  * fix lsblk command  
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 26 Oct 2019 18:48:45 -0400
+
 formatusb (19.10.01) mx; urgency=medium
 
   * revised label schema 
