@@ -137,6 +137,9 @@ void MainWindow::labeldrive()
     }
     qDebug() << "label string" << cmdstr;
     cmd->getCmdOut(cmdstr);
+    //partprobe command string
+    cmdstr = ("partprobe /dev/" + device + partnum);
+    system(cmdstr.toUtf8());
 }
 
 // cleanup environment when window is closed
