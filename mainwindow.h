@@ -71,7 +71,6 @@ private slots:
     void on_buttonHelp_clicked();
     void on_buttonBack_clicked();
     void on_buttonRefresh_clicked();
-    void labeldrive();
 
 private:
     Ui::MainWindow *ui;

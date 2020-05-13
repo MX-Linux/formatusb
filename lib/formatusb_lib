@@ -1,0 +1,71 @@
+#!/bin/bash
+
+## bash library for formatusb
+
+##arguments format, label, device
+
+partnum="1"
+
+device="$1"
+format="$2"
+label="$3"
+
+echo device is $device
+echo format is $format
+echo label is $label
+
+
+clearpartions(){
+live-usb-maker gui partition-clear --color=off -t "$device"
+}
+
+makeusb(){
+live-usb-maker gui --format="$format" --color=off -t "$device"
+}
+
+labelusb(){
+
+#if device is mmc, then partnum=p1
+
+if [[ "mmc" == *"$device"* ]]; then
+	partnum="p1"
+fi
+
+#ensure device is unmounted
+umount /dev/"$device$partnum"
+
+    
+case $format in 
+
+	vfat) fatlabel /dev/"$device$partnum" "$label" ;;
+	
+	ext4)  e2label /dev/"$device$partnum" "$label" ;;
+	
+	ntfs)  ntfslabel /dev/"$device$partnum" "$label" ;;
+	
+	exfat) exfatlabel /dev/"$device$partnum" "$label" ;;
+	
+	*)	echo "unknown format, exiting" ;;
+
+esac
+}
+partitionrefresh(){
+
+partprobe "/dev/$device"
+
+}
+
+main(){
+
+echo main launched
+
+	clearpartions
+	sleep 1
+	makeusb
+	sleep 1
+	labelusb
+	sleep 1
+	partitionrefresh
+}
+
+main

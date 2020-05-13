@@ -61,12 +61,12 @@ void MainWindow::makeUsb(const QString &options)
     ui->progressBar->setMaximum(iso_sectors+start_io);
     qDebug() << "max progress bar is " << ui->progressBar->maximum();
     //clear partitions
-    qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
+    //qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
     setConnections();
     qDebug() << cmd->getCmdOut(cmdstr);
     //label drive
-    labeldrive();
+    //labeldrive();
 }
 
 // setup versious items first time program runs
@@ -100,46 +100,10 @@ QString MainWindow::buildOptionList()
     }
     qDebug() << "usb device" << device << "label " << label;
     QString options;
-        options = QString("live-usb-maker gui --format=" + format + " --color=off -t " + device);
+        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\"'");
 
     qDebug() << "Options: " << options;
     return options;
-}
-
-// label new drive
-void MainWindow::labeldrive()
-{
-    QString cmdstr;
-    QString target;
-    QString partnum = "1";
-    if ( device.contains("mmc")) {
-        partnum = "p1";
-    }
-
-    cmdstr = ("umount /dev/" + device + partnum);
-    qDebug() << "umount string" << cmdstr;
-    cmd->getCmdOut(cmdstr);
-
-    if ( ui->comboBoxDataFormat->currentText() == "fat32") {
-        cmdstr = QString("fatlabel /dev/" + device + partnum + " \"%1\"").arg(label);
-    }
-
-    if ( ui->comboBoxDataFormat->currentText() == "ext4") {
-        cmdstr = QString("e2label /dev/" + device + partnum + " \"%1\"").arg(label);
-    }
-
-    if ( ui->comboBoxDataFormat->currentText() == "ntfs") {
-        cmdstr = QString("ntfslabel /dev/" + device + partnum + " \"%1\"").arg(label);
-    }
-
-    if ( ui->comboBoxDataFormat->currentText() == "exfat") {
-        cmdstr = QString("exfatlabel /dev/" + device + partnum + " \"%1\"").arg(label);
-    }
-    qDebug() << "label string" << cmdstr;
-    cmd->getCmdOut(cmdstr);
-    //partprobe command string
-    cmdstr = ("partprobe /dev/" + device + partnum);
-    system(cmdstr.toUtf8());
 }
 
 // cleanup environment when window is closed
