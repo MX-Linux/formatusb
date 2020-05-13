@@ -55,6 +55,15 @@ partprobe "/dev/$device"
 
 }
 
+cleanuplog(){
+	if [ -e "/var/log/formatusb.log" ]; then
+		cp /var/log/formatusb.log /var/log/formatusb.log.old
+	fi
+	if [ -e "/tmp/formatusb.log" ]; then
+		cp /tmp/formatusb.log /var/log/formatusb.log
+	fi
+}
+
 main(){
 
 echo main launched
@@ -66,6 +75,7 @@ echo main launched
 	labelusb
 	sleep 1
 	partitionrefresh
+	cleanuplog
 }
 
 main

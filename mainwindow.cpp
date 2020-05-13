@@ -109,7 +109,8 @@ QString MainWindow::buildOptionList()
 // cleanup environment when window is closed
 void MainWindow::cleanup()
 {
-
+    QString log_name = "/tmp/formatusb.log";
+    system("[ -f " + log_name.toUtf8() + " ] && rm " + log_name.toUtf8());
 }
 
 // build the USB list

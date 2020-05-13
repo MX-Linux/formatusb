@@ -54,8 +54,6 @@ int main(int argc, char *argv[])
     a.installTranslator(&qtTran);
 
     QString log_name= "/tmp/formatusb.log";
-    // archive old log
-    system("[ -f " + log_name.toUtf8() + " ] && mv " + log_name.toUtf8() + " " + log_name.toUtf8() + ".old");
     // Set the logging files
     logFile.reset(new QFile(log_name));
     // Open the file logging
@@ -69,16 +67,9 @@ int main(int argc, char *argv[])
 
     qDebug() << "Program Version:" << VERSION;
 
-//    if (getuid() == 0) {
         MainWindow w(a.arguments());
         w.show();
-        return a.exec();
-//    } else {
-//        QApplication::beep();
-//        QMessageBox::critical(0, QString::null,
-//                              QApplication::tr("You must run this program as root."));
-//        return EXIT_FAILURE;
-//    }
+        return a.exec();        
 }
 
 
