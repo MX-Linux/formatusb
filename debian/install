@@ -6,3 +6,4 @@ license.html		usr/share/doc/formatusb
 lib/*				usr/lib/formatusb
 polkit-actions/*	usr/share/polkit-1/actions
 translations/*.qm	usr/share/formatusb/locale
+formatusb.png   usr/share/pixmaps

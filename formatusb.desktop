@@ -92,6 +92,6 @@ Comment[zh_TW]=Format USB devices
 Exec=formatusb
 Terminal=false
 Type=Application
-Icon=media-removable
+Icon=formatusb
 Categories=System;MX-Utilities;X-antiX;
 NoDisplay=false
