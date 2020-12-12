@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Program_Name</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="formatusb"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
     <layout class="QGridLayout" name="buttonBar" columnstretch="0,0,0,0,0,0,0,0,0,0,0">
