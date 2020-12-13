@@ -10,7 +10,7 @@ Architecture: any
 Depends: cli-shell-utils,
          live-usb-maker,
          menu,
-         xdg-utils | mx-viewer,
+         mx-viewer | antix-viewer| xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: format usb devices
