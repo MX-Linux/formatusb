@@ -348,17 +348,17 @@
          </property>
         </spacer>
        </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxShowAll">
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkBoxshowpartitions">
          <property name="text">
-          <string>Show all devices</string>
+          <string>Show partitions</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBoxshowpartitions">
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="checkBoxShowAll">
          <property name="text">
-          <string>Show Partitions</string>
+          <string>Show all devices</string>
          </property>
         </widget>
        </item>
