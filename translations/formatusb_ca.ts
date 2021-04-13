@@ -90,12 +90,12 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="354"/>
-        <source>Show all devices</source>
+        <source>Show partitions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="361"/>
-        <source>Show Partitions</source>
+        <source>Show all devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
