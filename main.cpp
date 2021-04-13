@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QTranslator appTran;
-    appTran.load(QString("formatusb") + QLocale::system().name(), "/usr/share/formatusb/locale");
+    appTran.load(QString("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale");
     a.installTranslator(&appTran);
 
     qDebug() << "Program Version:" << VERSION;

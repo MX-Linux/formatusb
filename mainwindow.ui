@@ -14,7 +14,8 @@
    <string>Program_Name</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="formatusb"/>
+   <iconset theme="formatusb">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
@@ -230,6 +231,13 @@
      </property>
      <widget class="QWidget" name="selectionPage">
       <layout class="QGridLayout" name="gridLayout">
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEditFSlabel">
+         <property name="placeholderText">
+          <string>USB-DATA</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -237,6 +245,47 @@
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Format</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="buttonRefresh">
+         <property name="text">
+          <string>Refresh drive list</string>
+         </property>
+         <property name="icon">
+          <iconset theme="view-refresh">
+           <normaloff>.</normaloff>.</iconset>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>File System Label</string>
          </property>
         </widget>
        </item>
@@ -262,7 +311,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="2" column="1">
         <widget class="QComboBox" name="comboBoxDataFormat">
          <item>
           <property name="text">
@@ -286,14 +335,7 @@
          </item>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Format</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -306,44 +348,17 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="buttonRefresh">
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBoxShowAll">
          <property name="text">
-          <string>Refresh drive list</string>
-         </property>
-         <property name="icon">
-          <iconset theme="view-refresh">
-           <normaloff>.</normaloff>.</iconset>
-         </property>
-         <property name="autoDefault">
-          <bool>false</bool>
+          <string>Show all devices</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEditFSlabel">
-         <property name="placeholderText">
-          <string>USB-DATA</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_3">
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="checkBoxshowpartitions">
          <property name="text">
-          <string>File System Label</string>
+          <string>Show Partitions</string>
          </property>
         </widget>
        </item>

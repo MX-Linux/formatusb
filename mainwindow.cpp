@@ -53,9 +53,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::makeUsb(const QString &options)
 {
+    //get a device value if action is on a partition
+    QString device_to_check = device;
+    if (device.contains("nvme")){
+        device_to_check = device.section("p",0,0);
+    }
+    if (device.contains("mmc")){
+        device_to_check = device.section("p",0,0);
+    }
+
+    if (device.contains("sd")){
+        device_to_check = device.left(3);
+    }
 
     // check amount of io on device before copy, this is in sectors
-    start_io = cmd->getCmdOut("cat /sys/block/" + device + "/stat |awk '{print $7}'").toInt();
+    start_io = cmd->getCmdOut("cat /sys/block/" + device_to_check + "/stat |awk '{print $7}'").toInt();
     ui->progressBar->setMinimum(start_io);
     qDebug() << "start io is " << start_io;
     ui->progressBar->setMaximum(iso_sectors+start_io);
@@ -63,6 +75,7 @@ void MainWindow::makeUsb(const QString &options)
     //clear partitions
     //qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
+    //QString cmdstr = "echo test options";
     setConnections();
     qDebug() << cmd->getCmdOut(cmdstr);
     //label drive
@@ -85,8 +98,6 @@ void MainWindow::setup()
     height = this->heightMM();
     ui->lineEditFSlabel->setText("USB-DATA");
 
-    QRegExp rx("\\w*");
-    QValidator *validator = new QRegExpValidator(rx, this);
 }
 
 // Build the option list to be passed to live-usb-maker
@@ -98,10 +109,15 @@ QString MainWindow::buildOptionList()
     if (format.contains("fat32")){
         format = "vfat";
     }
-    qDebug() << "usb device" << device << "label " << label;
     QString options;
-        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\"'");
+    if (ui->checkBoxshowpartitions->isChecked()) {
+        qDebug() << "partition is" << device << "label " << label;
+        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" part'");
 
+    } else {
+        qDebug() << "usb device" << device << "label " << label;
+        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\"'");
+    }
     qDebug() << "Options: " << options;
     return options;
 }
@@ -115,8 +131,13 @@ void MainWindow::cleanup()
 
 // build the USB list
 QStringList MainWindow::buildUsbList()
-{
-    QString drives = cmd->getCmdOut("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259");
+{   QString drives;
+    if (ui->checkBoxshowpartitions->isChecked()){
+        drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 |grep -v disk");
+    } else {
+        drives = cmd->getCmdOut("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259 ");
+    }
+
     return removeUnsuitable(drives.split("\n"));
 }
 
@@ -125,14 +146,22 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
 {
     QStringList list;
     QString name;
+    bool showall = ui->checkBoxShowAll->isChecked();
     for (const QString &line : devices) {
         name = line.split(" ").at(0);
-        if (system(cli_utils.toUtf8() + "is_usb_or_removable " + name.toUtf8()) == 0) {
+        if (!showall){
+            if (system(cli_utils.toUtf8() + "is_usb_or_removable " + name.toUtf8()) == 0) {
+                if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
+                    list << line;
+                }
+            }
+        } else {
             if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
                 list << line;
             }
         }
     }
+
     return list;
 }
 
@@ -170,8 +199,10 @@ void MainWindow::setConnections()
 
 void MainWindow::updateBar()
 {
-    int current_io = cmdprog->getCmdOut("cat /sys/block/" + device + "/stat | awk '{print $7}'").toInt();
-    ui->progressBar->setValue(current_io);
+    if (!ui->checkBoxshowpartitions->isChecked()){
+        int current_io = cmdprog->getCmdOut("cat /sys/block/" + device + "/stat | awk '{print $7}'").toInt();
+        ui->progressBar->setValue(current_io);
+    }
 }
 
 void MainWindow::updateOutput()
@@ -270,3 +301,13 @@ void MainWindow::on_buttonRefresh_clicked()
     ui->combo_Usb->addItems(buildUsbList());
 }
 
+
+void MainWindow::on_checkBoxShowAll_clicked()
+{
+    on_buttonRefresh_clicked();
+}
+
+void MainWindow::on_checkBoxshowpartitions_clicked()
+{
+     on_buttonRefresh_clicked();
+}

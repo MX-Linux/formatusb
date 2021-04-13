@@ -4,16 +4,15 @@
 
 ##arguments format, label, device
 
-partnum="1"
+partnum=""
 
 device="$1"
 format="$2"
 label="$3"
+part="$4"
 
-echo device is $device
-echo format is $format
-echo label is $label
-
+echo device is $device format is $format 
+echo label is $label partition work is $part
 
 clearpartions(){
 live-usb-maker gui partition-clear --color=off -t "$device"
@@ -25,10 +24,23 @@ live-usb-maker gui --format="$format" --color=off -t "$device"
 
 labelusb(){
 
-#if device is mmc, then partnum=p1
 
-if [[ "mmc" == *"$device"* ]]; then
-	partnum="p1"
+#ensure some partnums when working on devices
+
+if [ "$part" != "part" ]; then
+	
+	partnum="1"
+	
+	#if device is mmc, then partnum=p1
+
+	if [[ "mmc" == *"$device"* ]]; then
+		partnum="p1"
+	fi
+
+	#if device is nvme, then partnum=p1
+	if [[ "nvme" == *"$device"* ]]; then
+		partnum="p1"
+	fi
 fi
 
 #ensure device is unmounted
@@ -64,14 +76,42 @@ cleanuplog(){
 	fi
 }
 
+format_partitions(){
+	
+	echo "formatting partitions"
+	
+	#ensure device is unmounted
+	umount /dev/"$device"
+
+	case $format in 
+
+	vfat) mkfs.fat -F 32 /dev/"$device" ;;
+	
+	ext4)  mkfs.ext4 /dev/"$device" ;;
+	
+	ntfs)  mkfs.ntfs -Q /dev/"$device" ;;
+	
+	exfat) mkfs.exfat /dev/"$device" ;;
+	
+	*)	echo "unknown format, exiting" ;;
+
+esac
+	
+	
+}
+
 main(){
 
 echo main launched
 
+if [ "$part" = "part" ]; then
+	format_partitions
+else
 	clearpartions
 	sleep 1
 	makeusb
 	sleep 1
+fi
 	labelusb
 	sleep 1
 	partitionrefresh

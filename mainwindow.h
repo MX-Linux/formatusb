@@ -72,6 +72,10 @@ private slots:
     void on_buttonBack_clicked();
     void on_buttonRefresh_clicked();
 
+    void on_checkBoxShowAll_clicked();
+
+    void on_checkBoxshowpartitions_clicked();
+
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
