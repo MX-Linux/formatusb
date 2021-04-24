@@ -44,7 +44,7 @@ if [ "$part" != "part" ]; then
 fi
 
 #ensure device is unmounted
-umount /dev/"$device$partnum"
+umount -q /dev/"$device$partnum"
 
     
 case $format in 
@@ -80,6 +80,10 @@ format_partitions(){
 	
 	echo "formatting partitions"
 	
+	local USER=$(id -u $(/usr/bin/logname))
+	local GROUP=$(getent group users |awk -F: '{print $3}')
+	local USERNAME=$(/usr/bin/logname)
+		
 	#ensure device is unmounted
 	umount /dev/"$device"
 
@@ -87,13 +91,21 @@ format_partitions(){
 
 	vfat) mkfs.fat -F 32 /dev/"$device" ;;
 	
-	ext4)  mkfs.ext4 /dev/"$device" ;;
+	ext4)  mkfs.ext4 /dev/"$device"
+		   mkdir -p /tmp/formatmountpoint
+		   mount -t ext4 /dev/"$device" /tmp/formatmountpoint
+		   echo "Changing owner of partition to $USERNAME:users"
+		   chown $USERNAME:users /tmp/formatmountpoint
+		   chmod 775 -R /tmp/formatmountpoint
+		   umount /tmp/formatmountpoint
+		   rmdir /tmp/formatmountpoint;;
 	
 	ntfs)  mkfs.ntfs -Q /dev/"$device" ;;
 	
 	exfat) mkfs.exfat /dev/"$device" ;;
 	
 	*)	echo "unknown format, exiting" ;;
+
 
 esac
 	
