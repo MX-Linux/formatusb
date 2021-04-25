@@ -12,11 +12,68 @@ label="$3"
 part="$4"
 
 echo device is $device format is $format 
-echo label is $label partition work is $part
+echo label is $label
 
 clearpartions(){
-live-usb-maker gui partition-clear --color=off -t "$device"
+	live-usb-maker gui partition-clear --color=off -t "$device"
 }
+
+unmount_partitions()
+{
+	local umount_device=$device*
+	umount /dev/$umount_device 2>/dev/null
+}
+
+##clear_partitions from live-usb-maker by James Bowlin (BitJam) for antiX
+clear_partitions()
+{
+    local dev=/dev/$device
+    local bytes=$(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
+    local block_size=512
+    local pt_size=$((17 * 1024))
+    local pt_cnt=$((pt_size / block_size))
+    local sneaky_bytes=$((32 * 1024))
+    local sneaky_offset=$((sneaky_bytes / block_size))
+
+    local total_blocks=$((bytes / $block_size))
+    #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks" 
+
+    # Clear out previous primary partition table
+    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt
+    
+    sleep 1
+
+    # Clear out sneaky iso-hybrid partition table
+    dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=64
+
+	sleep 1
+	
+    [ -n "$bytes" ] || return
+    local offset=$((total_blocks - $pt_cnt))
+
+    # Clear out secondary gpt partition table
+    dd conv=notrunc if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=$offset
+    sleep 1
+    # Tell kernel the partition table has changed
+    echo "refresh partitions info $dev"
+    /sbin/partprobe -s $dev
+    sleep 1
+}
+
+create_partition()
+{
+	local dev=/dev/$device
+	unmount_partitions
+	sleep 1
+	parted -s $dev mklabel msdos
+	sleep 1
+	/sbin/partprobe $dev
+	parted -s -a optimal $dev mkpart primary 1 100%
+	sleep 1
+	/sbin/partprobe $dev
+	sleep 1
+}
+
 
 makeusb(){
 live-usb-maker gui --format="$format" --color=off -t "$device"
@@ -24,27 +81,8 @@ live-usb-maker gui --format="$format" --color=off -t "$device"
 
 labelusb(){
 
-
-#ensure some partnums when working on devices
-
-if [ "$part" != "part" ]; then
-	
-	partnum="1"
-	
-	#if device is mmc, then partnum=p1
-
-	if [[ "mmc" == *"$device"* ]]; then
-		partnum="p1"
-	fi
-
-	#if device is nvme, then partnum=p1
-	if [[ "nvme" == *"$device"* ]]; then
-		partnum="p1"
-	fi
-fi
-
 #ensure device is unmounted
-umount -q /dev/"$device$partnum"
+umount -q /dev/"$device$partnum" 2>/dev/null
 
     
 case $format in 
@@ -62,8 +100,28 @@ case $format in
 esac
 }
 partitionrefresh(){
+	
+	##need device not partition
 
-partprobe "/dev/$device"
+	local refreshdevice
+
+	#if mmc device
+	if [[ "$device" == *"mmc"* ]]; then
+		refreshdevice=${device%p*}
+	fi
+
+	#if device is nvme, then partnum=p1
+	if [[ "$device" == *"$nvme"* ]]; then
+		refreshdevice=${device%p*}
+	fi
+	#if device is sdXY, 
+	if [[ "$device" == *"sd"* ]]; then
+		refreshdevice=${device//[0-9]/}
+	fi
+
+echo "Refresh Partitions $refreshdevice"
+
+/sbin/partprobe "/dev/$refreshdevice"
 
 }
 
@@ -74,35 +132,47 @@ cleanuplog(){
 	if [ -e "/tmp/formatusb.log" ]; then
 		cp /tmp/formatusb.log /var/log/formatusb.log
 	fi
+	
+}
+
+partnumber()
+{
+	#ensure some partnums when working on devices
+
+if [ "$part" != "part" ]; then
+	
+	partnum="1"
+	
+	#if device is mmc, then partnum=p1
+
+	if [[ "$device" == *"mmc"* ]]; then
+		partnum="p1"
+	fi
+
+	#if device is nvme, then partnum=p1
+	if [[ "$device" == *"nvme"* ]]; then
+		partnum="p1"
+	fi
+fi
 }
 
 format_partitions(){
 	
-	echo "formatting partitions"
-	
-	local USER=$(id -u $(/usr/bin/logname))
-	local GROUP=$(getent group users |awk -F: '{print $3}')
-	local USERNAME=$(/usr/bin/logname)
+	echo "formatting partitions $device$partnum"
 		
 	#ensure device is unmounted
-	umount /dev/"$device"
+	unmount_partitions
 
 	case $format in 
 
-	vfat) mkfs.fat -F 32 /dev/"$device" ;;
+	vfat) mkfs.fat -F 32 /dev/"$device$partnum" ;;
 	
-	ext4)  mkfs.ext4 /dev/"$device"
-		   mkdir -p /tmp/formatmountpoint
-		   mount -t ext4 /dev/"$device" /tmp/formatmountpoint
-		   echo "Changing owner of partition to $USERNAME:users"
-		   chown $USERNAME:users /tmp/formatmountpoint
-		   chmod 775 -R /tmp/formatmountpoint
-		   umount /tmp/formatmountpoint
-		   rmdir /tmp/formatmountpoint;;
+	ext4)  mkfs.ext4 -F /dev/"$device$partnum"
+		   change_ownership;;
 	
-	ntfs)  mkfs.ntfs -Q /dev/"$device" ;;
+	ntfs)  mkfs.ntfs -Q /dev/"$device$partnum" ;;
 	
-	exfat) mkfs.exfat /dev/"$device" ;;
+	exfat) mkfs.exfat /dev/"$device$partnum" ;;
 	
 	*)	echo "unknown format, exiting" ;;
 
@@ -112,22 +182,59 @@ esac
 	
 }
 
+disable_automount()
+{
+mkdir -p /run/udev/rules.d
+echo 'SUBSYSTEM=="block", ENV{UDISKS_IGNORE}="1"' > /run/udev/rules.d/91-mx-udisks-inhibit.rules
+udevadm control --reload
+udevadm trigger --subsystem-match=block
+
+}
+
+enable_automount()
+{
+rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
+udevadm control --reload
+udevadm trigger --subsystem-match=block
+}
+
+change_ownership()
+{
+	local USER=$(id -u $(/usr/bin/logname))
+	local GROUP=$(getent group users |awk -F: '{print $3}')
+	local USERNAME=$(/usr/bin/logname)
+	
+	mkdir -p /tmp/formatmountpoint
+	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint
+	echo "Changing owner of partition to $USERNAME:users"
+	chown $USERNAME:users /tmp/formatmountpoint
+	chmod 775 -R /tmp/formatmountpoint
+	umount -q /tmp/formatmountpoint
+	rmdir /tmp/formatmountpoint
+}
+
 main(){
 
-echo main launched
+#echo main launched
+unmount_partitions
+disable_automount
 
 if [ "$part" = "part" ]; then
 	format_partitions
 else
-	clearpartions
+	clear_partitions
 	sleep 1
-	makeusb
+	create_partition
+	sleep 1
+	partnumber
+	format_partitions
 	sleep 1
 fi
 	labelusb
 	sleep 1
 	partitionrefresh
 	cleanuplog
+	enable_automount
 }
 
 main

@@ -8,10 +8,11 @@ Standards-Version: 3.9.8
 Package: formatusb
 Architecture: any
 Depends: cli-shell-utils,
-         live-usb-maker,
+         coreutils,
+         parted,
          menu,
          mx-viewer | antix-viewer| xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: format usb devices
- gui wrapper for live-usb-maker (antix) format usb function
+ gui to aid users to format removable usb media
