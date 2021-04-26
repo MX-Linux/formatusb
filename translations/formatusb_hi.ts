@@ -1,242 +1,239 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="hi" version="2.1">
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
+        <location filename="mainwindow.ui" line="14"/>
+        <location filename="ui_mainwindow.h" line="285"/>
         <source>Program_Name</source>
-        <translation type="unfinished"></translation>
+        <translation>प्रोग्राम नाम (_N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="50"/>
+        <location filename="mainwindow.ui" line="50"/>
+        <location filename="ui_mainwindow.h" line="287"/>
         <source>Quit application</source>
         <translation>अनुप्रयोग बंद करें</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="53"/>
+        <location filename="mainwindow.ui" line="53"/>
+        <location filename="ui_mainwindow.h" line="289"/>
         <source>Close</source>
         <translation>बंद करें</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="60"/>
+        <location filename="mainwindow.ui" line="60"/>
+        <location filename="ui_mainwindow.h" line="291"/>
         <source>Alt+N</source>
         <translation>Alt+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="76"/>
+        <location filename="mainwindow.ui" line="76"/>
+        <location filename="ui_mainwindow.h" line="294"/>
         <source>Display help </source>
-        <translation>मदद देखें</translation>
+        <translation>सहायता देखें</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="79"/>
+        <location filename="mainwindow.ui" line="79"/>
+        <location filename="ui_mainwindow.h" line="296"/>
         <source>Help</source>
         <translation>सहायता</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="86"/>
+        <location filename="mainwindow.ui" line="86"/>
+        <location filename="ui_mainwindow.h" line="298"/>
         <source>Alt+H</source>
         <translation>Alt+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="102"/>
+        <location filename="mainwindow.ui" line="102"/>
+        <location filename="ui_mainwindow.h" line="300"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>पिछला</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="160"/>
+        <location filename="mainwindow.ui" line="160"/>
+        <location filename="ui_mainwindow.h" line="302"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>अगला</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="186"/>
+        <location filename="mainwindow.ui" line="186"/>
+        <location filename="ui_mainwindow.h" line="307"/>
         <source>About this application</source>
         <translation>इस अनुप्रयोग के बारे में</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="189"/>
+        <location filename="mainwindow.ui" line="189"/>
+        <location filename="ui_mainwindow.h" line="309"/>
         <source>About...</source>
         <translation>बारे में...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="196"/>
+        <location filename="mainwindow.ui" line="196"/>
+        <location filename="ui_mainwindow.h" line="311"/>
         <source>Alt+B</source>
         <translation>Alt+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="244"/>
+        <location filename="mainwindow.ui" line="237"/>
+        <location filename="ui_mainwindow.h" line="321"/>
+        <source>USB-DATA</source>
+        <translation>यूएसबी-डेटा</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="244"/>
+        <location filename="ui_mainwindow.h" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;लक्षित यूएसबी उपकरण चयन&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="318"/>
+        <location filename="mainwindow.ui" line="267"/>
+        <location filename="ui_mainwindow.h" line="319"/>
+        <source>Format</source>
+        <translation>प्रारूप</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="274"/>
+        <location filename="ui_mainwindow.h" line="320"/>
+        <source>Refresh drive list</source>
+        <translation>ड्राइव सूची रिफ्रेश करें</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="288"/>
+        <location filename="ui_mainwindow.h" line="322"/>
+        <source>File System Label</source>
+        <translation>फाइल सिस्टम उपनाम</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="318"/>
+        <location filename="ui_mainwindow.h" line="314"/>
         <source>fat32</source>
-        <translation type="unfinished"></translation>
+        <translation>fat32</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="323"/>
+        <location filename="mainwindow.ui" line="323"/>
+        <location filename="ui_mainwindow.h" line="315"/>
         <source>ext4</source>
         <translation>ext4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="328"/>
+        <location filename="mainwindow.ui" line="328"/>
+        <location filename="ui_mainwindow.h" line="316"/>
         <source>exfat</source>
-        <translation type="unfinished"></translation>
+        <translation>exfat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="333"/>
+        <location filename="mainwindow.ui" line="333"/>
+        <location filename="ui_mainwindow.h" line="317"/>
         <source>ntfs</source>
-        <translation type="unfinished"></translation>
+        <translation>ntfs</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="354"/>
+        <location filename="mainwindow.ui" line="354"/>
         <source>Show partitions</source>
-        <translation type="unfinished"></translation>
+        <translation>विभाजन दिखाएँ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="361"/>
+        <location filename="mainwindow.ui" line="361"/>
         <source>Show all devices</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी उपकरण दिखाएँ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="267"/>
-        <source>Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="274"/>
-        <source>Refresh drive list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="237"/>
-        <source>USB-DATA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="288"/>
-        <source>File System Label</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="181"/>
+        <location filename="mainwindow.cpp" line="181"/>
         <source>Success</source>
-        <translation>सफलता</translation>
+        <translation>सफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="181"/>
+        <location filename="mainwindow.cpp" line="181"/>
         <source>Format successful!</source>
-        <translation type="unfinished"></translation>
+        <translation>फॉर्मेट करना सफल!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="183"/>
+        <location filename="mainwindow.cpp" line="183"/>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>विफल</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="183"/>
+        <location filename="mainwindow.cpp" line="183"/>
         <source>Error encountered in the Format process</source>
-        <translation type="unfinished"></translation>
+        <translation>फॉर्मेट प्रक्रिया हेतु त्रुटि</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="mainwindow.cpp" line="236"/>
         <source>Error</source>
         <translation>त्रुटि</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="236"/>
+        <location filename="mainwindow.cpp" line="236"/>
         <source>Please select a USB device to write to</source>
-        <translation type="unfinished"></translation>
+        <translation>राइट हेतु यूएसबी उपकरण चुनें</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="mainwindow.cpp" line="242"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>इन कार्यों से इस पर मौजूद सारा डेटा नष्ट हो जाएगा
+
+</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="mainwindow.cpp" line="242"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>क्या आप जारी रखना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="282"/>
         <source>About %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 के बारे में</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="287"/>
-        <source>%1 License</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="295"/>
-        <source>%1 Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="vanished">बारे में</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="mainwindow.cpp" line="283"/>
         <source>Version: </source>
         <translation>संस्करण :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="mainwindow.cpp" line="284"/>
         <source>Program for formatting USB devices</source>
-        <translation type="unfinished"></translation>
+        <translation>यूएसबी उपकरण फॉर्मेट करने हेतु प्रोग्राम</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="mainwindow.cpp" line="286"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>प्रतिलिप्याधिकार (c) MX Linux</translation>
+        <translation>कॉपीराइट (c) एमएक्स लिनक्स</translation>
     </message>
     <message>
-        <source>License</source>
-        <translation type="vanished">लाइसेंस</translation>
+        <location filename="mainwindow.cpp" line="287"/>
+        <source>%1 License</source>
+        <translation>%1 लाइसेंस</translation>
     </message>
     <message>
-        <source>Changelog</source>
-        <translation type="vanished">परिवर्तन सूची</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">रद्द करें</translation>
-    </message>
-    <message>
-        <source>&amp;Close</source>
-        <translation type="vanished">&amp;बंद करें</translation>
+        <location filename="mainwindow.cpp" line="295"/>
+        <source>%1 Help</source>
+        <translation>%1 सहायता</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
-        <source>You must run this program as root.</source>
-        <translation type="vanished">इस प्रोग्राम को चलाने हेतु आपका रुट होना आवश्यक है।</translation>
-    </message>
-    <message>
-        <location filename="../about.cpp" line="38"/>
+        <location filename="about.cpp" line="38"/>
         <source>License</source>
-        <translation type="unfinished">लाइसेंस</translation>
+        <translation>लाइसेंस</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="39"/>
-        <location filename="../about.cpp" line="49"/>
+        <location filename="about.cpp" line="39"/>
+        <location filename="about.cpp" line="49"/>
         <source>Changelog</source>
-        <translation type="unfinished">परिवर्तन सूची</translation>
+        <translation>बदलाव सूची</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="40"/>
+        <location filename="about.cpp" line="40"/>
         <source>Cancel</source>
-        <translation type="unfinished">रद्द करें</translation>
+        <translation>रद्द करें</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="57"/>
+        <location filename="about.cpp" line="57"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;बंद करें</translation>
+        <translation>बंद करें (&amp;C)</translation>
     </message>
 </context>
 </TS>
