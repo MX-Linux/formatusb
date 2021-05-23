@@ -120,7 +120,7 @@ partitionrefresh(){
 	
 	##need device not partition
 
-	local refreshdevice partition_to_mark filter partition_dev
+	local refreshdevice partition_to_mark filter partition_dev mark
 
 	partition_dev="$device$partnum"
 	
@@ -150,14 +150,38 @@ echo "Device $device"
 echo "Refresh Partitions $refreshdevice"  
 echo "partition to mark $partition_to_mark"
 
+#if gpt partition, use GUID for part type
+if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"gpt\")" ]; then
+	mark="EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
+	echo "mark $mark"
+fi
+
+#if msdos partition, use hexadecimal for part type, per format
+
+if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"dos\")" ]; then
+	case $format in 
+
+	      vfat) mark="b"  ;;
+	
+	exfat | ntfs) mark="7"  ;;
+	
+	         *)  ;; #don't mark
+	         
+	esac
+	echo "mark $mark"
+fi
+
+
 #mark partition based on format if formating ntfs(7), exfat(7), or fat32(b)
 case $format in 
 
-	      vfat) sfdisk /dev/$device $partition_to_mark --part-type b  ;;
-	
-	exfat,ntfs) sfdisk /dev/$device $partition_to_mark --part-type 7  ;;
-	
-	         *)  ;; #don't mark
+				vfat | exfat | ntfs) sfdisk /dev/$refreshdevice $partition_to_mark --part-type $mark
+									 sleep 1
+									 checkerrorcode "Setting Partition Type"	;;
+				
+					  
+	     	
+							  *)  ;; #don't mark
 	         
 esac
 

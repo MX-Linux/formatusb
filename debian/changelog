@@ -1,3 +1,9 @@
+formatusb (21.05.02) mx; urgency=medium
+
+  * detect mbr vs. gpt
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sun, 23 May 2021 08:46:12 -0400
+
 formatusb (21.05.01) mx; urgency=medium
 
   * mark partitions for windows compatability with exfat, ntfs, and fat32
