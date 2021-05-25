@@ -69,23 +69,80 @@ clear_partitions()
     sleep 1
 }
 
+
 create_partition()
 {
 	local dev=/dev/$device
+	
+	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev)
+	# same as the more bulky $(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
+	
 	unmount_partitions
+	
+	# Clearing first 64kb may be a good idea before making partition tables
+	dd if=/dev/zero of=$dev bs=512 count=128 #Assuming disk > 64kb size
+	checkerrorcode "Clearing initial parts of $dev"
 	sleep 1
-	parted -s $dev mklabel msdos 
-	checkerrorcode "making new partition table"
-	sleep 1
+	
+	local mbrlimit = $((800 * 1024 * 1024 * 1024)) # about 800GB - devices over this size are made to gpt
+	
+	# $mkpart_param1 = "primary" for DOS or $label for GPT
+	# $mkpart_param3 = 1 (partition number) for DOS or 0 (partition start) for GPT
+	if [ $bytes <= $mbrlimit ] ; then # the <= prevents a race condition
+		parted -s $dev mklabel msdos 
+		checkerrorcode "making new dos partition table"
+		sleep 1
+		mkpart_param1="primary"
+		mkpart_param3="1"
+	fi
+	
+	if [ $bytes > $mbrlimit ] ; then
+		parted -s $dev mklabel gpt 
+		checkerrorcode "making new gpt partition table"
+		sleep 1
+		mkpart_param1="$label"
+		mkpart_param3="0"
+	fi
+
 	/sbin/partprobe $dev 
 	checkerrorcode "refresh partitions info"
-	parted -s -a optimal $dev mkpart primary 1 100% 
-	checkerrorcode "create new partition"
 	sleep 1
+	
+	# Makes partitions, deals both MBR and GPT partitions .
+	# Also sets the appropriate part type automatically (using parted) , and also sets partition label (not filesystem label) for GPT
+	# Reference: https://access.redhat.com/sites/default/files/attachments/parted_0.pdf
+	
+	# DOS partition table:
+	# FAT32 --- W95 FAT32 (LBA) ie. 0x0c for DOS partition tables.
+	# NTFS or EXFAT ---- NTFS/exFAT/HPFS ie. 0x07 for DOS partition tables.
+	
+	# GPT partition table:
+	# FAT32 EXFAT and NTFS ---- ebd0a0a2-b9e5-4433-87c0-68b6b72699c7 (Microsoft basic data partition)
+	# ext4 ---- Linux filesystem ie. 0fc63daf-8483-4772-8e79-3d69d8477de4
+
+	case $format in 
+
+		vfat) parted -s -a optimal $dev mkpart "$mkpart_param1" fat32 "$mkpart_param3" "100%"  ;;
+	
+		ext4)  parted -s -a optimal $dev mkpart "$mkpart_param1" ext4 "$mkpart_param3" "100%"  ;;
+	
+		ntfs)  parted -s -a optimal $dev mkpart "$mkpart_param1" ntfs "$mkpart_param3" "100%"  ;;
+	
+		exfat) parted -s -a optimal $dev mkpart "$mkpart_param1" ntfs "$mkpart_param3" "100%"  ;; # NTFS and exFAT have same part type on both GPT and MBR - parted calls that type "ntfs" on both GPT and MBR
+	
+		*)	echo "unknown format, exiting"  ;;
+
+	esac
+	
+	checkerrorcode "creating new partition"
+	
+	sleep 1
+	
 	/sbin/partprobe $dev 
 	checkerrorcode "refresh partitions info"
 	sleep 1
 }
+
 
 
 makeusb(){
