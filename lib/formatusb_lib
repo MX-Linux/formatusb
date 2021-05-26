@@ -72,6 +72,7 @@ clear_partitions()
 create_partition()
 {
 	local dev=/dev/$device
+	local option
 	unmount_partitions
 	sleep 1
 	
@@ -85,6 +86,7 @@ create_partition()
 	if [ ! "$originalparttable" = "gpt" ]; then
 		if (($bytes <= $mbrlimit)) ; then # the <= prevents a race condition
 			parttabletype="msdos" 
+			option="primary"
 			echo "making new dos partition table"
 			sleep 1
 		fi
@@ -102,12 +104,21 @@ create_partition()
 		sleep 1
 	fi
 	
+	#set default part name if file system label is empty
+	if [ "$parttabletype" = "gpt" ]; then
+		if [ -z "$label" ]; then
+			option="$label"
+		else 
+			option="primary"
+		fi
+	fi
+	
 	parted -s $dev mklabel $parttabletype
 	checkerrorcode "making new partition table"
 	sleep 1
 	/sbin/partprobe $dev 
 	checkerrorcode "refresh partitions info"
-	parted -s -a optimal $dev mkpart primary 1 100% 
+	parted -s -a optimal $dev mkpart $option 1 100% 
 	checkerrorcode "create new partition"
 	sleep 1
 	/sbin/partprobe $dev 
