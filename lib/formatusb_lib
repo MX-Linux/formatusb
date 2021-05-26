@@ -74,7 +74,35 @@ create_partition()
 	local dev=/dev/$device
 	unmount_partitions
 	sleep 1
-	parted -s $dev mklabel msdos 
+	
+	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev)
+	bytes=$((bytes / 1))
+	local mbrlimit=$((2048 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
+	local parttabletype
+
+    echo "bytes $bytes limit $mbrlimit"
+	
+	if [ ! "$originalparttable" = "gpt" ]; then
+		if (($bytes <= $mbrlimit)) ; then # the <= prevents a race condition
+			parttabletype="msdos" 
+			echo "making new dos partition table"
+			sleep 1
+		fi
+
+		if (($bytes > $mbrlimit)) ; then
+			parttabletype="gpt" 
+			echo "making new gpt partition table"
+			sleep 1
+		fi
+	fi
+	
+	if [ "$originalparttable" = "gpt" ]; then
+		parttabletype="gpt" 
+		echo "making new gpt partition table"
+		sleep 1
+	fi
+	
+	parted -s $dev mklabel $parttabletype
 	checkerrorcode "making new partition table"
 	sleep 1
 	/sbin/partprobe $dev 
@@ -295,6 +323,14 @@ checkerrorcode()
 	fi
 }
 
+checkpartitiontype()
+{
+	local dev=/dev/$device
+	if [ -n "$(blkid $dev | grep PTTYPE=\"gpt\")" ]; then
+		originalparttable="gpt"
+	fi
+}
+
 main(){
 
 #echo main launched
@@ -304,6 +340,8 @@ disable_automount
 if [ "$part" = "part" ]; then
 	format_partitions
 else
+	checkpartitiontype
+	sleep 1
 	clear_partitions
 	sleep 1
 	create_partition
