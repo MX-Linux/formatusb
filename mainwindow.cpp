@@ -105,19 +105,21 @@ QString MainWindow::buildOptionList()
 {
     device = ui->combo_Usb->currentText().split(" ").at(0);
     label = ui->lineEditFSlabel->text();
+    QString partoption;
     QString format = ui->comboBoxDataFormat->currentText();
     if (format.contains("fat32")){
         format = "vfat";
     }
-    QString options;
-    if (ui->checkBoxshowpartitions->isChecked()) {
-        qDebug() << "partition is" << device << "label " << label;
-        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" part'");
 
+    QString options;
+    if (ui->comboBoxPartitionTableType->isEnabled()) {
+          partoption = ui->comboBoxPartitionTableType->currentText();
     } else {
-        qDebug() << "usb device" << device << "label " << label;
-        options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\"'");
+        partoption = "part";
     }
+
+    qDebug() << "partition is" << device << "label " << label;
+    options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\"" + partoption + "'");
     qDebug() << "Options: " << options;
     return options;
 }
@@ -310,4 +312,10 @@ void MainWindow::on_checkBoxShowAll_clicked()
 void MainWindow::on_checkBoxshowpartitions_clicked()
 {
      on_buttonRefresh_clicked();
+     if ( ui->checkBoxshowpartitions->isChecked()){
+         ui->comboBoxPartitionTableType->setEnabled(false);
+     }
+     if ( ! ui->checkBoxshowpartitions->isChecked()){
+         ui->comboBoxPartitionTableType->setEnabled(true);
+     }
 }

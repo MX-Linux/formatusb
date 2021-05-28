@@ -9,7 +9,8 @@ partnum=""
 device="$1"
 format="$2"
 label="$3"
-part="$4"
+part="$4"  #can be part, defaults, gpt, or msdos
+
 
 LOG="/tmp/formatter.log"
 
@@ -76,14 +77,14 @@ create_partition()
 	unmount_partitions
 	sleep 1
 	
-	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev)
+	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
 	bytes=$((bytes / 1))
-	local mbrlimit=$((2048 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
+	local mbrlimit=$((2000 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
 	local parttabletype
 
     echo "bytes $bytes limit $mbrlimit"
 	
-	if [ ! "$originalparttable" = "gpt" ]; then
+	if [ "$part" = "defaults" ]; then
 		if (($bytes <= $mbrlimit)) ; then # the <= prevents a race condition
 			parttabletype="msdos" 
 			option="primary"
@@ -98,8 +99,15 @@ create_partition()
 		fi
 	fi
 	
-	if [ "$originalparttable" = "gpt" ]; then
+	if [ "$part" = "gpt" ]; then
 		parttabletype="gpt" 
+		echo "making new gpt partition table"
+		sleep 1
+	fi
+	
+	if [ "$part" = "msdos" ]; then
+		parttabletype="msdos" 
+		option="primary"
 		echo "making new gpt partition table"
 		sleep 1
 	fi
@@ -351,8 +359,6 @@ disable_automount
 if [ "$part" = "part" ]; then
 	format_partitions
 else
-	checkpartitiontype
-	sleep 1
 	clear_partitions
 	sleep 1
 	create_partition
