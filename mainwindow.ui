@@ -51,7 +51,7 @@
           <widget class="QComboBox" name="comboBoxPartitionTableType">
            <item>
             <property name="text">
-             <string>Defaults</string>
+             <string>defaults</string>
             </property>
            </item>
            <item>
