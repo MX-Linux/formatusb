@@ -181,7 +181,7 @@ partitionrefresh(){
 	fi
 
 	#if device is nvme, then partnum=p1
-	if [[ "$device" == *"$nvme"* ]]; then
+	if [[ "$device" == *"nvme"* ]]; then
 		refreshdevice=${device%p*}
 		filter=$refreshdevice
 		filter+="p"
