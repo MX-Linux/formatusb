@@ -41,7 +41,7 @@ MainWindow::MainWindow(const QStringList& args)  :
     ui->setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     setup();
-    ui->combo_Usb->addItems(buildUsbList());
+    ui->comboBoxUsbList->addItems(buildUsbList());
     this->adjustSize();
 }
 
@@ -103,7 +103,7 @@ void MainWindow::setup()
 // Build the option list to be passed to live-usb-maker
 QString MainWindow::buildOptionList()
 {
-    device = ui->combo_Usb->currentText().split(" ").at(0);
+    device = ui->comboBoxUsbList->currentText().split(" ").at(0);
     label = ui->lineEditFSlabel->text();
     QString partoption;
     QString options;
@@ -249,14 +249,14 @@ void MainWindow::on_buttonNext_clicked()
 
     // on first page
     if (ui->stackedWidget->currentIndex() == 0) {
-        if (ui->combo_Usb->currentText() == "") {
+        if (ui->comboBoxUsbList->currentText() == "") {
             QMessageBox::critical(this, tr("Error"), tr("Please select a USB device to write to"));
             return;
         }
 
         //confirm action
         int ans;
-        QString msg = tr("These actions will destroy all data on \n\n") + ui->combo_Usb->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
+        QString msg = tr("These actions will destroy all data on \n\n") + ui->comboBoxUsbList->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
         ans = QMessageBox::warning(this, windowTitle(), msg,
                                    QMessageBox::Yes, QMessageBox::No);
         if (ans != QMessageBox::Yes) {
@@ -314,8 +314,8 @@ void MainWindow::on_buttonHelp_clicked()
 
 void MainWindow::on_buttonRefresh_clicked()
 {
-    ui->combo_Usb->clear();
-    ui->combo_Usb->addItems(buildUsbList());
+    ui->comboBoxUsbList->clear();
+    ui->comboBoxUsbList->addItems(buildUsbList());
 }
 
 
