@@ -1,3 +1,10 @@
+formatusb (21.05.04) mx; urgency=medium
+
+  * change combo usb list object name
+  * fix type on nvme drive detection
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 29 May 2021 09:51:46 -0400
+
 formatusb (21.05.03) mx; urgency=medium
 
   * allow choosing of mbr vs. gpt 
