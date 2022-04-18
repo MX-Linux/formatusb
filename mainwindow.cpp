@@ -226,15 +226,7 @@ void MainWindow::updateOutput()
     // remove escape sequences that are not handled by code
     QString out = cmd->readAll();
     out.remove("[0m").remove("]0;").remove("").remove("").remove("[1000D").remove("[74C|").remove("[?25l").remove("[?25h").remove("[0;36m").remove("[1;37m");
-//    if (out.contains("[10D[K")) { // escape sequence used to display the progress percentage
-//        out.remove("[10D[K");
-//        ui->outputBox->moveCursor(QTextCursor::StartOfLine);
-//        QKeyEvent *event = new QKeyEvent(QEvent::KeyPress, Qt::Key_K, Qt::ControlModifier);
-//        QCoreApplication::postEvent(ui->outputBox, event);
-//        QString out_prog = out;
-//        ui->progressBar->setValue(out_prog.remove(" ").remove("%").toInt());
-//    }
-
+    ui->outputBox->moveCursor(QTextCursor::End);
     ui->outputBox->insertPlainText(out);
     QScrollBar *sb = ui->outputBox->verticalScrollBar();
     sb->setValue(sb->maximum());
