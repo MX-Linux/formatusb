@@ -67,9 +67,9 @@ int main(int argc, char *argv[])
 
     qDebug() << "Program Version:" << VERSION;
 
-        MainWindow w(a.arguments());
+        MainWindow w;
         w.show();
-        return a.exec();        
+        return a.exec();
 }
 
 
@@ -78,7 +78,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 {
     // Write to terminal
     QTextStream term_out(stdout);
-    term_out << msg << endl;
+    term_out << msg << "\n";
 
     // Open stream file writes
     QTextStream out(logFile.data());
@@ -96,7 +96,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     default:            out << "OTH"; break;
     }
     // Write to the output category of the message and the message itself
-    out << context.category << ": "
-        << msg << endl;
+    out << context.category << ": " << msg << "\n";
     out.flush();    // Clear the buffered data
 }

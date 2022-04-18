@@ -34,7 +34,7 @@
 
 #include <QDebug>
 
-MainWindow::MainWindow(const QStringList& args)  :
+MainWindow::MainWindow()  :
     ui(new Ui::MainWindow)
 {
     qDebug().noquote() << QCoreApplication::applicationName() << "version:" << VERSION;
@@ -55,14 +55,14 @@ void MainWindow::makeUsb(const QString &options)
 {
     //get a device value if action is on a partition
     QString device_to_check = device;
-    if (device.contains("nvme")){
+    if (device.contains("nvme")) {
         device_to_check = device.section("p",0,0);
     }
-    if (device.contains("mmc")){
+    if (device.contains("mmc")) {
         device_to_check = device.section("p",0,0);
     }
 
-    if (device.contains("sd")){
+    if (device.contains("sd")) {
         device_to_check = device.left(3);
     }
 
@@ -109,14 +109,14 @@ QString MainWindow::buildOptionList()
     QString options;
 
     QString format = ui->comboBoxDataFormat->currentText();
-    if (format.contains("fat32")){
+    if (format.contains("fat32")) {
         format = "vfat";
     }
 
 
     if (ui->comboBoxPartitionTableType->isEnabled()) {
         //0=defaults, 1=msdos, 2=gpt
-        switch(ui->comboBoxPartitionTableType->currentIndex()){
+        switch(ui->comboBoxPartitionTableType->currentIndex()) {
         case 0:
             partoption = "defaults";
             break;
@@ -149,7 +149,7 @@ void MainWindow::cleanup()
 // build the USB list
 QStringList MainWindow::buildUsbList()
 {   QString drives;
-    if (ui->checkBoxshowpartitions->isChecked()){
+    if (ui->checkBoxshowpartitions->isChecked()) {
         drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 |grep -v disk");
     } else {
         drives = cmd->getCmdOut("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259 ");
@@ -210,13 +210,12 @@ void MainWindow::setConnections()
     connect(cmd, &QProcess::readyRead, this, &MainWindow::updateOutput);
     connect(cmd, &QProcess::started, this, &MainWindow::cmdStart);
     connect(&timer, &QTimer::timeout, this, &MainWindow::updateBar);
-    connect(cmd, static_cast<void (QProcess::*)(int)>(&QProcess::finished), this, &MainWindow::cmdDone);
-
+    connect(cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
 }
 
 void MainWindow::updateBar()
 {
-    if (!ui->checkBoxshowpartitions->isChecked()){
+    if (!ui->checkBoxshowpartitions->isChecked()) {
         int current_io = cmdprog->getCmdOut("cat /sys/block/" + device + "/stat | awk '{print $7}'").toInt();
         ui->progressBar->setValue(current_io);
     }
@@ -237,7 +236,6 @@ void MainWindow::updateOutput()
 //    }
 
     ui->outputBox->insertPlainText(out);
-
     QScrollBar *sb = ui->outputBox->verticalScrollBar();
     sb->setValue(sb->maximum());
     qApp->processEvents();
@@ -255,13 +253,9 @@ void MainWindow::on_buttonNext_clicked()
         }
 
         //confirm action
-        int ans;
         QString msg = tr("These actions will destroy all data on \n\n") + ui->comboBoxUsbList->currentText().simplified() + "\n\n " + tr("Do you wish to continue?");
-        ans = QMessageBox::warning(this, windowTitle(), msg,
-                                   QMessageBox::Yes, QMessageBox::No);
-        if (ans != QMessageBox::Yes) {
+        if (QMessageBox::Yes != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes, QMessageBox::No))
             return;
-        }
         if (cmd->state() != QProcess::NotRunning) {
             ui->stackedWidget->setCurrentWidget(ui->outputPage);
             return;
@@ -327,10 +321,10 @@ void MainWindow::on_checkBoxShowAll_clicked()
 void MainWindow::on_checkBoxshowpartitions_clicked()
 {
      on_buttonRefresh_clicked();
-     if ( ui->checkBoxshowpartitions->isChecked()){
+     if ( ui->checkBoxshowpartitions->isChecked()) {
          ui->comboBoxPartitionTableType->setEnabled(false);
      }
-     if ( ! ui->checkBoxshowpartitions->isChecked()){
+     if ( ! ui->checkBoxshowpartitions->isChecked()) {
          ui->comboBoxPartitionTableType->setEnabled(true);
      }
 }

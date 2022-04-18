@@ -46,7 +46,7 @@ class MainWindow : public QDialog
     Q_OBJECT
 
 public:
-    MainWindow(const QStringList &args);
+    MainWindow();
     ~MainWindow();
 
     void makeUsb(const QString &options);
@@ -56,24 +56,19 @@ public:
     QStringList buildUsbList();
     QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
-
-public slots:
-
 private slots:
     void cleanup();
-    void cmdStart();
     void cmdDone();
+    void cmdStart();
     void setConnections();
     void updateBar();
     void updateOutput();
-    void on_buttonNext_clicked();
     void on_buttonAbout_clicked();
-    void on_buttonHelp_clicked();
     void on_buttonBack_clicked();
+    void on_buttonHelp_clicked();
+    void on_buttonNext_clicked();
     void on_buttonRefresh_clicked();
-
     void on_checkBoxShowAll_clicked();
-
     void on_checkBoxshowpartitions_clicked();
 
 private:
