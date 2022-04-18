@@ -109,29 +109,13 @@ QString MainWindow::buildOptionList()
     QString options;
 
     QString format = ui->comboBoxDataFormat->currentText();
-    if (format.contains("fat32")) {
+    if (format.contains("fat32"))
         format = "vfat";
-    }
 
-
-    if (ui->comboBoxPartitionTableType->isEnabled()) {
-        //0=defaults, 1=msdos, 2=gpt
-        switch(ui->comboBoxPartitionTableType->currentIndex()) {
-        case 0:
-            partoption = "defaults";
-            break;
-        case 1:
-            partoption = "msdos";
-            break;
-        case 2:
-            partoption = "gpt";
-            break;
-        default: partoption = "defaults";
-        }
-    } else {
+    if (ui->comboBoxPartitionTableType->isEnabled())
+        partoption = ui->comboBoxPartitionTableType->currentText().toLower();
+    else
         partoption = "part";
-    }
-
 
     qDebug() << "partition is" << device << "label " << label;
     options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "'");
