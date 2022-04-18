@@ -65,13 +65,6 @@ void MainWindow::makeUsb(const QString &options)
     if (device.contains("sd")) {
         device_to_check = device.left(3);
     }
-
-    // check amount of io on device before copy, this is in sectors
-    start_io = cmd->getCmdOut("cat /sys/block/" + device_to_check + "/stat |awk '{print $7}'").toInt();
-    ui->progressBar->setMinimum(start_io);
-    qDebug() << "start io is " << start_io;
-    ui->progressBar->setMaximum(iso_sectors+start_io);
-    qDebug() << "max progress bar is " << ui->progressBar->maximum();
     //clear partitions
     //qDebug() << cmd->getCmdOut("live-usb-maker gui partition-clear --color=off -t " + device);
     QString cmdstr = options;
@@ -89,7 +82,6 @@ void MainWindow::setup()
     cmdprog = new Cmd(this);
     connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::cleanup);
     this->setWindowTitle("Format USB");
-    advancedOptions = false;
     ui->buttonBack->setHidden(true);;
     ui->stackedWidget->setCurrentIndex(0);
     ui->buttonCancel->setEnabled(true);
@@ -175,7 +167,6 @@ void MainWindow::cmdStart()
 
 void MainWindow::cmdDone()
 {
-    ui->progressBar->setValue(ui->progressBar->maximum());
     setCursor(QCursor(Qt::ArrowCursor));
     ui->buttonBack->setEnabled(true);
     if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
@@ -184,25 +175,13 @@ void MainWindow::cmdDone()
         QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
     }
     cmd->disconnect();
-    timer.stop();
 }
 
-// set proc and timer connections
 void MainWindow::setConnections()
 {
-    timer.start(1000);
     connect(cmd, &QProcess::readyRead, this, &MainWindow::updateOutput);
     connect(cmd, &QProcess::started, this, &MainWindow::cmdStart);
-    connect(&timer, &QTimer::timeout, this, &MainWindow::updateBar);
     connect(cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
-}
-
-void MainWindow::updateBar()
-{
-    if (!ui->checkBoxshowpartitions->isChecked()) {
-        int current_io = cmdprog->getCmdOut("cat /sys/block/" + device + "/stat | awk '{print $7}'").toInt();
-        ui->progressBar->setValue(current_io);
-    }
 }
 
 void MainWindow::updateOutput()
@@ -258,7 +237,6 @@ void MainWindow::on_buttonBack_clicked()
     ui->buttonNext->setEnabled(true);
     ui->buttonBack->setDisabled(true);
     ui->outputBox->clear();
-    ui->progressBar->setValue(0);
 }
 
 

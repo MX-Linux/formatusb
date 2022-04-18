@@ -29,7 +29,6 @@
 
 #include <QMessageBox>
 #include <QProcess>
-#include <QTimer>
 #include <QSettings>
 #include <QFile>
 
@@ -50,7 +49,6 @@ public:
     ~MainWindow();
 
     void makeUsb(const QString &options);
-    void progress();
     void setup();
     QString buildOptionList();
     QStringList buildUsbList();
@@ -61,7 +59,6 @@ private slots:
     void cmdDone();
     void cmdStart();
     void setConnections();
-    void updateBar();
     void updateOutput();
     void on_buttonAbout_clicked();
     void on_buttonBack_clicked();
@@ -77,11 +74,7 @@ private:
     Cmd *cmdprog;
     QString device;
     QString label;
-    QTimer timer;
-    bool advancedOptions;
     int height;
-    int iso_sectors;
-    int start_io;
 };
 
 
