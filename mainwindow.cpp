@@ -108,10 +108,9 @@ QString MainWindow::buildOptionList()
         partoption = ui->comboBoxPartitionTableType->currentText().toLower();
     else
         partoption = "part";
-    }
 
     QString authentication = "pkexec";
-    if (!QFileInfo::exists("/usr/bin/pkexec")){
+    if ( !QFile::exists("/usr/bin/pkexec")){
             authentication = "su-to-root -X -c";
 	}
 
