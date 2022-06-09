@@ -132,9 +132,13 @@ QString MainWindow::buildOptionList()
         partoption = "part";
     }
 
+    QString authentication = "pkexec";
+    if (!QFileInfo::exists("/usr/bin/pkexec")){
+            authentication = "su-to-root -X -c";
+}
 
     qDebug() << "partition is" << device << "label " << label;
-    options = QString("su-to-root -X -c '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "'");
+    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
     qDebug() << "Options: " << options;
     return options;
 }

@@ -1,3 +1,10 @@
+formatusb (22.06.01) mx; urgency=medium
+
+  * don't use su-to-root if pkexec exists 
+  * fix policy file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 Jun 2022 21:25:33 -0400
+
 formatusb (21.05.04) mx; urgency=medium
 
   * change combo usb list object name

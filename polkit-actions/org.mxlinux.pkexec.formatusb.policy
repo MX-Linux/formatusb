@@ -3,7 +3,7 @@
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
-  <action id="org.mxlinux.pkexec.mx-tweak.root_action">
+  <action id="org.mxlinux.pkexec.formatusb">
     <message>formatusb:  Authentication is required to proceed</message>
     <icon_name>media-removable</icon_name>
     <defaults>
