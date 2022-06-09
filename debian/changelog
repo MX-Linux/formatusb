@@ -5,6 +5,13 @@ formatusb (22.06.01) mx; urgency=medium
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 08 Jun 2022 21:25:33 -0400
 
+formatusb (22.04) mx; urgency=medium
+
+  * Make sure text is added at end of output box (clicking inside the output box should not move cursor around)
+  * Remove non-functional progress bar
+
+ -- Adrian <adrian@mxlinux.org>  Mon, 18 Apr 2022 16:11:28 -0400
+
 formatusb (21.05.04) mx; urgency=medium
 
   * change combo usb list object name
