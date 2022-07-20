@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="am">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb_NO">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>የ ፕሮግራም _ስም</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation>አቀራረብ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
@@ -49,7 +49,7 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>ext4</source>
-        <translation>ext4</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="122"/>
@@ -64,7 +64,7 @@
     <message>
         <location filename="../mainwindow.ui" line="135"/>
         <source>Refresh drive list</source>
-        <translation>የ አካል ዝርዝር ማነቃቂያ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="149"/>
@@ -84,12 +84,12 @@
     <message>
         <location filename="../mainwindow.ui" line="222"/>
         <source>Quit application</source>
-        <translation>መተግበሪያ ማጥፊያ</translation>
+        <translation>Lukk programmet</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Close</source>
-        <translation>መዝጊያ</translation>
+        <translation>Lukk</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="232"/>
@@ -99,12 +99,12 @@
     <message>
         <location filename="../mainwindow.ui" line="270"/>
         <source>Display help </source>
-        <translation>እርዳታ ማሳያ</translation>
+        <translation>Vis hjelp</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>Help</source>
-        <translation>እርዳታ</translation>
+        <translation>Hjelp</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="280"/>
@@ -114,12 +114,12 @@
     <message>
         <location filename="../mainwindow.ui" line="312"/>
         <source>About this application</source>
-        <translation>ስለዚህ መተግበሪያ</translation>
+        <translation>Om denne applikasjonen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About...</source>
-        <translation>ስለ...</translation>
+        <translation>Om...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -129,17 +129,17 @@
     <message>
         <location filename="../mainwindow.ui" line="354"/>
         <source>Next</source>
-        <translation>ይቀጥሉ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="380"/>
         <source>Back</source>
-        <translation>ወደ ኋላ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Success</source>
-        <translation>ተሳክቷል</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Failure</source>
-        <translation>ወድቋል</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
@@ -159,12 +159,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Error</source>
-        <translation>ስህተት</translation>
+        <translation>Feil</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Please select a USB device to write to</source>
-        <translation>እባክዎን የሚጻፍበት የ USB አካል ይምረጡ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
@@ -181,12 +181,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>Om %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>Version: </source>
-        <translation>እትም</translation>
+        <translation>Versjon:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="254"/>
@@ -196,7 +196,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>የ ቅጂ መብት (c) MX Linux</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="257"/>
@@ -206,7 +206,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1 Hjelp</translation>
     </message>
 </context>
 <context>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>ፍቃድ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>
@@ -225,12 +225,12 @@
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>መሰረዣ</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;መዝጊያ</translation>
+        <translation>&amp;Lukk</translation>
     </message>
 </context>
 </TS>

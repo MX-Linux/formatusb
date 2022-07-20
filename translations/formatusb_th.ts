@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="am">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="th">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>የ ፕሮግራም _ስም</translation>
+        <translation>Program_Name</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation>አቀራረብ</translation>
+        <translation>ฟอร์แมต</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../mainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;เลือกอุปกรณ์ USB เป้าหมาย&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="82"/>
@@ -44,7 +44,7 @@
     <message>
         <location filename="../mainwindow.ui" line="112"/>
         <source>fat32</source>
-        <translation type="unfinished"/>
+        <translation>fat32</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="117"/>
@@ -54,27 +54,27 @@
     <message>
         <location filename="../mainwindow.ui" line="122"/>
         <source>exfat</source>
-        <translation type="unfinished"/>
+        <translation>exfat</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="127"/>
         <source>ntfs</source>
-        <translation type="unfinished"/>
+        <translation>ntfs</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="135"/>
         <source>Refresh drive list</source>
-        <translation>የ አካል ዝርዝር ማነቃቂያ</translation>
+        <translation>รีเฟรชรายชื่อไดรฟ์</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="149"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"/>
+        <translation>USB-DATA</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="156"/>
         <source>File System Label</source>
-        <translation type="unfinished"/>
+        <translation>Label ระบบไฟล์</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="163"/>
@@ -84,12 +84,12 @@
     <message>
         <location filename="../mainwindow.ui" line="222"/>
         <source>Quit application</source>
-        <translation>መተግበሪያ ማጥፊያ</translation>
+        <translation>ออกจากแอปพลิเคชัน</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Close</source>
-        <translation>መዝጊያ</translation>
+        <translation>ปิด</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="232"/>
@@ -99,12 +99,12 @@
     <message>
         <location filename="../mainwindow.ui" line="270"/>
         <source>Display help </source>
-        <translation>እርዳታ ማሳያ</translation>
+        <translation>แสดงหน้าช่วยเหลือ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>Help</source>
-        <translation>እርዳታ</translation>
+        <translation>ช่วยเหลือ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="280"/>
@@ -114,12 +114,12 @@
     <message>
         <location filename="../mainwindow.ui" line="312"/>
         <source>About this application</source>
-        <translation>ስለዚህ መተግበሪያ</translation>
+        <translation>เกี่ยวกับแอปพลิเคชันนี้</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About...</source>
-        <translation>ስለ...</translation>
+        <translation>เกี่ยวกับ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="322"/>
@@ -129,74 +129,75 @@
     <message>
         <location filename="../mainwindow.ui" line="354"/>
         <source>Next</source>
-        <translation>ይቀጥሉ</translation>
+        <translation>ต่อไป</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="380"/>
         <source>Back</source>
-        <translation>ወደ ኋላ</translation>
+        <translation>ย้อนกลับ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Success</source>
-        <translation>ተሳክቷል</translation>
+        <translation>สำเร็จ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Format successful!</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์แมตสำเร็จ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Failure</source>
-        <translation>ወድቋል</translation>
+        <translation>ล้มเหลว</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Error encountered in the Format process</source>
-        <translation type="unfinished"/>
+        <translation>พบข้อผิดพลาดในการฟอร์แมต</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Error</source>
-        <translation>ስህተት</translation>
+        <translation>ข้อผิดพลาด</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Please select a USB device to write to</source>
-        <translation>እባክዎን የሚጻፍበት የ USB አካል ይምረጡ</translation>
+        <translation>กรุณาเลือกอุปกรณ์ USB</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation type="unfinished"/>
+        <translation>การกระทำนี้จะทำลายข้อมูลทั้งหมดใน
+</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Do you wish to continue?</source>
-        <translation type="unfinished"/>
+        <translation>คุณต้องการดำเนินการต่อหรือไม่</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>เกี่ยวกับ %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>Version: </source>
-        <translation>እትም</translation>
+        <translation>เวอร์ชัน:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="254"/>
         <source>Program for formatting USB devices</source>
-        <translation type="unfinished"/>
+        <translation>โปรแกรมสำหรับฟอร์แมตอุปกรณ์ USB</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>የ ቅጂ መብት (c) MX Linux</translation>
+        <translation>สงวนลิขสิทธิ์ (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="257"/>
@@ -214,23 +215,23 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>ፍቃድ</translation>
+        <translation>สัญญาอนุญาต</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>
         <location filename="../about.cpp" line="45"/>
         <source>Changelog</source>
-        <translation type="unfinished"/>
+        <translation>Changelog</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>መሰረዣ</translation>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;መዝጊያ</translation>
+        <translation>&amp;ปิด</translation>
     </message>
 </context>
 </TS>
