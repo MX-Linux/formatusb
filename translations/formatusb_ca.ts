@@ -19,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Per Omissió</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>MS-DOS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>GPT</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Tipus de Taula de Particions</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>

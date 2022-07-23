@@ -19,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Valeurs par défaut</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -74,12 +74,12 @@
     <message>
         <location filename="../mainwindow.ui" line="156"/>
         <source>File System Label</source>
-        <translation>Étiquette du Système de Fichiers</translation>
+        <translation>Étiquette du système de fichiers</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Type de table de partition</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>

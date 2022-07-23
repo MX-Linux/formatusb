@@ -19,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Parazgjedhje</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../mainwindow.ui" line="149"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"/>
+        <translation>USB-DATA</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="156"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Lloj Tabele Pjesësh</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
