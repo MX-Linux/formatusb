@@ -1,3 +1,9 @@
+formatusb (22.10.01) mx; urgency=medium
+
+  * update translations
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Wed, 26 Oct 2022 19:37:42 -0400
+
 formatusb (22.08.01) mx; urgency=medium
 
   * add fr_BE
