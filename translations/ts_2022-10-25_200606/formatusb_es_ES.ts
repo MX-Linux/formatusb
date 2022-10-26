@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es_ES">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>Nombre_Programa</translation>
+        <translation>Nombre_del_Programa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation>Formatear</translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation>Predeterminados</translation>
+        <translation>Por defecto</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
@@ -34,7 +34,7 @@
     <message>
         <location filename="../mainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Seleccione Dispositivo USB Destino&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Seleccione Dispositivo USB&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="82"/>
@@ -84,7 +84,7 @@
     <message>
         <location filename="../mainwindow.ui" line="222"/>
         <source>Quit application</source>
-        <translation>Terminar aplicación</translation>
+        <translation>Salir de la aplicación</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
@@ -134,12 +134,12 @@
     <message>
         <location filename="../mainwindow.ui" line="380"/>
         <source>Back</source>
-        <translation>Volver</translation>
+        <translation>Atras</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
         <source>Success</source>
-        <translation>Éxito</translation>
+        <translation>Exito</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="178"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Failure</source>
-        <translation>Falla</translation>
+        <translation>Fallo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
@@ -164,14 +164,14 @@
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Please select a USB device to write to</source>
-        <translation>Favor seleccione el dispositivo USB al cual escribir</translation>
+        <translation>Por favor seleccione el dispositivo USB para escribir</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation>Estas acciones destruirían todos los datos en el
+        <translation>Estas acciones destruiran todos los datos en 
 
 </translation>
     </message>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
         <source>Version: </source>
-        <translation>Versión:</translation>
+        <translation>Versión: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="254"/>

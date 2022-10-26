@@ -14,7 +14,7 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation type="unfinished"/>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
@@ -181,7 +181,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>Про %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="253"/>
@@ -201,12 +201,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="257"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>%1 Ліцензія</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1 Довідка</translation>
     </message>
 </context>
 <context>

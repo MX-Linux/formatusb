@@ -19,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>Padrões</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../mainwindow.ui" line="149"/>
         <source>USB-DATA</source>
-        <translation>DADOS USB</translation>
+        <translation>USB-DE-DADOS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="156"/>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"/>
+        <translation>Tipo de Tabela da Partição</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
@@ -154,12 +154,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Error encountered in the Format process</source>
-        <translation>Erro encontrado no processo de Formatação</translation>
+        <translation>Um erro foi encontrado no processo de formatação</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation>Ocorreu um Erro</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
@@ -171,7 +171,7 @@
         <source>These actions will destroy all data on 
 
 </source>
-        <translation>Estas ações irão destruir (apagar) todos os dados em 
+        <translation>Estas ações irão destruir (apagar) todos os dados no dispositivo
 
 </translation>
     </message>

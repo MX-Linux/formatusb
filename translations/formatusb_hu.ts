@@ -84,7 +84,7 @@
     <message>
         <location filename="../mainwindow.ui" line="222"/>
         <source>Quit application</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés az alkalmazásból</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
