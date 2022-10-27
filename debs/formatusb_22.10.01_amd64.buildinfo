@@ -2,19 +2,19 @@ Format: 1.0
 Source: formatusb
 Binary: formatusb
 Architecture: amd64 source
-Version: 22.08.01
+Version: 22.10.01
 Checksums-Md5:
- 68d81c417faa075ecd257a68945106c7 569 formatusb_22.08.01.dsc
- d86c667ab6d22ee835de1f43be5dc9aa 78408 formatusb_22.08.01_amd64.deb
+ 5186c58068e3b2adb2aa4037411758f9 572 formatusb_22.10.01.dsc
+ 5ff5114d3ed3be008ba3e7ddc3ad3ce2 78720 formatusb_22.10.01_amd64.deb
 Checksums-Sha1:
- d21453decd5a17a72db5db578bbe3b055b3c9599 569 formatusb_22.08.01.dsc
- 257e9833cc4e0bbf22aeb404bde030a819d9b9f9 78408 formatusb_22.08.01_amd64.deb
+ 738cbce0b9b154c54d8dc1a11408bbca3bba7ae3 572 formatusb_22.10.01.dsc
+ 2dca970b23b9744271db7874ada6af0c1b2d588a 78720 formatusb_22.10.01_amd64.deb
 Checksums-Sha256:
- a7c4bcd4f2f487499b65174ed038d301696002eda31ef76417de5d41ed1133a2 569 formatusb_22.08.01.dsc
- ed4e114ffdcf9173b9b80bc9b0d128674be3f7d2ef615d67b0ff78de9796d53b 78408 formatusb_22.08.01_amd64.deb
+ 36a5dac2159a4585839379f2827dedb03739b439430f8901491ca2a565dddee9 572 formatusb_22.10.01.dsc
+ ea2a8d01e7f3dd3392110bfa42c0cb3baee230549556b7aee6da742e2cb04412 78720 formatusb_22.10.01_amd64.deb
 Build-Origin: Debian
 Build-Architecture: amd64
-Build-Date: Mon, 15 Aug 2022 19:42:14 -0400
+Build-Date: Wed, 26 Oct 2022 20:21:38 -0400
 Build-Tainted-By:
  merged-usr-via-symlinks
  usr-local-has-libraries
@@ -344,4 +344,4 @@ Installed-Build-Depends:
 Environment:
  DEB_BUILD_OPTIONS="parallel=4"
  LANG="en_US.UTF-8"
- SOURCE_DATE_EPOCH="1660604787"
+ SOURCE_DATE_EPOCH="1666827462"

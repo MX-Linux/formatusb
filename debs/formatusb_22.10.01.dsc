@@ -2,15 +2,15 @@ Format: 3.0 (native)
 Source: formatusb
 Binary: formatusb
 Architecture: any
-Version: 22.08.01
+Version: 22.10.01
 Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
 Standards-Version: 3.9.8
 Build-Depends: debhelper (>= 10), qtbase5-dev, qttools5-dev-tools
 Package-List:
  formatusb deb admin optional arch=any
 Checksums-Sha1:
- dfed589298f36015938db6d4e2c20efd7e2545b7 75772 formatusb_22.08.01.tar.xz
+ ad0aedce96be0194766056567c2a1917f234d676 379800 formatusb_22.10.01.tar.xz
 Checksums-Sha256:
- 0af6b248f9c5fee8c896ab1a20e393a493e0e8aac4e282f409de2ff71ad472bf 75772 formatusb_22.08.01.tar.xz
+ c6be898fb594f7f86982b029fb5b7c32c319b5ea06496e42c8e30e33e16dbf5c 379800 formatusb_22.10.01.tar.xz
 Files:
- de804bff8d79dd5afa8d26761457d238 75772 formatusb_22.08.01.tar.xz
+ 6f6d72c8e32a1899f76a996898a0ff12 379800 formatusb_22.10.01.tar.xz

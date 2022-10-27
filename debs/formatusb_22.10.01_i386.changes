@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Wed, 26 Oct 2022 19:37:42 -0400
+Source: formatusb
+Binary: formatusb
+Architecture: i386
+Version: 22.10.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Description:
+ formatusb  - format usb devices
+Changes:
+ formatusb (22.10.01) mx; urgency=medium
+ .
+   * update translations
+Checksums-Sha1:
+ a142aca1ce98293840ede6523420cf96d5382780 10189 formatusb_22.10.01_i386.buildinfo
+ 7bb6027b4726d713dde5aa4522194bd82e661615 80268 formatusb_22.10.01_i386.deb
+Checksums-Sha256:
+ de06fe773039dfcba53474ff7cacf5691635e316c60b626062dd6cb2a90c8b74 10189 formatusb_22.10.01_i386.buildinfo
+ d6aad8af0391443b4e4d9be817b9450394e2a10720d0f3adfce9b56549eb5f8f 80268 formatusb_22.10.01_i386.deb
+Files:
+ fac5220085da182f6df14e2772992bb4 10189 admin optional formatusb_22.10.01_i386.buildinfo
+ 9cf656a550a4151449177d0a5bf76147 80268 admin optional formatusb_22.10.01_i386.deb
