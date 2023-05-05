@@ -1,3 +1,10 @@
+formatusb (23.05.01) mx; urgency=medium
+
+  * update translations
+  * translate policy files
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 04 May 2023 21:13:19 -0400
+
 formatusb (22.10.01) mx; urgency=medium
 
   * update translations
