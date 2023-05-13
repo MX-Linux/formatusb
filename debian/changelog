@@ -1,3 +1,9 @@
+formatusb (23.05.03) mx; urgency=medium
+
+  * mx-launcher-l10n strings in policy file
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Fri, 12 May 2023 22:10:27 -0400
+
 formatusb (23.05.01) mx; urgency=medium
 
   * update translations
