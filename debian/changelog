@@ -1,3 +1,11 @@
+formatusb (23.06.01) mx; urgency=medium
+
+  * validate file system labels
+  * allow no label
+  * improve error handling
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 29 Jun 2023 23:28:12 -0400
+
 formatusb (23.05.05) mx; urgency=medium
 
   * update logo
