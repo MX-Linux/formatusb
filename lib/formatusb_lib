@@ -152,6 +152,10 @@ live-usb-maker gui --format="$format" --color=off -t "$device"
 
 labelusb(){
 
+if [ -z "$label" ]; then
+	return
+fi
+
 #ensure device is unmounted
 if [ -n "$(df |grep $device)" ]; then
     umount -q /dev/"$device$partnum" 2>/dev/null

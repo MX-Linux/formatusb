@@ -52,6 +52,7 @@ public:
     void setup();
     QString buildOptionList();
     QStringList buildUsbList();
+    void validate_name();
     QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
 private slots:
