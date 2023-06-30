@@ -305,10 +305,16 @@ void MainWindow::validate_name(){
     }
 
     if (!test.contains(QRegExp(regexstring))) {
-        QMessageBox::critical(this, tr("Failure"), tr("Invalid Characters"));
+        QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
     }
 }
 void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
+{
+    validate_name();
+}
+
+
+void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int index)
 {
     validate_name();
 }

@@ -1,10 +1,12 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="hu">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -148,6 +150,7 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Hiba</translation>
     </message>
@@ -209,6 +212,11 @@
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
         <translation>%1 Súgó</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="308"/>
+        <source>Invalid Name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

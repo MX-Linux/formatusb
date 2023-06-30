@@ -71,6 +71,8 @@ private slots:
 
     void on_lineEditFSlabel_textChanged(const QString &arg1);
 
+    void on_comboBoxDataFormat_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
