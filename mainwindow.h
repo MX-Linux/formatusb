@@ -69,6 +69,8 @@ private slots:
     void on_checkBoxShowAll_clicked();
     void on_checkBoxshowpartitions_clicked();
 
+    void on_lineEditFSlabel_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
