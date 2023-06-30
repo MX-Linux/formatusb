@@ -23,9 +23,12 @@ clearpartions(){
 
 unmount_partitions()
 {
-	local umount_device=$device* 
-	umount /dev/$umount_device 2>/dev/null
-	checkerrorcode "unmount partitions"
+	local umount_device=$device*
+	if [ -n "$(df |grep $device)" ]; then
+	    umount -q /dev/$umount_device 2>/dev/null
+	    checkerrorcode "unmount partitions"
+
+	fi
 }
 
 ##clear_partitions from live-usb-maker by James Bowlin (BitJam) for antiX
@@ -44,12 +47,14 @@ clear_partitions()
 
     # Clear out previous primary partition table
     dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt 
+    
     checkerrorcode "primary partition table clear"
     
     sleep 1
 
     # Clear out sneaky iso-hybrid partition table
     dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=64 
+    
     checkerrorcode "iso-hybrid partition table clear"
 
 	sleep 1
@@ -60,12 +65,14 @@ clear_partitions()
     # Clear out secondary gpt partition table
     dd conv=notrunc if=/dev/zero of=$dev bs=$block_size count=$pt_cnt seek=$offset 
     
+    
     checkerrorcode "secondary partition table clear"
     
     sleep 1
     # Tell kernel the partition table has changed
     echo "refresh partitions info $dev" 
     /sbin/partprobe -s $dev 
+    
     checkerrorcode "refresh partitions info"
     sleep 1
 }
@@ -122,14 +129,18 @@ create_partition()
 	fi
 	
 	parted -s $dev mklabel $parttabletype
+	
 	checkerrorcode "making new partition table"
 	sleep 1
 	/sbin/partprobe $dev 
+	
 	checkerrorcode "refresh partitions info"
-	parted -s -a optimal $dev mkpart $option 1 100% 
+	parted -s -a optimal $dev mkpart $option 1 100%
+	 
 	checkerrorcode "create new partition"
 	sleep 1
-	/sbin/partprobe $dev 
+	/sbin/partprobe $dev
+	 
 	checkerrorcode "refresh partitions info"
 	sleep 1
 }
@@ -142,8 +153,11 @@ live-usb-maker gui --format="$format" --color=off -t "$device"
 labelusb(){
 
 #ensure device is unmounted
-umount -q /dev/"$device$partnum" 2>/dev/null
-checkerrorcode "unmount partitions"
+if [ -n "$(df |grep $device)" ]; then
+    umount -q /dev/"$device$partnum" 2>/dev/null
+    checkerrorcode "unmount partitions"
+fi
+
 
     
 case $format in 
@@ -159,6 +173,7 @@ case $format in
 	*)	echo "unknown format, exiting"  ;;
 
 esac
+
 
 checkerrorcode "label partition"
 }
@@ -224,6 +239,7 @@ case $format in
 
 				vfat | exfat | ntfs) sfdisk /dev/$refreshdevice $partition_to_mark --part-type $mark
 									 sleep 1
+									 
 									 checkerrorcode "Setting Partition Type"	;;
 				
 					  
@@ -232,7 +248,8 @@ case $format in
 	         
 esac
 
-/sbin/partprobe "/dev/$refreshdevice"  
+/sbin/partprobe "/dev/$refreshdevice" 
+ 
 checkerrorcode "refresh partition info"
 
 }
@@ -299,6 +316,7 @@ checkerrorcode "format partition"
 disable_automount()
 {
 mkdir -p /run/udev/rules.d  
+
 checkerrorcode "hide disk from udev"
 echo 'SUBSYSTEM=="block", ENV{UDISKS_IGNORE}="1"' > /run/udev/rules.d/91-mx-udisks-inhibit.rules
 udevadm control --reload  
@@ -308,7 +326,8 @@ udevadm trigger --subsystem-match=block
 
 enable_automount()
 {
-rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules  
+rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules 
+ 
 checkerrorcode "make disk visible to udev"
 udevadm control --reload   
 udevadm trigger --subsystem-match=block  
@@ -323,8 +342,10 @@ change_ownership()
 	mkdir -p /tmp/formatmountpoint 
 	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint    
 	chown $USERNAME:users /tmp/formatmountpoint
+	
 	checkerrorcode "Changing owner of partition to $USERNAME:users" 
 	chmod 775 -R /tmp/formatmountpoint  
+	
 	checkerrorcode "Changing permissions of partition to $USERNAME:users"
 	umount -q /tmp/formatmountpoint  
 	rmdir /tmp/formatmountpoint  
@@ -332,11 +353,12 @@ change_ownership()
 
 checkerrorcode()
 {
+	retval=$?
 	local msg="$1"
-	#echo "exit code is $?"
-	if [ "$?" != "0" ]; then
+	#echo "retval is $retval"
+	if [ ! $retval = 0 ]; then
 		echo "$msg" "ERRROR"
-		exit "$?"
+		exit "$retval"
 	else
 		echo "$msg" "OK"
 	fi
