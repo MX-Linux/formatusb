@@ -305,7 +305,12 @@ void MainWindow::validate_name(){
     }
 
     if (!test.contains(QRegExp(regexstring))) {
-        QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
+        if (ui->buttonNext->isEnabled()) {
+            QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
+            ui->buttonNext->setEnabled(false);
+        }
+    } else {
+        ui->buttonNext->setEnabled(true);
     }
 }
 void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
