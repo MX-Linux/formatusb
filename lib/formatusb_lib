@@ -11,6 +11,12 @@ format="$2"
 label="$3"
 part="$4"  #can be part, defaults, gpt, or msdos
 
+case "${part,,}" in
+     part) part=part     ;;
+     *gpt) part=gpt      ;;
+     *dos) part=msdos    ;;
+        *) part=defaults ;;
+esac
 
 LOG="/tmp/formatter.log"
 
