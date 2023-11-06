@@ -10,10 +10,9 @@ Architecture: any
 Depends: cli-shell-utils,
          coreutils,
          parted,
-         gksu | pkexec,
          mx-viewer | antix-viewer| xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: mx-launcher-l10n
+Recommends: mx-launcher-l10n, gksu | pkexec
 Description: format usb devices
  gui to aid users to format removable usb media
