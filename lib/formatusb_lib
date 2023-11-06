@@ -135,19 +135,19 @@ create_partition()
 		fi
 	fi
 	
-	parted -s $dev mklabel $parttabletype
+	/sbin/parted -s $dev mklabel $parttabletype
 	
 	checkerrorcode "making new partition table"
 	sleep 1
 	/sbin/partprobe $dev 
-	
 	checkerrorcode "refresh partitions info"
+	sleep 1
+	#create partition
 	/sbin/parted -s -a optimal $dev mkpart $option 1 100%
-	 
 	checkerrorcode "create new partition"
 	sleep 1
+	
 	/sbin/partprobe $dev
-	 
 	checkerrorcode "refresh partitions info"
 	sleep 1
 }
