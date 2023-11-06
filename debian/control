@@ -10,6 +10,7 @@ Architecture: any
 Depends: cli-shell-utils,
          coreutils,
          parted,
+         gksu | pkexec,
          mx-viewer | antix-viewer| xdg-utils,
          ${misc:Depends},
          ${shlibs:Depends}
