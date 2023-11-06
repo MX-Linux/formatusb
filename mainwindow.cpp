@@ -110,7 +110,6 @@ QString MainWindow::buildOptionList()
         partoption = "part";
 
     QString authentication = "pkexec";
-    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
 
     if ( !QFile::exists("/usr/bin/pkexec") && QFile::exists("/usr/bin/gksu")){
             authentication = "gksu";
@@ -120,6 +119,7 @@ QString MainWindow::buildOptionList()
             authentication = "";
     }
 
+    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
     options = options.trimmed();
     qDebug() << "partition is" << device << "label " << label;
     qDebug() << "Options: " << options;
