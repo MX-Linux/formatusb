@@ -117,8 +117,10 @@ QString MainWindow::buildOptionList()
             options = QString(authentication + " '/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "'");
 	}
 
-    if (getuid() == 0 )
+    if (getuid() == 0 ) {
             authentication = "";
+            options = QString("/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label + "\" " + partoption + "");
+    }
 
 
     options = options.trimmed();
