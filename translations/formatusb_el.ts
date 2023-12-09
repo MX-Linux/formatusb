@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="el">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>Program_Name</translation>
+        <translation>Όνομα_προγράμματος</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -150,7 +148,6 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Αποτυχία</translation>
     </message>
@@ -213,11 +210,6 @@
         <source>%1 Help</source>
         <translation>Βοήθεια %1</translation>
     </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="308"/>
-        <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -235,7 +227,7 @@
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Άκυρο</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>

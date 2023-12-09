@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>Programmname</translation>
+        <translation>Programm_Name</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Show all devices</source>
-        <translation>Anzeige aller Geräte</translation>
+        <translation>Alle Geräte anzeigen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -41,7 +39,7 @@
     <message>
         <location filename="../mainwindow.ui" line="82"/>
         <source>Show partitions</source>
-        <translation>Anzeige der Partitionen</translation>
+        <translation>Partitionen anzeigen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="112"/>
@@ -150,14 +148,13 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Fehlschlag</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Error encountered in the Format process</source>
-        <translation>Ein Fehler ist beim Formatieren aufgetreten</translation>
+        <translation>Beim Formatieren ist ein Fehler aufgetreten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
@@ -181,7 +178,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="216"/>
         <source>Do you wish to continue?</source>
-        <translation>Möchtest du fortfahren?</translation>
+        <translation>Möchten sie fortfahren?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="252"/>
@@ -196,7 +193,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="254"/>
         <source>Program for formatting USB devices</source>
-        <translation>Programm zur Formatierung von USB Laufwerken</translation>
+        <translation>Programm zur Formatierung von USB-Laufwerken</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
@@ -212,11 +209,6 @@
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
         <translation>%1 Hilfe</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="308"/>
-        <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

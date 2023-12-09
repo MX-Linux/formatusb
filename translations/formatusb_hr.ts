@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="hr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hr">
 <context>
     <name>MainWindow</name>
     <message>
@@ -11,7 +9,7 @@
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Show all devices</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
@@ -21,17 +19,17 @@
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -41,7 +39,7 @@
     <message>
         <location filename="../mainwindow.ui" line="82"/>
         <source>Show partitions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="112"/>
@@ -66,22 +64,22 @@
     <message>
         <location filename="../mainwindow.ui" line="135"/>
         <source>Refresh drive list</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="149"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="156"/>
         <source>File System Label</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="163"/>
         <source>Partition Table Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="222"/>
@@ -150,14 +148,13 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Neuspjeh</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
         <source>Error encountered in the Format process</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="211"/>
@@ -213,11 +210,6 @@
         <source>%1 Help</source>
         <translation>%1 Pomoć</translation>
     </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="308"/>
-        <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -230,7 +222,7 @@
         <location filename="../about.cpp" line="35"/>
         <location filename="../about.cpp" line="45"/>
         <source>Changelog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../about.cpp" line="36"/>

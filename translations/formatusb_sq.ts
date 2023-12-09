@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>MainWindow</name>
     <message>
@@ -150,7 +148,6 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="180"/>
-        <location filename="../mainwindow.cpp" line="308"/>
         <source>Failure</source>
         <translation>Dështim</translation>
     </message>
@@ -212,11 +209,6 @@
         <location filename="../mainwindow.cpp" line="265"/>
         <source>%1 Help</source>
         <translation>Ndihmë për %1</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="308"/>
-        <source>Invalid Name</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
