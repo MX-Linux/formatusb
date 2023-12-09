@@ -1,3 +1,9 @@
+formatusb (23.11.03) mx; urgency=medium
+
+  * update translations 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 09 Dec 2023 14:39:24 -0500
+
 formatusb (23.11.02) mx; urgency=medium
 
   * remove mx-launcher-l10n from depends, make recommend
