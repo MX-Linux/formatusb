@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation>Program_Name</translation>
+        <translation>Название программы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
         <source>Show all devices</source>
-        <translation>Minden eszköz megjelenítése</translation>
+        <translation>Показать все устройства</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation>Formázás</translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation>Alapértékek</translation>
+        <translation>Значения по умолчанию</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
@@ -36,42 +36,42 @@
     <message>
         <location filename="../mainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Select Target USB Device&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;USB eszköz kiválasztása&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Выбор целевого USB накопителя&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="82"/>
         <source>Show partitions</source>
-        <translation>Partíciók megjelenítése</translation>
+        <translation>Показать разделы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="138"/>
         <source>Refresh drive list</source>
-        <translation>Lista frissítése</translation>
+        <translation>Обновить список накопителей</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="152"/>
         <source>USB-DATA</source>
-        <translation>USB-ADAT</translation>
+        <translation>USB-DATA</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="159"/>
         <source>File System Label</source>
-        <translation>Fájlrendszer címke</translation>
+        <translation>Метка файловой системы</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="166"/>
         <source>Partition Table Type</source>
-        <translation>Partíciós tábla</translation>
+        <translation>Тип таблицы разделов</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
-        <translation>Kilépés az alkalmazásból</translation>
+        <translation>Выйти из приложения</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="228"/>
         <source>Close</source>
-        <translation>Bezárás</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="235"/>
@@ -81,12 +81,12 @@
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
-        <translation>Súgó megjelenítése</translation>
+        <translation>Показать справку</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="276"/>
         <source>Help</source>
-        <translation>Súgó</translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
@@ -96,12 +96,12 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
-        <translation>Az alkalmazásról</translation>
+        <translation>Об этом приложении</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
-        <translation>Névjegy...</translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
@@ -111,72 +111,72 @@
     <message>
         <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
-        <translation>Következő</translation>
+        <translation>Следующий</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
-        <translation>Vissza</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
         <source>Success</source>
-        <translation>Sikeres</translation>
+        <translation>Успешно</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
         <source>Format successful!</source>
-        <translation>Formázás sikeres!</translation>
+        <translation>Форматирование удалось!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
-        <translation>Hiba</translation>
+        <translation>Сбой</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
         <source>Error encountered in the Format process</source>
-        <translation>Hiba történt a formázás közben</translation>
+        <translation>Ошибка в процессе форматирования</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="217"/>
         <source>Error</source>
-        <translation>Hiba</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="217"/>
         <source>Please select a USB device to write to</source>
-        <translation>Válassza ki a formázandó USB eszközt</translation>
+        <translation>Выберите USB накопитель для записи</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="222"/>
         <source>These actions will destroy all data on 
 
 </source>
-        <translation>Ez minden adatot töröl a következőről
+        <translation>Эти действия уничтожат данные на 
 
 </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="222"/>
         <source>Do you wish to continue?</source>
-        <translation>Szeretné folytatni?</translation>
+        <translation>Вы хотите продолжить?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
         <source>About %1</source>
-        <translation>%1 névjegye</translation>
+        <translation>О %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="259"/>
         <source>Version: </source>
-        <translation>Verzió:</translation>
+        <translation>Версия: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="260"/>
         <source>Program for formatting USB devices</source>
-        <translation>USB eszközök formázására szolgáló eszköz</translation>
+        <translation>Программа для форматирования USB накопителей</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="262"/>
@@ -186,17 +186,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="263"/>
         <source>%1 License</source>
-        <translation>%1 Licenc</translation>
+        <translation>%1 Лицензия</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="271"/>
         <source>%1 Help</source>
-        <translation>%1 Súgó</translation>
+        <translation>%1 Справка</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation>Érvénytelen név</translation>
+        <translation>Неверное имя</translation>
     </message>
 </context>
 <context>
@@ -204,23 +204,23 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>Licenc</translation>
+        <translation>Лицензия</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>
         <location filename="../about.cpp" line="45"/>
         <source>Changelog</source>
-        <translation>Változások listája</translation>
+        <translation>Список изменений</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>Mégsem</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;Bezárás</translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 </TS>
