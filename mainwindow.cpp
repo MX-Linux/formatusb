@@ -310,7 +310,7 @@ void MainWindow::validate_name(){
         regexstring = "^[A-Za-z0-9_.-]{1,32}$";
     }
 
-    if (!test.contains(QRegExp(regexstring))) {
+    if (!test.contains(QRegularExpression(regexstring))) {
         if (ui->buttonNext->isEnabled()) {
             QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
             ui->buttonNext->setEnabled(false);
