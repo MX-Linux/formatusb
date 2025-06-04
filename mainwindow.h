@@ -27,14 +27,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFile>
 #include <QMessageBox>
 #include <QProcess>
 #include <QSettings>
-#include <QFile>
 
 #include <cmd.h>
 
-const QString cli_utils = ". /usr/local/lib/cli-shell-utils/cli-shell-utils.bash;";
+const QString cli_utils = QString(". ") +
+    (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash")
+        ? "/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"
+        : "/usr/lib/cli-shell-utils/cli-shell-utils.bash;");
 
 namespace Ui {
 class MainWindow;
@@ -84,4 +87,3 @@ private:
 
 
 #endif
-
