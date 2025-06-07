@@ -18,7 +18,6 @@ Depends: cli-shell-utils,
          coreutils,
          parted,
          mx-viewer | antix-viewer | xdg-utils,
-         qt6-svg-plugins,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: mx-launcher-l10n,
