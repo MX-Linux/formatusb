@@ -22,10 +22,7 @@
  * along with this package. If not, see <http://www.gnu.org/licenses/>.
  **********************************************************************/
 
-
-
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QFile>
 #include <QMessageBox>
@@ -34,12 +31,13 @@
 
 #include <cmd.h>
 
-const QString cli_utils = QString(". ") +
-    (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash")
-        ? "/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"
-        : "/usr/lib/cli-shell-utils/cli-shell-utils.bash;");
+const QString cli_utils = QString(". ")
+                          + (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash")
+                                 ? "/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"
+                                 : "/usr/lib/cli-shell-utils/cli-shell-utils.bash;");
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -56,7 +54,8 @@ public:
     QString buildOptionList();
     QStringList buildUsbList();
     void validate_name();
-    QStringList removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
+    QStringList
+    removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
 private slots:
     void cleanup();
@@ -84,6 +83,3 @@ private:
     QString label;
     int height;
 };
-
-
-#endif
