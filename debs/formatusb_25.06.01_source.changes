@@ -1,0 +1,22 @@
+Format: 1.8
+Date: Sat, 07 Jun 2025 19:03:13 -0400
+Source: formatusb
+Architecture: source
+Version: 25.06.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ formatusb (25.06.01) mx; urgency=medium
+ .
+   * remove qt6-style-plugin as depend
+Checksums-Sha1:
+ 0eb2ebe7dc6e83f408de0aac127edfa51862ce5c 777 formatusb_25.06.01.dsc
+ 7c73aa7ac681386ac4b3056df229170f558075bd 72684 formatusb_25.06.01.tar.xz
+Checksums-Sha256:
+ bce9d2fff3e4d00e6b4ccecfc3682faed4a0c013958f277cafb15a0f73c08562 777 formatusb_25.06.01.dsc
+ 2ffe8065c945cfdf22faf8224a8850c182d448f29ee551b6cf3df5a6f9714337 72684 formatusb_25.06.01.tar.xz
+Files:
+ 2ab271a840097d5fdf81158caa94c35c 777 admin optional formatusb_25.06.01.dsc
+ bb45f400b0a7f93732eb4bfa94ff167c 72684 admin optional formatusb_25.06.01.tar.xz
