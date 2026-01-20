@@ -11,7 +11,6 @@ depends=(
     'parted'
     'coreutils'
     'util-linux'
-    'cli-shell-utils'
 )
 makedepends=('qt6-tools')
 source=()
@@ -55,4 +54,8 @@ package() {
     if [ -d help ]; then
         cp -r help "${pkgdir}/usr/share/doc/formatusb/" 2>/dev/null || true
     fi
+
+    install -Dm644 scripts/cli-shell-utils.bash "${pkgdir}/usr/lib/cli-shell-utils/"
+
+    install -Dm755 scripts/vmlinuz-version "${pkgdir}/usr/lib/cli-shell-utils/bin/vmlinuz-version"
 }
