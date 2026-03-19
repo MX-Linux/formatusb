@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="vi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ka">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
         <source>Program_Name</source>
-        <translation type="unfinished"/>
+        <translation>პროგრამის_სახელი</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="39"/>
@@ -14,22 +14,22 @@
     <message>
         <location filename="../mainwindow.ui" line="46"/>
         <source>Format</source>
-        <translation>Định dạng</translation>
+        <translation>ფორმატი</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="54"/>
         <source>Defaults</source>
-        <translation type="unfinished"/>
+        <translation>ნაგულისხმევები</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="59"/>
         <source>msdos</source>
-        <translation type="unfinished"/>
+        <translation>msdos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="64"/>
         <source>gpt</source>
-        <translation type="unfinished"/>
+        <translation>gpt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="72"/>
@@ -49,7 +49,7 @@
     <message>
         <location filename="../mainwindow.ui" line="152"/>
         <source>USB-DATA</source>
-        <translation type="unfinished"/>
+        <translation>USB-DATA</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="159"/>
@@ -64,12 +64,12 @@
     <message>
         <location filename="../mainwindow.ui" line="225"/>
         <source>Quit application</source>
-        <translation>Thoát ứng dụng</translation>
+        <translation>აპლიკაციიდან გასვლა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="228"/>
         <source>Close</source>
-        <translation>Đóng</translation>
+        <translation>დახურვა</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="235"/>
@@ -79,12 +79,12 @@
     <message>
         <location filename="../mainwindow.ui" line="273"/>
         <source>Display help </source>
-        <translation>Hiển thị bản trợ giúp</translation>
+        <translation>დახმარების ჩვენება </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="276"/>
         <source>Help</source>
-        <translation>Trợ giúp</translation>
+        <translation>დახმარება</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="283"/>
@@ -94,12 +94,12 @@
     <message>
         <location filename="../mainwindow.ui" line="315"/>
         <source>About this application</source>
-        <translation>Về ứng dụng này</translation>
+        <translation>ამ აპლიკაციის შესახებ</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="318"/>
         <source>About...</source>
-        <translation>Về ứng dụng này...</translation>
+        <translation>შესახებ...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="325"/>
@@ -109,17 +109,17 @@
     <message>
         <location filename="../mainwindow.ui" line="357"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>შემდეგი</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>უკან</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
         <source>Success</source>
-        <translation type="unfinished"/>
+        <translation>წარმატება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="184"/>
@@ -130,7 +130,7 @@
         <location filename="../mainwindow.cpp" line="186"/>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Failure</source>
-        <translation type="unfinished"/>
+        <translation>ჩავარდნა</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="186"/>
@@ -140,7 +140,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="217"/>
         <source>Error</source>
-        <translation>Lỗi</translation>
+        <translation>შეცდომა</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="217"/>
@@ -162,12 +162,12 @@
     <message>
         <location filename="../mainwindow.cpp" line="258"/>
         <source>About %1</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის შესახებ</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="259"/>
         <source>Version: </source>
-        <translation>Phiên bản:</translation>
+        <translation>ვერსია:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="260"/>
@@ -177,17 +177,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="262"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation>(c) MX Linux საავტორო ფულებები დაცულია</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="263"/>
         <source>%1 License</source>
-        <translation type="unfinished"/>
+        <translation>ლიცენზია %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="271"/>
         <source>%1 Help</source>
-        <translation type="unfinished"/>
+        <translation>%1-ის დახმარება</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
@@ -200,23 +200,23 @@
     <message>
         <location filename="../about.cpp" line="34"/>
         <source>License</source>
-        <translation>Giấy phép</translation>
+        <translation>ლიცენზია</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="35"/>
         <location filename="../about.cpp" line="45"/>
         <source>Changelog</source>
-        <translation>Nhật kí thay đổi</translation>
+        <translation>ცვლილებების ჟურნალი</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="36"/>
         <source>Cancel</source>
-        <translation>Hủy bỏ</translation>
+        <translation>გაუქმება</translation>
     </message>
     <message>
         <location filename="../about.cpp" line="53"/>
         <source>&amp;Close</source>
-        <translation>&amp;Đóng</translation>
+        <translation>&amp;დახურვა</translation>
     </message>
 </context>
 </TS>
