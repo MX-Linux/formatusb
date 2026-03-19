@@ -1,6 +1,5 @@
-formatusb (26.03) mx; urgency=medium
+formatusb (26.03.1) mx; urgency=medium
 
-  * Non-maintainer upload.
   * Show help and license in-app
 
  -- Adrian <adrian@mxlinux.org>  Thu, 19 Mar 2026 15:15:33 -0400
