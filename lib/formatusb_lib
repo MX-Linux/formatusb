@@ -18,6 +18,16 @@ case "${part,,}" in
         *) part=defaults ;;
 esac
 
+# SECURITY: $device is interpolated (often unquoted) into many root commands
+# below (df/dd/parted/blkid/sfdisk). This helper is directly pkexec-invocable,
+# so GUI-side checks are bypassable — validate the device name here. A real
+# block-device name (sdb1, mmcblk0p1, nvme0n1p1) is alphanumeric only; this
+# rejects any shell metacharacter / path separator.
+if [[ ! "$device" =~ ^[A-Za-z0-9]+$ ]]; then
+    echo "Invalid device name: $device" >&2
+    exit 2
+fi
+
 LOG="/tmp/formatter.log"
 
 echo device is $device format is $format
@@ -135,15 +145,21 @@ create_partition()
 		fi
 	fi
 
-	parted -s $dev mklabel $parttabletype
+	parted -s "$dev" mklabel "$parttabletype"
 
 	checkerrorcode "making new partition table"
 	sleep 1
-	partprobe $dev
+	partprobe "$dev"
 	checkerrorcode "refresh partitions info"
 	sleep 1
-	#create partition
-	parted -s -a optimal $dev mkpart $option 1 100%
+	#create partition. $option is "primary" (msdos) or empty (gpt, no name);
+	#quote it when present so it can't word-split, but keep the original
+	#argument vector when empty so parted's gpt "no name" case is unchanged.
+	if [ -n "$option" ]; then
+		parted -s -a optimal "$dev" mkpart "$option" 1 100%
+	else
+		parted -s -a optimal "$dev" mkpart 1 100%
+	fi
 	checkerrorcode "create new partition"
 	sleep 1
 
@@ -266,13 +282,37 @@ checkerrorcode "refresh partition info"
 }
 
 cleanuplog(){
-	if [ -e "/var/log/formatusb.log" ]; then
-		cp /var/log/formatusb.log /var/log/formatusb.log.old
+	local dest="/var/log/formatusb.log" old="/var/log/formatusb.log.old" uid dir src
+	# Where the GUI wrote its log: a user session logs to its private runtime
+	# dir (/run/user/<uid>); a root run logs to /run. Both are non-world-writable,
+	# unlike the legacy /tmp fallback. The caller's uid comes from pkexec/sudo/login.
+	if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+		uid="$PKEXEC_UID"
+	elif [[ "$SUDO_UID" =~ ^[0-9]+$ ]]; then
+		uid="$SUDO_UID"
+	else
+		uid=$(id -u "$(logname)" 2>/dev/null)
 	fi
-	if [ -e "/tmp/formatusb.log" ]; then
-		cp /tmp/formatusb.log /var/log/formatusb.log
-	fi
-
+	local -a logdirs=()
+	[[ "$uid" =~ ^[0-9]+$ && "$uid" -ne 0 ]] && logdirs+=("/run/user/${uid}")
+	logdirs+=("/run" "/tmp")
+	for dir in "${logdirs[@]}"; do
+		[[ -d "$dir" ]] || continue
+		src="${dir}/formatusb.log"
+		# Only act on a real regular file, never a symlink, so the source
+		# cannot be redirected at a root-owned file.
+		[[ -f "$src" && ! -L "$src" ]] || continue
+		# Rotate the destination, never following a symlink left there.
+		if [[ -L "$dest" ]]; then
+			rm -f -- "$dest"
+		elif [[ -f "$dest" ]]; then
+			mv -- "$dest" "$old"
+		fi
+		# -P: if the source is swapped for a symlink in a race, copy the link
+		# itself rather than dereferencing it to another file.
+		cp -P -- "$src" "$dest"
+		return 0
+	done
 }
 
 partnumber()
@@ -346,20 +386,37 @@ udevadm trigger --subsystem-match=block
 
 change_ownership()
 {
-	local USER=$(id -u $(/usr/bin/logname))
-	local GROUP=$(getent group users |awk -F: '{print $3}')
-	local USERNAME=$(/usr/bin/logname)
+	local USERNAME mountpoint
+	# Resolve the calling user from the polkit-provided uid (fall back to
+	# logname) rather than trusting the controlling terminal alone.
+	if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
+		USERNAME=$(getent passwd "$PKEXEC_UID" | cut -d: -f1)
+	fi
+	[[ -z "$USERNAME" ]] && USERNAME=$(/usr/bin/logname)
+	[[ -z "$USERNAME" ]] && return
 
-	mkdir -p /tmp/formatmountpoint
-	mount -t ext4 /dev/"$device$partnum" /tmp/formatmountpoint
-	chown $USERNAME:users /tmp/formatmountpoint
+	# Use a fresh, root-owned, random mount point (mode 0700) instead of a
+	# predictable world-writable /tmp path an attacker could pre-create/symlink.
+	mountpoint=$(mktemp -d /run/formatusb-mnt.XXXXXX) || return
+	# Always tear down the temp mount point, even if a step below fails and
+	# exits (checkerrorcode exits on error).
+	trap 'umount -q "$mountpoint" 2>/dev/null; rmdir "$mountpoint" 2>/dev/null' EXIT
 
+	# Check the mount immediately: if it fails, chown/chmod would silently act
+	# on the empty temp dir and the new filesystem would never be owned by the
+	# user. checkerrorcode aborts here on failure (and the trap cleans up).
+	mount -t ext4 /dev/"$device$partnum" "$mountpoint"
+	checkerrorcode "Mounting new partition to set ownership"
+
+	chown "$USERNAME":users "$mountpoint"
 	checkerrorcode "Changing owner of partition to $USERNAME:users"
-	chmod 775 -R /tmp/formatmountpoint
 
+	chmod -R 775 "$mountpoint"
 	checkerrorcode "Changing permissions of partition to $USERNAME:users"
-	umount -q /tmp/formatmountpoint
-	rmdir /tmp/formatmountpoint
+
+	umount -q "$mountpoint"
+	rmdir "$mountpoint"
+	trap - EXIT
 }
 
 checkerrorcode()
