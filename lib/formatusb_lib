@@ -331,8 +331,10 @@ checkerrorcode "refresh partition info"
 cleanuplog(){
 	local dest="/var/log/formatusb.log" old="/var/log/formatusb.log.old" uid dir src
 	# Where the GUI wrote its log: a user session logs to its private runtime
-	# dir (/run/user/<uid>); a root run logs to /run. Both are non-world-writable,
-	# unlike the legacy /tmp fallback. The caller's uid comes from pkexec/sudo/login.
+	# dir (/run/user/<uid>); a root run logs to /run. Both are non-world-writable.
+	# World-writable /tmp is deliberately NOT searched as root: even with symlinks
+	# rejected, its content and size would be attacker-controllable. The caller's
+	# uid comes from pkexec/sudo/login.
 	if [[ "$PKEXEC_UID" =~ ^[0-9]+$ ]]; then
 		uid="$PKEXEC_UID"
 	elif [[ "$SUDO_UID" =~ ^[0-9]+$ ]]; then
@@ -342,7 +344,7 @@ cleanuplog(){
 	fi
 	local -a logdirs=()
 	[[ "$uid" =~ ^[0-9]+$ && "$uid" -ne 0 ]] && logdirs+=("/run/user/${uid}")
-	logdirs+=("/run" "/tmp")
+	logdirs+=("/run")
 	for dir in "${logdirs[@]}"; do
 		[[ -d "$dir" ]] || continue
 		src="${dir}/formatusb.log"
