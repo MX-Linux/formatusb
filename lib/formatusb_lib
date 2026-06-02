@@ -28,6 +28,15 @@ if [[ ! "$device" =~ ^[A-Za-z0-9]+$ ]]; then
     exit 2
 fi
 
+# Reject unknown filesystem types up front. Otherwise format_partitions()
+# treats an unknown format as a no-op "success" (its *) branch returns 0 and
+# checkerrorcode reports OK) -- but for a non-"part" mode the disk has already
+# been wiped/repartitioned by then, so fail closed before any disk writes.
+case "$format" in
+    vfat|ext4|ntfs|exfat) ;;
+    *) echo "Invalid format: $format" >&2; exit 2 ;;
+esac
+
 LOG="/tmp/formatter.log"
 
 echo device is $device format is $format
