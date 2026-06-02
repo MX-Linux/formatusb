@@ -417,6 +417,7 @@ mkdir -p /run/udev/rules.d
 
 checkerrorcode "hide disk from udev"
 echo 'SUBSYSTEM=="block", ENV{UDISKS_IGNORE}="1"' > /run/udev/rules.d/91-mx-udisks-inhibit.rules
+AUTOMOUNT_DISABLED=1   # tells the cleanup trap to re-enable automount on any exit
 udevadm control --reload
 udevadm trigger --subsystem-match=block
 
@@ -427,6 +428,7 @@ enable_automount()
 rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
 
 checkerrorcode "make disk visible to udev"
+AUTOMOUNT_DISABLED=""   # disarm the cleanup trap's re-enable once done normally
 udevadm control --reload
 udevadm trigger --subsystem-match=block
 }
@@ -445,9 +447,9 @@ change_ownership()
 	# Use a fresh, root-owned, random mount point (mode 0700) instead of a
 	# predictable world-writable /tmp path an attacker could pre-create/symlink.
 	mountpoint=$(mktemp -d /run/formatusb-mnt.XXXXXX) || return
-	# Always tear down the temp mount point, even if a step below fails and
-	# exits (checkerrorcode exits on error).
-	trap 'umount -q "$mountpoint" 2>/dev/null; rmdir "$mountpoint" 2>/dev/null' EXIT
+	# Register the temp mount for the global cleanup trap so it is always torn
+	# down, even if a step below fails and exits (checkerrorcode exits on error).
+	TEMP_MOUNT="$mountpoint"
 
 	# Check the mount immediately: if it fails, chown/chmod would silently act
 	# on the empty temp dir and the new filesystem would never be owned by the
@@ -461,9 +463,13 @@ change_ownership()
 	chmod -R 775 "$mountpoint"
 	checkerrorcode "Changing permissions of partition to $USERNAME:users"
 
+	# Verify the unmount succeeded before reporting success, so a failed umount
+	# is not logged OK while leaving the filesystem mounted.
 	umount -q "$mountpoint"
+	checkerrorcode "Unmounting temporary mount point"
 	rmdir "$mountpoint"
-	trap - EXIT
+	checkerrorcode "Removing temporary mount point"
+	TEMP_MOUNT=""
 }
 
 checkerrorcode()
@@ -487,7 +493,28 @@ checkpartitiontype()
 	fi
 }
 
+# Always-run cleanup: re-enable automount and tear down the temp mount point on
+# ANY exit, including checkerrorcode's mid-run exit. Preserves the exit status.
+_cleanup()
+{
+	local rc=$?
+	if [ -n "$TEMP_MOUNT" ]; then
+		umount -q "$TEMP_MOUNT" 2>/dev/null
+		rmdir "$TEMP_MOUNT" 2>/dev/null
+		TEMP_MOUNT=""
+	fi
+	if [ -n "$AUTOMOUNT_DISABLED" ]; then
+		rm -f /run/udev/rules.d/91-mx-udisks-inhibit.rules
+		udevadm control --reload 2>/dev/null
+		udevadm trigger --subsystem-match=block 2>/dev/null
+		AUTOMOUNT_DISABLED=""
+	fi
+	exit "$rc"
+}
+
 main(){
+
+trap _cleanup EXIT
 
 #echo main launched
 unmount_partitions
