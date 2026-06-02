@@ -12,10 +12,13 @@ label="$3"
 part="$4"  #can be part, defaults, gpt, or msdos
 
 case "${part,,}" in
-     part) part=part     ;;
-     *gpt) part=gpt      ;;
-     *dos) part=msdos    ;;
-        *) part=defaults ;;
+     part)     part=part     ;;
+     *gpt)     part=gpt      ;;
+     *dos)     part=msdos    ;;
+     defaults) part=defaults ;;
+     # Fail closed: an unrecognised mode must not silently fall through to
+     # "defaults" (whole-disk repartitioning) on a destructive privileged helper.
+        *) echo "Invalid partition mode: $part" >&2; exit 2 ;;
 esac
 
 # SECURITY: $device is interpolated (often unquoted) into many root commands
