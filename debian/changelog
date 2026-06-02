@@ -1,3 +1,11 @@
+formatusb (26.06) mx; urgency=medium
+
+  * Add safety checks to avoid formatting with invalid settings
+  * Restore your drive's automount setting after formatting finishes
+  * Improve reliability and security of the formatting process
+
+ -- Adrian <adrian@mxlinux.org>  Tue, 02 Jun 2026 00:30:00 -0400
+
 formatusb (26.03.1) mx; urgency=medium
 
   * Show help and license in-app
