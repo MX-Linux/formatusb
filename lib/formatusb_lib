@@ -75,8 +75,6 @@ case "$format" in
     *) echo "Invalid format: $format" >&2; exit 2 ;;
 esac
 
-LOG="/tmp/formatter.log"
-
 echo device is $device format is $format
 echo label is $label
 
@@ -99,12 +97,11 @@ unmount_partitions()
 clear_partitions()
 {
     local dev=/dev/$device
-    local bytes=$(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
+    local bytes
+    bytes=$(parted --script $dev unit B print 2>/dev/null | sed -rn "s/^Disk.*: ([0-9]+)B$/\1/ip")
     local block_size=512
     local pt_size=$((17 * 1024))
     local pt_cnt=$((pt_size / block_size))
-    local sneaky_bytes=$((32 * 1024))
-    local sneaky_offset=$((sneaky_bytes / block_size))
 
     local total_blocks=$((bytes / $block_size))
     #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks"
@@ -148,7 +145,8 @@ create_partition()
 	unmount_partitions
 	sleep 1
 
-	local bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
+	local bytes
+	bytes=$(lsblk --bytes --nodeps --noheadings --output SIZE $dev 2>/dev/null)
 	bytes=$((bytes / 1))
 	local mbrlimit=$((2000 * 1024 * 1024 * 1024)) # about 2TB - devices over this size are made to gpt
 	local parttabletype
@@ -484,14 +482,6 @@ checkerrorcode()
 		exit "$retval"
 	else
 		echo "$msg" "OK"
-	fi
-}
-
-checkpartitiontype()
-{
-	local dev=/dev/$device
-	if [ -n "$(blkid $dev | grep PTTYPE=\"gpt\")" ]; then
-		originalparttable="gpt"
 	fi
 }
 
