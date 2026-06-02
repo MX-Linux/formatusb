@@ -13,8 +13,8 @@ part="$4"  #can be part, defaults, gpt, or msdos
 
 case "${part,,}" in
      part)     part=part     ;;
-     *gpt)     part=gpt      ;;
-     *dos)     part=msdos    ;;
+     gpt)      part=gpt      ;;
+     msdos)    part=msdos    ;;
      defaults) part=defaults ;;
      # Fail closed: an unrecognised mode must not silently fall through to
      # "defaults" (whole-disk repartitioning) on a destructive privileged helper.
@@ -30,6 +30,41 @@ if [[ ! "$device" =~ ^[A-Za-z0-9]+$ ]]; then
     echo "Invalid device name: $device" >&2
     exit 2
 fi
+
+# Must be a real block device (the helper is directly pkexec-invocable, so this
+# is not guaranteed by the GUI device list).
+if [ ! -b "/dev/$device" ]; then
+    echo "Not a block device: /dev/$device" >&2
+    exit 2
+fi
+
+whole_disk_name()
+{
+    local node="${1#/dev/}" parent type
+    while [ -n "$node" ] && [ -b "/dev/$node" ]; do
+        type=$(lsblk -ndo TYPE "/dev/$node" 2>/dev/null | head -1)
+        [ "$type" = "disk" ] && { echo "$node"; return 0; }
+        parent=$(lsblk -ndo PKNAME "/dev/$node" 2>/dev/null | head -1)
+        [ -z "$parent" ] && break
+        node="$parent"
+    done
+    echo "$node"
+}
+
+# Refuse to operate on the disk backing the running system or live medium.
+# Compare whole-disk kernel names, following parent links so normal partitions
+# and common mapper/LVM/LUKS stacks resolve to the same backing disk.
+target_disk=$(whole_disk_name "/dev/$device")
+for _mnt in / /boot /boot/efi /live/boot-dev /live/to-ram /lib/live/mount/medium /run/live/medium; do
+    _src=$(findmnt -fn -o SOURCE "$_mnt" 2>/dev/null) || continue
+    _src=${_src%%[*}              # strip btrfs subvol suffix, e.g. /dev/sda2[/@]
+    [ -b "$_src" ] || continue
+    _pdisk=$(whole_disk_name "$_src")
+    if [ "$target_disk" = "$_pdisk" ]; then
+        echo "Refusing to format /dev/$device: it backs the running system or live medium" >&2
+        exit 3
+    fi
+done
 
 # Reject unknown filesystem types up front. Otherwise format_partitions()
 # treats an unknown format as a no-op "success" (its *) branch returns 0 and
