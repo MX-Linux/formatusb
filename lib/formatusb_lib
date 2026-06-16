@@ -78,10 +78,6 @@ esac
 echo device is $device format is $format
 echo label is $label
 
-clearpartions(){
-	live-usb-maker gui partition-clear --color=off -t "$device"
-}
-
 unmount_partitions()
 {
 	local umount_device=$device*
@@ -478,7 +474,7 @@ checkerrorcode()
 	local msg="$1"
 	#echo "retval is $retval"
 	if [ ! $retval = 0 ]; then
-		echo "$msg" "ERRROR"
+		echo "$msg" "ERROR"
 		exit "$retval"
 	else
 		echo "$msg" "OK"

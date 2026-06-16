@@ -84,8 +84,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
-    Cmd *cmdprog;
     QString device;
     QString label;
-    int height;
 };

@@ -66,29 +66,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::makeUsb(const QString &options)
 {
-    // get a device value if action is on a partition
-    QString deviceToCheck = device;
-    if (device.contains("nvme")) {
-        deviceToCheck = device.section("p", 0, 0);
-    }
-    if (device.contains("mmc")) {
-        deviceToCheck = device.section("p", 0, 0);
-    }
-
-    if (device.contains("sd")) {
-        deviceToCheck = device.left(3);
-    }
     setConnections();
     qDebug() << cmd->getCmdOut(options);
     // label drive
     // labeldrive();
 }
 
-// setup versious items first time program runs
+// setup various items first time program runs
 void MainWindow::setup()
 {
     cmd = new Cmd(this);
-    cmdprog = new Cmd(this);
     connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::cleanup);
     setWindowTitle("Format USB");
     ui->buttonBack->setHidden(true);
@@ -96,7 +83,6 @@ void MainWindow::setup()
     ui->buttonCancel->setEnabled(true);
     ui->buttonNext->setEnabled(true);
     ui->outputBox->setCursorWidth(0);
-    height = heightMM();
     ui->lineEditFSlabel->setText("USB-DATA");
 }
 
@@ -259,12 +245,9 @@ void MainWindow::on_buttonNext_clicked()
 
         makeUsb(buildOptionList());
 
-        // on output page
-    } else if (ui->stackedWidget->currentWidget() == ui->outputPage) {
-
-    } else {
+        // do nothing on the output page; quit from any other page
+    } else if (ui->stackedWidget->currentWidget() != ui->outputPage) {
         qApp->quit();
-        return;
     }
 }
 
