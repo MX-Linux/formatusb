@@ -1,5 +1,5 @@
 # **********************************************************************
-# * Copyright (C) 2017 MX Authors
+# * Copyright (C) 2017-2026 MX Authors
 # *
 # * Authors: Dolphin Oracle
 # *          MX Linux <http://mxlinux.org>
