@@ -245,6 +245,22 @@ esac
 checkerrorcode "label partition"
 }
 
+# Strip the partition suffix from a composite device+partition string to obtain
+# the parent block device ("refreshdevice") and the bare partition number
+# ("partition_to_mark").  Handles the three device-naming conventions found in
+# the kernel: sdX (sdX1), mmcblkX (mmcblkXp1), nvmeXnY (nvmeXnYp1).
+resolve_partition_ref(){
+	local dev="$1"
+	if [[ "$dev" == *"mmc"* ]] || [[ "$dev" == *"nvme"* ]]; then
+		refreshdevice="${dev%p*}"
+		filter="${refreshdevice}p"
+		partition_to_mark="${partition_dev#$filter}"
+	elif [[ "$dev" == *"sd"* ]]; then
+		refreshdevice="${dev//[0-9]/}"
+		partition_to_mark="${partition_dev#$refreshdevice}"
+	fi
+}
+
 partitionrefresh(){
 
 	##need device not partition
@@ -253,27 +269,7 @@ partitionrefresh(){
 
 	partition_dev="$device$partnum"
 
-
-	#if mmc device
-	if [[ "$device" == *"mmc"* ]]; then
-		refreshdevice=${device%p*}
-		filter=$refreshdevice
-		filter+="p"
-		partition_to_mark=${partition_dev#$filter}
-	fi
-
-	#if device is nvme, then partnum=p1
-	if [[ "$device" == *"nvme"* ]]; then
-		refreshdevice=${device%p*}
-		filter=$refreshdevice
-		filter+="p"
-		partition_to_mark=${partition_dev#$filter}
-	fi
-	#if device is sdXY,
-	if [[ "$device" == *"sd"* ]]; then
-		refreshdevice=${device//[0-9]/}
-		partition_to_mark=${partition_dev#$refreshdevice}
-	fi
+	resolve_partition_ref "$device"
 
 echo "Device $device"
 echo "Refresh Partitions $refreshdevice"
