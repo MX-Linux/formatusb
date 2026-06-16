@@ -200,15 +200,20 @@ void MainWindow::cmdDone()
 
 void MainWindow::setConnections()
 {
-    connect(cmd, &QProcess::readyRead, this, &MainWindow::updateOutput);
+    // Display output as Cmd reads it. Cmd's constructor already drains stdout/stderr
+    // into outBuffer via readAllStandardOutput()/readAllStandardError() on each
+    // readyRead*, so connecting to QProcess::readyRead and calling readAll() here would
+    // race that and find the channel empty. Consume the chunk Cmd hands us instead.
+    connect(cmd, &Cmd::outputAvailable, this, &MainWindow::updateOutput);
+    connect(cmd, &Cmd::errorAvailable, this, &MainWindow::updateOutput);
     connect(cmd, &QProcess::started, this, &MainWindow::cmdStart);
     connect(cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
 }
 
-void MainWindow::updateOutput()
+void MainWindow::updateOutput(const QString &output)
 {
     // remove escape sequences that are not handled by code
-    QString out = cmd->readAll();
+    QString out = output;
     out.remove("[0m")
         .remove("]0;")
         .remove("")

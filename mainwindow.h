@@ -68,7 +68,7 @@ private slots:
     void cmdDone();
     void cmdStart();
     void setConnections();
-    void updateOutput();
+    void updateOutput(const QString &output);
     void on_buttonAbout_clicked();
     void on_buttonBack_clicked();
     void on_buttonHelp_clicked();
