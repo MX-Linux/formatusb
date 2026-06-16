@@ -81,7 +81,9 @@ echo label is $label
 unmount_partitions()
 {
 	local umount_device=$device*
-	if [ -n "$(df |grep $device)" ]; then
+	# df /dev/$device returns 0 for any existing block device, mounted or not, so
+	# it can't gate this; check the actual mountpoints of the device + partitions.
+	if [ -n "$(lsblk -nro MOUNTPOINT "/dev/$device" 2>/dev/null)" ]; then
 	    umount -q /dev/$umount_device 2>/dev/null
 	    sleep 1
 	    checkerrorcode "unmount partitions"
@@ -216,8 +218,9 @@ if [ -z "$label" ]; then
 	return
 fi
 
-#ensure device is unmounted
-if [ -n "$(df |grep $device)" ]; then
+#ensure the partition is unmounted before labeling; skip when it isn't mounted
+#so a freshly-formatted (unmounted) partition doesn't trip checkerrorcode
+if findmnt -S "/dev/$device$partnum" &>/dev/null; then
     umount -q /dev/"$device$partnum" 2>/dev/null
     checkerrorcode "unmount partitions"
 fi
