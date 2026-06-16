@@ -43,8 +43,7 @@ HEADERS  += \
 FORMS    += \
     mainwindow.ui
 
-TRANSLATIONS += translations/formatusb_en.ts \
-                
+TRANSLATIONS += translations/formatusb_en.ts
 
 RESOURCES += \
     images.qrc

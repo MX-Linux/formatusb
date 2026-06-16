@@ -29,6 +29,7 @@
 
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QRegularExpression>
 #include <QScrollBar>
 #include <QTextStream>
 
@@ -115,9 +116,9 @@ QString MainWindow::buildOptionList()
         authentication = "";
     }
 
-    options = QString(authentication + " /usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label
-                      + "\" " + partOption + "");
-    options = options.trimmed();
+    QString prefix = authentication.isEmpty() ? QString() : authentication + " ";
+    options = prefix + "/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label
+              + "\" " + partOption;
     qDebug() << "partition is" << device << "label " << label;
     qDebug() << "Options: " << options;
     return options;
