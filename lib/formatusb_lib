@@ -177,13 +177,9 @@ create_partition()
 		sleep 1
 	fi
 
-	#set default part name if file system label is empty
+	# Use the filesystem label as the GPT partition name (if set)
 	if [ "$parttabletype" = "gpt" ]; then
-		if [ -z "$label" ]; then
-			option="$label"
-		else
-			option="primary"
-		fi
+		option="$label"
 	fi
 
 	parted -s "$dev" mklabel "$parttabletype"
@@ -193,9 +189,9 @@ create_partition()
 	partprobe "$dev"
 	checkerrorcode "refresh partitions info"
 	sleep 1
-	#create partition. $option is "primary" (msdos) or empty (gpt, no name);
-	#quote it when present so it can't word-split, but keep the original
-	#argument vector when empty so parted's gpt "no name" case is unchanged.
+	# Create partition. $option is "primary" (msdos), the label (gpt), or empty (gpt, no label).
+	# Quote it when present so it can't word-split, but keep the original
+	# argument vector when empty so parted's gpt "no name" case is unchanged.
 	if [ -n "$option" ]; then
 		parted -s -a optimal "$dev" mkpart "$option" 1 100%
 	else
