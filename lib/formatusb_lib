@@ -75,6 +75,26 @@ case "$format" in
     *) echo "Invalid format: $format" >&2; exit 2 ;;
 esac
 
+# Validate the filesystem label server-side. This helper is directly
+# pkexec-invocable, so the GUI's validate_name() check is bypassable and the
+# label (used below as a parted partition name and as the *label tool argument)
+# must be re-checked here. An empty label is allowed (means "no label");
+# otherwise enforce the same contract the GUI does -- the character set
+# [A-Za-z0-9_.-] plus the per-filesystem length limit -- so a label the GUI
+# would reject can't reach mkpart/*label. The set excludes every shell
+# metacharacter and path separator.
+if [ -n "$label" ]; then
+    case "$format" in
+        ext4) label_max=16 ;;
+        ntfs) label_max=32 ;;
+        *)    label_max=11 ;;   # vfat, exfat
+    esac
+    if [ "${#label}" -gt "$label_max" ] || [[ ! "$label" =~ ^[A-Za-z0-9_.-]+$ ]]; then
+        echo "Invalid label: $label" >&2
+        exit 2
+    fi
+fi
+
 echo device is $device format is $format
 echo label is $label
 
