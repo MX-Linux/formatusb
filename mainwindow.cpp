@@ -77,7 +77,6 @@ void MainWindow::makeUsb(const QString &options)
 void MainWindow::setup()
 {
     cmd = new Cmd(this);
-    connect(qApp, &QApplication::aboutToQuit, this, &MainWindow::cleanup);
     setWindowTitle("Format USB");
     ui->buttonBack->setHidden(true);
     ui->stackedWidget->setCurrentIndex(0);
@@ -122,12 +121,6 @@ QString MainWindow::buildOptionList()
     qDebug() << "partition is" << device << "label " << label;
     qDebug() << "Options: " << options;
     return options;
-}
-
-// cleanup environment when window is closed
-void MainWindow::cleanup()
-{
-    QFile::remove(sessionLogPath());
 }
 
 // build the USB list

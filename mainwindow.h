@@ -64,7 +64,6 @@ public:
     removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
 private slots:
-    void cleanup();
     void cmdDone();
     void cmdStart();
     void setConnections();
