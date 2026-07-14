@@ -221,5 +221,5 @@ Exec=formatusb
 Terminal=false
 Type=Application
 Icon=formatusb
-Categories=System;MX-Utilities;X-antiX;
+Categories=System;X-MX-Utilities;X-antiX;
 NoDisplay=false
