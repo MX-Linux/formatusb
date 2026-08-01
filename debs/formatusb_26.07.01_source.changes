@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sat, 01 Aug 2026 08:30:30 -0400
+Source: formatusb
+Architecture: source
+Version: 26.07.01
+Distribution: mx
+Urgency: medium
+Maintainer: Dolphin Oracle <dolphinoracle@gmail.com>
+Changed-By: Dolphin Oracle <dolphinoracle@gmail.com>
+Changes:
+ formatusb (26.07.01) mx; urgency=medium
+ .
+   * use index rather than text for partition type selection
+Checksums-Sha1:
+ b95e6261ddfd22343ab7096ba9df600e07cfe39e 1663 formatusb_26.07.01.dsc
+ bae6a79be5700327b067d0f111d9d922a5630ca9 121736 formatusb_26.07.01.tar.xz
+ b4f275c37069637044d469d5f82cb6498c469ec5 11665 formatusb_26.07.01_source.buildinfo
+Checksums-Sha256:
+ facfd772652116ab07d4fe86b4ddbba18ecd782014993297d320ff0b05196ed1 1663 formatusb_26.07.01.dsc
+ dafb65e0f9e34bae337b8d8384b5806cd925f5997a4f03be4ead88cc635137c7 121736 formatusb_26.07.01.tar.xz
+ fe30239b667205d5d178a090c02158a07a5ed6bbcfcff9cf9da5ee7507d0cea3 11665 formatusb_26.07.01_source.buildinfo
+Files:
+ 6fa4e298972ff5568fc83f15d64bd998 1663 admin optional formatusb_26.07.01.dsc
+ c644f02a8612a20b0eb684875507ddf4 121736 admin optional formatusb_26.07.01.tar.xz
+ 38dc38ca8e05cf179e61ba50956b5e77 11665 admin optional formatusb_26.07.01_source.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE9i7eqjrnCpyZ2sQYm2ih6Lm2N1wFAmpt6mQACgkQm2ih6Lm2
+N1xDIRAAxkO4sQS/lvQQb/xM4L7RzLWZsUK3tsbTQe2eIAufT/wFuDUUQ7LoAEH+
+0NaTIUpftltBull2sJk94w7ve64zbBRvL6/Vxg85lmWM4115+Vay0z9Zkgw+iJ+U
+mYpjpP4J1J1Ab1Ld17q0U0c57TuLlQB3WZhhzKHPFsvrB4f3shfnh4CSA++Hmif1
+1fEo2/6BHVSeV2U5V4L1ypaasi24LlT+tqsRlbdi8kJ1AwI0KMxxKpzT0ks9mOi+
+6dvF7uQMnSbOPE8Fdj96nfOsZ/+iJOjmUts/Lm533pdOIK0zdLxqhteUTlheQCl2
+UAFsSXmTsCbkYJgSJr31jedNDForqG1e5QHiBecBzLzBLo1BT5ZlHRkPI4xR/Gs4
+goJQjVTqSZJDT1hxEft2/WgNadtT+tJh0JzL63IfoYiiUD1pDO0pGlN/zEEfdfiQ
+TTMi591Ek6QWDe8U/KyUKQAtJWnZQ5Qzw/vK1IPo7UC7HJ8uNM2bCQqrau0tvyPV
+1iJkJW6E26IET1z1ZtCLCuyH5K2LEqFSY6rU0Kqv+NsLs1G8jnLjpyYHhZ+L+ZwP
+W3/CiFxXf04tIlaEwI2AgcGxMZJmqkcdPJC2AN3EIPfWOWNo834hK18txeWa9nof
+X6agf9kLrWS0qGcYeJ+VCiObzTI3vdWEjY1SJznJw77kmWjV5eg=
+=l8nD
+-----END PGP SIGNATURE-----
