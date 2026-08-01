@@ -1,3 +1,10 @@
+formatusb (25.08.01mx26) mx; urgency=medium
+
+  * use indexes rather yhan text for partition type field
+  * 
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Aug 2026 08:25:28 -0400
+
 formatusb (25.06.01mx25) mx; urgency=medium
 
   * update cli-shell-utils location
