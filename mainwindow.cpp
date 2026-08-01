@@ -104,10 +104,23 @@ QString MainWindow::buildOptionList()
     if (format.contains("fat32"))
         format = "vfat";
 
-    if (ui->comboBoxPartitionTableType->isEnabled())
-        partoption = ui->comboBoxPartitionTableType->currentText().toLower();
-    else
+    // 0 = defualts
+    // 1 = msdos
+    // 2 - gpt
+
+    if (ui->comboBoxPartitionTableType->isEnabled()){
+        if (ui->comboBoxPartitionTableType->currentIndex() == 0 ) {
+            partoption = "defaults";
+        }
+        if (ui->comboBoxPartitionTableType->currentIndex() == 1 ) {
+            partoption = "msdos";
+        }
+        if (ui->comboBoxPartitionTableType->currentIndex() == 2 ) {
+            partoption = "gpt";
+        }
+    } else {
         partoption = "part";
+    }
 
     QString authentication = "pkexec";
 
