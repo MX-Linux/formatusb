@@ -1,3 +1,9 @@
+formatusb (25.07.01) mx; urgency=medium
+
+  * use index rather than text for partition type selection
+
+ -- Dolphin Oracle <dolphinoracle@gmail.com>  Sat, 01 Aug 2026 08:30:30 -0400
+
 formatusb (26.06) mx; urgency=medium
 
   * Add safety checks to avoid formatting with invalid settings
