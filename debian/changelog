@@ -1,4 +1,4 @@
-formatusb (25.07.01) mx; urgency=medium
+formatusb (26.07.01) mx; urgency=medium
 
   * use index rather than text for partition type selection
 
