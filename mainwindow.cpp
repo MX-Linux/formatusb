@@ -99,8 +99,20 @@ QString MainWindow::buildOptionList()
         format = "vfat";
     }
 
-    if (ui->comboBoxPartitionTableType->isEnabled()) {
-        partOption = ui->comboBoxPartitionTableType->currentText().toLower();
+    // 0 = defualts
+    // 1 = msdos
+    // 2 - gpt
+
+    if (ui->comboBoxPartitionTableType->isEnabled()){
+        if (ui->comboBoxPartitionTableType->currentIndex() == 0 ) {
+            partOption = "defaults";
+        }
+        if (ui->comboBoxPartitionTableType->currentIndex() == 1 ) {
+            partOption = "msdos";
+        }
+        if (ui->comboBoxPartitionTableType->currentIndex() == 2 ) {
+            partOption = "gpt";
+        }
     } else {
         partOption = "part";
     }
