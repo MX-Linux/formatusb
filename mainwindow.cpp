@@ -182,6 +182,10 @@ void MainWindow::cmdDone()
 {
     setCursor(QCursor(Qt::ArrowCursor));
     ui->buttonBack->setEnabled(true);
+    if (cancelRequested) {
+        cmd->disconnect();
+        return;
+    }
     if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
         QMessageBox::information(this, tr("Success"), tr("Format successful!"));
     } else {
@@ -264,6 +268,21 @@ void MainWindow::on_buttonBack_clicked()
     ui->buttonNext->setEnabled(true);
     ui->buttonBack->setDisabled(true);
     ui->outputBox->clear();
+}
+
+void MainWindow::on_buttonCancel_clicked()
+{
+    if (cmd->state() != QProcess::NotRunning) {
+        const QString msg = tr("A format operation is still in progress. Stopping it may leave the USB device "
+                               "in an unusable state.\n\nDo you wish to cancel the operation and close?");
+        if (QMessageBox::Yes
+            != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+            return;
+        }
+        cancelRequested = true;
+        cmd->halt();
+    }
+    close();
 }
 
 // About button clicked
