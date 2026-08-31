@@ -356,12 +356,12 @@ void MainWindow::validate_name()
     }
 }
 
-void MainWindow::on_lineEditFSlabel_textChanged(const QString &arg1)
+void MainWindow::on_lineEditFSlabel_textChanged(const QString &)
 {
     validate_name();
 }
 
-void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int index)
+void MainWindow::on_comboBoxDataFormat_currentIndexChanged(int)
 {
     validate_name();
 }

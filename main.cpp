@@ -58,8 +58,9 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon::fromTheme("media-removable"));
 
     QTranslator qtTran;
-    qtTran.load(QStringLiteral("qt_") + QLocale::system().name());
-    a.installTranslator(&qtTran);
+    if (qtTran.load(QStringLiteral("qt_") + QLocale::system().name())) {
+        a.installTranslator(&qtTran);
+    }
 
     QString logName = sessionLogPath();
     // Set the logging files
@@ -77,8 +78,9 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QTranslator appTran;
-    appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale");
-    a.installTranslator(&appTran);
+    if (appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale")) {
+        a.installTranslator(&appTran);
+    }
 
     qDebug() << "Program Version:" << VERSION;
 
