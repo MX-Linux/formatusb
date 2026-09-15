@@ -75,7 +75,10 @@ package() {
 
     install -dm755 "${pkgdir}/usr/share/doc/formatusb"
 
-    install -Dm644 help/*.1 "${pkgdir}/usr/share/man/man1/" 2>/dev/null || true
+    # -t is required: "install -D" treats its last argument as a file
+    # path even with one source, so this failed with "cannot create regular
+    # file '.../man1/': Not a directory" and the suppression hid it.
+    install -Dm644 -t "${pkgdir}/usr/share/man/man1/" help/*.1
     install -Dm644 authors.txt "${pkgdir}/usr/share/doc/formatusb/authors.txt"
     install -Dm644 license.html "${pkgdir}/usr/share/doc/formatusb/license.html"
     gzip -c debian/changelog > "${pkgdir}/usr/share/doc/formatusb/changelog.gz"
