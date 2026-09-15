@@ -1,0 +1,88 @@
+# Maintainer: Adrian <adrian@mxlinux.org>
+
+# PKGBUILD for building on the Open Build Service.
+#
+# OBS build VMs have no network, so every source has to be present in the
+# package's OBS sources before the build starts. This consumes the Debian
+# native tarball that release builds commit to debs/ - it carries the complete
+# source tree - instead of fetching a GitHub tarball the way aur/PKGBUILD does.
+#
+# Keep pkgver in step with debian/changelog: it names the tarball.
+
+pkgname=formatusb
+pkgver=26.07.01
+pkgrel=1
+pkgdesc="USB Device Formatting Utility"
+arch=('x86_64' 'i686')
+url="https://github.com/MX-Linux/formatusb"
+license=('GPL3')
+depends=(
+    'qt6-base'
+    'parted'
+    'coreutils'
+    'util-linux'
+)
+makedepends=('qt6-tools' 'cmake' 'ninja')
+source=("${pkgname}_${pkgver}.tar.xz")
+sha256sums=('SKIP')
+
+# Unlike the other MX repositories, whose tarballs unpack to "src", dpkg-source
+# packed this one from a directory called "formatusb", so that - and not
+# ${pkgname}-${pkgver} - is what it unpacks to.
+_srcdir="formatusb"
+
+build() {
+    cd "${srcdir}/${_srcdir}"
+
+    # Regenerate version.h from debian/changelog, exactly as debian/rules does.
+    # The committed version.h is stale: debian/rules only rewrites it during the
+    # binary build, after the source tarball has already been packed, so the
+    # tarball carries whatever version was current when version.h was last
+    # committed. Without this the package is named <pkgver> while the binary
+    # reports an older release.
+    head -n1 debian/changelog | sed -e 's/.*(\([^(]*\)).*/#define VERSION "\1"/' > version.h
+
+    rm -rf build
+
+    mkdir -p build
+    cd build
+
+    cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+    cmake --build . -j$(nproc)
+}
+
+package() {
+    cd "${srcdir}/${_srcdir}"
+
+    install -Dm755 build/formatusb "${pkgdir}/usr/bin/formatusb"
+
+    install -Dm755 lib/formatusb_lib "${pkgdir}/usr/lib/formatusb/formatusb_lib"
+
+    install -dm755 "${pkgdir}/usr/share/formatusb/locale"
+    install -Dm644 build/*.qm "${pkgdir}/usr/share/formatusb/locale/" 2>/dev/null || true
+
+    install -Dm644 polkit-actions/org.mxlinux.pkexec.formatusb.policy \
+        "${pkgdir}/usr/share/polkit-1/actions/org.mxlinux.pkexec.formatusb.policy"
+
+    install -Dm644 formatusb.desktop "${pkgdir}/usr/share/applications/formatusb.desktop"
+
+    install -Dm644 formatusb.png "${pkgdir}/usr/share/icons/hicolor/48x48/apps/formatusb.png"
+    install -Dm644 formatusb.png "${pkgdir}/usr/share/pixmaps/formatusb.png"
+    install -Dm644 formatusb.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/formatusb.svg"
+
+    install -dm755 "${pkgdir}/usr/share/doc/formatusb"
+
+    install -Dm644 help/*.1 "${pkgdir}/usr/share/man/man1/" 2>/dev/null || true
+    install -Dm644 authors.txt "${pkgdir}/usr/share/doc/formatusb/authors.txt"
+    install -Dm644 license.html "${pkgdir}/usr/share/doc/formatusb/license.html"
+    gzip -c debian/changelog > "${pkgdir}/usr/share/doc/formatusb/changelog.gz"
+    if [ -d "help" ]; then
+        for help_file in help/*.html help/*.jpg help/*.png help/*.css; do
+            [ -f "$help_file" ] && install -Dm644 "$help_file" "${pkgdir}/usr/share/doc/formatusb/help/$(basename "$help_file")"
+        done
+    fi
+
+    install -Dm644 scripts/cli-shell-utils.bash "${pkgdir}/usr/lib/cli-shell-utils/cli-shell-utils.bash"
+
+    install -Dm755 scripts/vmlinuz-version "${pkgdir}/usr/lib/cli-shell-utils/bin/vmlinuz-version"
+}
