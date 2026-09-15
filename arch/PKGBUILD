@@ -11,7 +11,7 @@
 
 pkgname=formatusb
 pkgver=26.07.01
-pkgrel=1
+pkgrel=2
 pkgdesc="USB Device Formatting Utility"
 arch=('x86_64' 'i686')
 url="https://github.com/MX-Linux/formatusb"
