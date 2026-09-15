@@ -91,4 +91,8 @@ package() {
     install -Dm644 scripts/cli-shell-utils.bash "${pkgdir}/usr/lib/cli-shell-utils/cli-shell-utils.bash"
 
     install -Dm755 scripts/vmlinuz-version "${pkgdir}/usr/lib/cli-shell-utils/bin/vmlinuz-version"
+    # namcap flags a declared license= with nothing under
+    # /usr/share/licenses. The file is in the source; it was simply never
+    # installed.
+    install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
