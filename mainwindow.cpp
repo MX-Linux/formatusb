@@ -183,7 +183,7 @@ void MainWindow::cmdDone()
     setCursor(QCursor(Qt::ArrowCursor));
     ui->buttonBack->setEnabled(true);
     if (cancelRequested) {
-        cmd->disconnect();
+        cmd->disconnect(this);
         return;
     }
     if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
@@ -191,7 +191,7 @@ void MainWindow::cmdDone()
     } else {
         QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
     }
-    cmd->disconnect();
+    cmd->disconnect(this);
 }
 
 void MainWindow::setConnections()
