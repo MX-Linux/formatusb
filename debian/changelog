@@ -2,6 +2,7 @@ formatusb (26.09.01) mx; urgency=medium
 
   * make sure options are present (fixes issue with large gpt disks with no label)
   * use partprobe to inform kernel rather than just using sleep
+  * fix command window display when running a second format
 
  -- Dolphin Oracle <dolphinoracle@gmail.com>  Thu, 24 Sep 2026 20:10:56 -0400
 
