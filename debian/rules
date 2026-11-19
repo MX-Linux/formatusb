@@ -1,9 +1,10 @@
 #!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
 MAKE_OPTS  = QMAKE=qmake6 QMAKE_OPTS="$(QMAKE_OPTS)"
 
 override_dh_auto_configure:
-	qmake6
+	qmake6 QMAKE_CFLAGS+="$(CFLAGS) $(CPPFLAGS)" QMAKE_CXXFLAGS+="$(CXXFLAGS) $(CPPFLAGS)" QMAKE_LFLAGS+="$(LDFLAGS)"
 
 override_dh_auto_clean:
 	dh_auto_clean
