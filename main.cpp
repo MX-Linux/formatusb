@@ -41,6 +41,14 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 
 int main(int argc, char *argv[])
 {
+    for (int i = 1; i < argc; ++i) {
+        const QByteArray option(argv[i]);
+        if (option == "--version" || option == "-v") {
+            QTextStream(stdout) << "Version: " << VERSION << '\n';
+            return EXIT_SUCCESS;
+        }
+    }
+
     if (qEnvironmentVariableIsEmpty("DISPLAY") && qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")
         && qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM")) {
         qWarning("formatusb: no display available (DISPLAY and WAYLAND_DISPLAY are both unset); "
@@ -56,11 +64,6 @@ int main(int argc, char *argv[])
     }
 
     QApplication a(argc, argv);
-
-    if (a.arguments().contains("--version") || a.arguments().contains("-v") ) {
-        qDebug() << "Version:" << VERSION;
-        return EXIT_SUCCESS;
-    }
 
     a.setWindowIcon(QIcon::fromTheme("media-removable"));
 
