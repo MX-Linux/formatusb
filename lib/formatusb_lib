@@ -455,6 +455,7 @@ format_partitions(){
 	vfat) mkfs.fat -F 32 /dev/"$device$partnum"  ;;
 
 	ext4)  mkfs.ext4 -F /dev/"$device$partnum"
+		   checkerrorcode "format ext4 partition"
 		   change_ownership;;
 
 	ntfs)  mkfs.ntfs -Q /dev/"$device$partnum"  ;;
