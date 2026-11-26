@@ -155,6 +155,26 @@ EOF
     ANNOTATION="$annotation"
 }
 
+# OBS reads the tagged tree and builds from its committed Debian source archive.
+sync_obs_recipe() {
+    local version recipe=arch/PKGBUILD
+    version=$(git show HEAD:debian/changelog | sed -n '1s/^[^(]*(\([^)]*\)).*/\1/p')
+    if [[ -z "$version" ]] || ! git cat-file -e "HEAD:debs/formatusb_${version}.tar.xz"; then
+        print_error "Missing committed Debian source archive for changelog version '$version'"
+        return 1
+    fi
+    if git show "HEAD:$recipe" | grep -Fxq "pkgver=$version"; then
+        return 0
+    fi
+    if ! git diff --quiet HEAD -- "$recipe"; then
+        print_error "Commit your changes to $recipe before preparing the release"
+        return 1
+    fi
+    sed -i "s/^pkgver=.*/pkgver=$version/" "$recipe"
+    grep -Fxq "pkgver=$version" "$recipe"
+    git commit -m "Sync OBS package with Debian source $version" -- "$recipe"
+}
+
 # Create annotated tag
 create_tag() {
     local version=$1
@@ -466,6 +486,7 @@ main() {
         fi
 
         # Create and push the tag (needed for checksum calculation)
+        sync_obs_recipe
         create_tag "$version" "$annotation"
         print_step "Pushing tag to GitHub..."
         git push origin "$version"
