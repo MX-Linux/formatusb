@@ -171,7 +171,7 @@ void MainWindow::buildUsbList()
 
     QString drives;
     if (ui->checkBoxshowpartitions->isChecked()) {
-        drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 |grep -v disk");
+        drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 | awk '$NF == \"part\"'");
     } else {
         drives = cmd->getCmdOut("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259 ");
     }
