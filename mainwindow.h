@@ -55,6 +55,7 @@ public:
     MainWindow();
     ~MainWindow();
 
+    void reject() override;
     void makeUsb(const QString &options);
     void setup();
     QString buildOptionList();
@@ -63,10 +64,10 @@ public:
     QStringList
     removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
-    void cmdDone();
-    void cmdStart();
-    void setConnections();
     void updateOutput(const QString &output);
     void on_buttonAbout_clicked();
     void on_buttonBack_clicked();
@@ -84,7 +85,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Cmd *cmd;
-    bool cancelRequested {false};
+    bool formatting {false};
     QString device;
     QString label;
 };

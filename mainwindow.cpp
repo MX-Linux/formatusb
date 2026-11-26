@@ -27,6 +27,7 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 
+#include <QCloseEvent>
 #include <QDir>
 #include <QHash>
 #include <QFileDialog>
@@ -69,10 +70,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::makeUsb(const QString &options)
 {
-    setConnections();
-    qDebug() << cmd->getCmdOut(options);
-    // label drive
-    // labeldrive();
+    formatting = true;
+    ui->buttonCancel->setEnabled(false);
+    connect(cmd, &Cmd::outputAvailable, this, &MainWindow::updateOutput);
+    connect(cmd, &Cmd::errorAvailable, this, &MainWindow::updateOutput);
+    const bool success = cmd->run(options);
+    cmd->disconnect(this);
+    formatting = false;
+    ui->buttonCancel->setEnabled(true);
+    ui->buttonBack->setEnabled(true);
+    if (success) {
+        QMessageBox::information(this, tr("Success"), tr("Format successful!"));
+    } else {
+        QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
+    }
 }
 
 // setup various items first time program runs
@@ -198,40 +209,6 @@ QStringList MainWindow::removeUnsuitable(const QStringList &devices)
     return list;
 }
 
-void MainWindow::cmdStart()
-{
-    // setCursor(QCursor(Qt::BusyCursor));
-    // ui->lineEdit->setFocus();
-}
-
-void MainWindow::cmdDone()
-{
-    setCursor(QCursor(Qt::ArrowCursor));
-    ui->buttonBack->setEnabled(true);
-    if (cancelRequested) {
-        cmd->disconnect(this);
-        return;
-    }
-    if (cmd->exitCode() == 0 && cmd->exitStatus() == QProcess::NormalExit) {
-        QMessageBox::information(this, tr("Success"), tr("Format successful!"));
-    } else {
-        QMessageBox::critical(this, tr("Failure"), tr("Error encountered in the Format process"));
-    }
-    cmd->disconnect(this);
-}
-
-void MainWindow::setConnections()
-{
-    // Display output as Cmd reads it. Cmd's constructor already drains stdout/stderr
-    // into outBuffer via readAllStandardOutput()/readAllStandardError() on each
-    // readyRead*, so connecting to QProcess::readyRead and calling readAll() here would
-    // race that and find the channel empty. Consume the chunk Cmd hands us instead.
-    connect(cmd, &Cmd::outputAvailable, this, &MainWindow::updateOutput);
-    connect(cmd, &Cmd::errorAvailable, this, &MainWindow::updateOutput);
-    connect(cmd, &QProcess::started, this, &MainWindow::cmdStart);
-    connect(cmd, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::cmdDone);
-}
-
 void MainWindow::updateOutput(const QString &output)
 {
     // remove escape sequences that are not handled by code
@@ -298,17 +275,23 @@ void MainWindow::on_buttonBack_clicked()
 
 void MainWindow::on_buttonCancel_clicked()
 {
-    if (cmd->state() != QProcess::NotRunning) {
-        const QString msg = tr("A format operation is still in progress. Stopping it may leave the USB device "
-                               "in an unusable state.\n\nDo you wish to cancel the operation and close?");
-        if (QMessageBox::Yes
-            != QMessageBox::warning(this, windowTitle(), msg, QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
-            return;
-        }
-        cancelRequested = true;
-        cmd->halt();
-    }
     close();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (formatting) {
+        event->ignore();
+        return;
+    }
+    QDialog::closeEvent(event);
+}
+
+void MainWindow::reject()
+{
+    if (!formatting) {
+        QDialog::reject();
+    }
 }
 
 // About button clicked

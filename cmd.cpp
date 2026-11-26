@@ -36,16 +36,6 @@ Cmd::Cmd(QObject *parent)
     connect(this, &Cmd::errorAvailable, [this](const QString &out) { outBuffer += out; });
 }
 
-void Cmd::halt()
-{
-    if (state() != QProcess::NotRunning) {
-        terminate();
-        waitForFinished(5000);
-        kill();
-        waitForFinished(1000);
-    }
-}
-
 bool Cmd::run(const QString &cmd, bool quiet)
 {
     outBuffer.clear();
@@ -73,8 +63,15 @@ bool Cmd::run(const QString &cmd, QString &output, bool quiet)
     if (!quiet) qDebug().noquote() << cmd;
     QEventLoop loop;
     connect(this, &Cmd::finished, &loop, &QEventLoop::quit, Qt::UniqueConnection);
+    connect(this, &QProcess::errorOccurred, &loop, [&loop](QProcess::ProcessError error) {
+        if (error == QProcess::FailedToStart) {
+            loop.quit();
+        }
+    });
     start("/bin/bash", QStringList() << "-c" << cmd);
-    loop.exec();
+    if (error() != QProcess::FailedToStart) {
+        loop.exec();
+    }
     output = outBuffer.trimmed();
-    return (exitStatus() == QProcess::NormalExit && exitCode() == 0);
+    return error() != QProcess::FailedToStart && exitStatus() == QProcess::NormalExit && exitCode() == 0;
 }
