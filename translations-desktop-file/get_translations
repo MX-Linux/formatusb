@@ -1,11 +1,8 @@
 #!/bin/bash
 
-APPNAME="$(basename $(dirname $(pwd)))-desktop"
-
-echodo() {
-  echo "${@}"
-  ${@}
-}
+set -e
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+APPNAME=formatusb-desktop
 
 # prepare transifex 
 if [ ! -s  .tx/config ]; then
@@ -19,17 +16,10 @@ file_filter = po/${APPNAME}_<lang>.po
 source_file = ${APPNAME}.pot
 source_lang = en
 type = po
-EOF
 minimum_perc = 25
+EOF
 fi    
 
 
-#remove existing translations
-rm po/* 
-
-
-# get all translations
-if command -v tx >/dev/null; then
-   echodo tx pull -r antix-development.$APPNAME  --all
-fi
+bash ../scripts/pull-catalogs "$APPNAME" po po "pot/${APPNAME}.pot"
 

@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-# Get script directory and determine app name
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
-APPNAME="$(basename "$PROJECT_DIR")"
-
-echodo() {
-  echo "${@}"
-  ${@}
-}
+set -e
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")"
+APPNAME=formatusb
 
 # Prepare transifex
 if [ ! -s  .tx/config ]; then
@@ -31,16 +25,7 @@ if [ -z "$(grep minimum_perc .tx/config)" ]; then
         echo "minimum_perc = 25" >> .tx/config
 fi
 
-# Remove existing translations
-find . -type f -name '*.ts' -not -name '*en.ts' -delete
-
-# Get all translations
-if command -v tx >/dev/null; then
-   echodo tx pull -r antix-development.$APPNAME --all
-fi
-
-# en_US duplicates the English source catalog and should not be shipped.
-rm -f "${APPNAME}_en_US.ts"
+bash ../scripts/pull-catalogs "$APPNAME" . ts "${APPNAME}_en.ts"
 
 # Find lupdate command in common locations
 LUPDATE=""
@@ -59,7 +44,10 @@ fi
 echo "Using lupdate: $LUPDATE"
 
 # Update all .ts files from source files
-SOURCE_FILES=$(find ../src -name "*.cpp" -o -name "*.h" -o -name "*.ui" 2>/dev/null)
+SOURCE_FILES=""
+if [[ -d ../src ]]; then
+    SOURCE_FILES=$(find ../src -name "*.cpp" -o -name "*.h" -o -name "*.ui")
+fi
 if [ -n "$SOURCE_FILES" ]; then
     "$LUPDATE" $SOURCE_FILES -ts *en.ts
 fi
