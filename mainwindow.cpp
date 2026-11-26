@@ -344,9 +344,6 @@ void MainWindow::validate_name()
     QString test;
     test = ui->lineEditFSlabel->text();
 
-    if (test.isEmpty()) {
-        return;
-    }
     QString regexString = "^[A-Za-z0-9_.-]{1,11}$";
     if (ui->comboBoxDataFormat->currentText() == "ext4") {
         regexString = "^[A-Za-z0-9_.-]{1,16}$";
@@ -355,13 +352,11 @@ void MainWindow::validate_name()
         regexString = "^[A-Za-z0-9_.-]{1,32}$";
     }
 
-    if (!test.contains(QRegularExpression(regexString))) {
-        if (ui->buttonNext->isEnabled()) {
-            QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
-            ui->buttonNext->setEnabled(false);
-        }
-    } else {
-        ui->buttonNext->setEnabled(true);
+    const bool valid = test.isEmpty() || test.contains(QRegularExpression(regexString));
+    const bool showError = !valid && ui->buttonNext->isEnabled();
+    ui->buttonNext->setEnabled(valid);
+    if (showError) {
+        QMessageBox::critical(this, tr("Failure"), tr("Invalid Name"));
     }
 }
 
