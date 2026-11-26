@@ -368,10 +368,14 @@ fi
 #mark partition based on format if formating ntfs(7), exfat(7), or fat32(b)
 case $format in
 
-				vfat | exfat | ntfs) sfdisk /dev/$refreshdevice $partition_to_mark --part-type $mark
-									 sleep 1
-
-									 checkerrorcode "Setting Partition Type"	;;
+                vfat | exfat | ntfs)
+                    if [[ -z "$mark" ]]; then
+                        echo "Unrecognized partition table on /dev/$refreshdevice" >&2
+                        exit 1
+                    fi
+                    sfdisk --part-type "/dev/$refreshdevice" "$partition_to_mark" "$mark"
+                    checkerrorcode "Setting Partition Type"
+                    ;;
 
 
 
