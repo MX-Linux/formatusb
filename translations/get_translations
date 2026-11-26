@@ -43,11 +43,6 @@ fi
 
 echo "Using lupdate: $LUPDATE"
 
-# Update all .ts files from source files
-SOURCE_FILES=""
-if [[ -d ../src ]]; then
-    SOURCE_FILES=$(find ../src -name "*.cpp" -o -name "*.h" -o -name "*.ui")
-fi
-if [ -n "$SOURCE_FILES" ]; then
-    "$LUPDATE" $SOURCE_FILES -ts *en.ts
-fi
+# src.pro lists the application sources, the UI form and the English catalog.
+cd ..
+"$LUPDATE" src.pro
