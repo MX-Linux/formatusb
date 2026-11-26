@@ -285,16 +285,13 @@ update_aur_package() {
     # Check if there are any changes to commit
     print_step "Checking for AUR package changes..."
 
-    if git -C "$AUR_DIR" diff --quiet && git -C "$AUR_DIR" diff --staged --quiet; then
+    git -C "$AUR_DIR" add -- PKGBUILD .SRCINFO
+    if git -C "$AUR_DIR" diff --cached --quiet -- PKGBUILD .SRCINFO; then
         print_warning "No changes in AUR package - skipping commit"
     else
         print_step "Committing AUR package changes..."
 
-        # Add all changes
-        git -C "$AUR_DIR" add .
-
-        # Commit changes
-        git -C "$AUR_DIR" commit -m "$annotation"
+        git -C "$AUR_DIR" commit -m "$annotation" -- PKGBUILD .SRCINFO
 
         print_success "AUR package updated and committed"
         echo
