@@ -39,6 +39,14 @@ if [ ! -b "/dev/$device" ]; then
     exit 2
 fi
 
+expected_type=disk
+[[ "$part" == part ]] && expected_type=part
+target_type=$(lsblk -ndo TYPE "/dev/$device") || exit 2
+if [[ "$target_type" != "$expected_type" ]]; then
+    echo "Mode $part requires a $expected_type device, got $target_type for /dev/$device" >&2
+    exit 2
+fi
+
 # Compare the complete dependency chains, including every member of a RAID
 # or multi-disk LVM volume. KNAME identifies the same node through any alias.
 target_ancestors=$(lsblk --inverse --raw --noheadings --output KNAME "/dev/$device") || exit 3
