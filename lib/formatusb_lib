@@ -97,14 +97,14 @@ check_required_tools()
 {
     local tool label_tool
     local -a required=(lsblk findmnt grep umount mkdir udevadm rm partprobe sleep
-                       blkid cp mv id logname)
+                       blkid sfdisk cp mv id logname)
     if [[ "$part" != part ]]; then
         required+=(parted dd sed)
     fi
     case "$format" in
-        vfat)  required+=(mkfs.fat sfdisk); label_tool=fatlabel ;;
-        ntfs)  required+=(mkfs.ntfs sfdisk); label_tool=ntfslabel ;;
-        exfat) required+=(mkfs.exfat sfdisk); label_tool=exfatlabel ;;
+        vfat)  required+=(mkfs.fat); label_tool=fatlabel ;;
+        ntfs)  required+=(mkfs.ntfs); label_tool=ntfslabel ;;
+        exfat) required+=(mkfs.exfat); label_tool=exfatlabel ;;
         ext4)  required+=(mkfs.ext4 mount getent cut mktemp chown chmod rmdir); label_tool=e2label ;;
     esac
     [[ -n "$label" ]] && required+=("$label_tool")
@@ -343,45 +343,33 @@ echo "Device $device"
 echo "Refresh Partitions $refreshdevice"
 echo "partition to mark $partition_to_mark"
 
-#if gpt partition, use GUID for part type
-if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"gpt\")" ]; then
-	mark="EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
-	echo "mark $mark"
-fi
-
-#if msdos partition, use hexadecimal for part type, per format
-
-if [ -n "$(blkid /dev/$refreshdevice | grep PTTYPE=\"dos\")" ]; then
-	case $format in
-
-	      vfat) mark="c"  ;;
-
-	exfat | ntfs) mark="7"  ;;
-
-	         *)  ;; #don't mark
-
-	esac
-	echo "mark $mark"
-fi
-
-
-#mark partition based on format if formating ntfs(7), exfat(7), or fat32(b)
-case $format in
-
-                vfat | exfat | ntfs)
-                    if [[ -z "$mark" ]]; then
-                        echo "Unrecognized partition table on /dev/$refreshdevice" >&2
-                        exit 1
-                    fi
-                    sfdisk --part-type "/dev/$refreshdevice" "$partition_to_mark" "$mark"
-                    checkerrorcode "Setting Partition Type"
-                    ;;
-
-
-
-							  *)  ;; #don't mark
-
-esac
+    local table
+    table=$(blkid -s PTTYPE -o value "/dev/$refreshdevice")
+    checkerrorcode "Reading partition table type"
+    case "$table" in
+        gpt)
+            if [[ "$format" == ext4 ]]; then
+                mark="0FC63DAF-8483-4772-8E79-3D69D8477DE4"
+            else
+                mark="EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
+            fi
+            ;;
+        dos)
+            case "$format" in
+                ext4) mark=83 ;;
+                vfat) mark=c ;;
+                exfat | ntfs) mark=7 ;;
+            esac
+            ;;
+        *)
+            echo "Unrecognized partition table on /dev/$refreshdevice" >&2
+            exit 1
+            ;;
+    esac
+    if [[ -n "$mark" ]]; then
+        sfdisk --part-type "/dev/$refreshdevice" "$partition_to_mark" "$mark"
+        checkerrorcode "Setting Partition Type"
+    fi
 
 partprobe "/dev/$refreshdevice"
 
