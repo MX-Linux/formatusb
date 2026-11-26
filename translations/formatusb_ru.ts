@@ -178,7 +178,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="262"/>
         <source>Copyright (c) MX Linux</source>
-        <translation>Copyright (c) MX Linux</translation>
+        <translation>Авторское право (c) MX Linux</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="263"/>
@@ -193,7 +193,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="315"/>
         <source>Invalid Name</source>
-        <translation type="unfinished"/>
+        <translation>Неверное имя</translation>
     </message>
 </context>
 <context>

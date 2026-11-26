@@ -1,3 +1,21 @@
+formatusb (26.11) mx; urgency=medium
+
+  * Stop before erasing a drive if any of its partitions cannot be unmounted.
+  * Ask you to select the drive again if it was replaced after selection,
+    even while you were entering your password.
+  * Protect all disks in a RAID array that holds the running system, even
+    when "Show all devices" is selected.
+  * Install the tools for FAT32, exFAT, NTFS and ext4 and check that the
+    tools for the selected format are available before erasing the drive.
+  * Keep the window open until formatting finishes.
+  * Report an error if ext4 formatting or a partition type change fails.
+  * Set the Linux partition type when reformatting a FAT32 partition as ext4.
+  * Show partitions whose labels contain the word "disk".
+  * Enable Next when you clear an invalid label to leave the drive unnamed.
+  * Show the installed version with --version even outside a graphical session.
+
+ -- Adrian <adrian@mxlinux.org>  Thu, 26 Nov 2026 10:26:11 -0500
+
 formatusb (26.09.01) mx; urgency=medium
 
   * make sure options are present (fixes issue with large gpt disks with no label)
