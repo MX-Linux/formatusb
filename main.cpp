@@ -31,7 +31,7 @@
 #include <QDebug>
 
 #include "mainwindow.h"
-#include "version.h"
+#include <version.h>
 #include <fcntl.h>
 #include <unistd.h>
 

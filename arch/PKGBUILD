@@ -38,14 +38,6 @@ _srcdir="formatusb"
 build() {
     cd "${srcdir}/${_srcdir}"
 
-    # Regenerate version.h from debian/changelog, exactly as debian/rules does.
-    # The committed version.h is stale: debian/rules only rewrites it during the
-    # binary build, after the source tarball has already been packed, so the
-    # tarball carries whatever version was current when version.h was last
-    # committed. Without this the package is named <pkgver> while the binary
-    # reports an older release.
-    head -n1 debian/changelog | sed -e 's/.*(\([^(]*\)).*/#define VERSION "\1"/' > version.h
-
     rm -rf build
 
     mkdir -p build

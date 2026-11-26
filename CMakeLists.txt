@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(formatusb VERSION 25.06.01 LANGUAGES CXX)
+project(formatusb LANGUAGES CXX)
+
+set(changelog "${CMAKE_CURRENT_SOURCE_DIR}/debian/changelog")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${changelog}")
+file(STRINGS "${changelog}" release_entry LIMIT_COUNT 1)
+if(NOT release_entry MATCHES "^formatusb [(]([^)]+)[)]")
+    message(FATAL_ERROR "Cannot read the formatusb version from ${changelog}")
+endif()
+set(version_header "${CMAKE_CURRENT_BINARY_DIR}/generated/version.h")
+file(GENERATE OUTPUT "${version_header}" CONTENT "#define VERSION \"${CMAKE_MATCH_1}\"\n")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,7 +38,6 @@ add_executable(formatusb
 # Add headers (for IDE support)
 target_sources(formatusb PRIVATE
     mainwindow.h
-    version.h
     about.h
     cmd.h
 )
@@ -41,7 +49,10 @@ target_link_libraries(formatusb
 )
 
 # Include directories
-target_include_directories(formatusb PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(formatusb PRIVATE
+    "${CMAKE_CURRENT_BINARY_DIR}/generated"
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+)
 
 # Install target
 install(TARGETS formatusb
