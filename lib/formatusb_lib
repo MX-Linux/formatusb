@@ -4,6 +4,7 @@
 
 ##arguments format, label, device
 
+expected_diskseq=$5  # optional for legacy direct callers
 partnum=""
 
 device="$1"
@@ -84,6 +85,23 @@ fi
 echo device is $device format is $format
 echo label is $label
 
+check_disk_identity()
+{
+    [[ -n "$expected_diskseq" ]] || return 0
+    local path="/sys/class/block/$device" actual
+    if [[ -f "$path/partition" ]]; then
+        path="$path/.."
+    fi
+    if [[ "$expected_diskseq" == "-" && -d "$path" && ! -e "$path/diskseq" ]]; then
+        return 0
+    fi
+    if [[ "$expected_diskseq" =~ ^[0-9]+$ ]] && read -r actual < "$path/diskseq" && [[ "$actual" == "$expected_diskseq" ]]; then
+        return 0
+    fi
+    echo "Device /dev/$device changed. Refresh the device list and select it again." >&2
+    exit 3
+}
+
 unmount_partitions()
 {
 	local nodes node mountpoint remaining
@@ -131,6 +149,7 @@ clear_partitions()
     local total_blocks=$((bytes / $block_size))
     #echo -e "Total bytes: $bytes\nTotal blocks: $total_blocks"
 
+    check_disk_identity
     # Clear out previous primary partition table
     dd if=/dev/zero of=$dev bs=$block_size count=$pt_cnt
 
@@ -399,6 +418,7 @@ format_partitions(){
 	#ensure device is unmounted
 	unmount_partitions
 
+	check_disk_identity
 	case $format in
 
 	vfat) mkfs.fat -F 32 /dev/"$device$partnum"  ;;
@@ -517,7 +537,7 @@ main(){
 
 trap _cleanup EXIT
 
-#echo main launched
+check_disk_identity
 unmount_partitions
 disable_automount
 

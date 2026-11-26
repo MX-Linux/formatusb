@@ -27,6 +27,8 @@
 #include "ui_mainwindow.h"
 #include "version.h"
 
+#include <QDir>
+#include <QHash>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QRegularExpression>
@@ -56,7 +58,7 @@ MainWindow::MainWindow()
     ui->setupUi(this);
     setWindowFlags(Qt::Window); // for the close, min and max buttons
     setup();
-    ui->comboBoxUsbList->addItems(buildUsbList());
+    buildUsbList();
     adjustSize();
 }
 
@@ -129,15 +131,33 @@ QString MainWindow::buildOptionList()
 
     QString prefix = authentication.isEmpty() ? QString() : authentication + " ";
     options = prefix + "/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label
-              + "\" " + partOption;
+              + "\" " + partOption + " " + ui->comboBoxUsbList->currentData().toString();
     qDebug() << "partition is" << device << "label " << label;
     qDebug() << "Options: " << options;
     return options;
 }
 
 // build the USB list
-QStringList MainWindow::buildUsbList()
+void MainWindow::buildUsbList()
 {
+    // Snapshot identities before lsblk reads the descriptions shown at confirmation.
+    QHash<QString, QString> sequences;
+    const QDir devices("/sys/class/block");
+    for (const QString &name : devices.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        const QString path = devices.filePath(name);
+        const bool partition = QFileInfo::exists(path + "/partition");
+        QFile sequence(path + (partition ? "/../diskseq" : "/diskseq"));
+        if (!sequence.exists()) {
+            sequences.insert(name, QStringLiteral("-")); // kernels predating diskseq
+        } else if (sequence.open(QIODevice::ReadOnly)) {
+            bool ok;
+            const auto value = sequence.readAll().trimmed().toULongLong(&ok);
+            if (ok) {
+                sequences.insert(name, QString::number(value));
+            }
+        }
+    }
+
     QString drives;
     if (ui->checkBoxshowpartitions->isChecked()) {
         drives = cmd->getCmdOut("lsblk -nlo NAME,SIZE,LABEL,TYPE -I 3,8,22,179,259 |grep -v disk");
@@ -145,7 +165,13 @@ QStringList MainWindow::buildUsbList()
         drives = cmd->getCmdOut("lsblk --nodeps -nlo NAME,SIZE,MODEL,VENDOR -I 3,8,22,179,259 ");
     }
 
-    return removeUnsuitable(drives.split("\n"));
+    const auto rows = removeUnsuitable(drives.split("\n"));
+    for (const QString &row : rows) {
+        const auto sequence = sequences.constFind(row.section(' ', 0, 0));
+        if (sequence != sequences.cend()) {
+            ui->comboBoxUsbList->addItem(row, sequence.value());
+        }
+    }
 }
 
 // remove unsuitable drives from the list (live and unremovable)
@@ -310,7 +336,7 @@ void MainWindow::on_buttonHelp_clicked()
 void MainWindow::on_buttonRefresh_clicked()
 {
     ui->comboBoxUsbList->clear();
-    ui->comboBoxUsbList->addItems(buildUsbList());
+    buildUsbList();
 }
 
 void MainWindow::on_checkBoxShowAll_clicked()

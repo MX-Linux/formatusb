@@ -58,7 +58,7 @@ public:
     void makeUsb(const QString &options);
     void setup();
     QString buildOptionList();
-    QStringList buildUsbList();
+    void buildUsbList();
     void validate_name();
     QStringList
     removeUnsuitable(const QStringList &devices); // remove unsuitable disks from the list (live and unremovable)
