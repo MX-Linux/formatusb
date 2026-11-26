@@ -93,6 +93,29 @@ fi
 echo device is $device format is $format
 echo label is $label
 
+check_required_tools()
+{
+    local tool label_tool
+    local -a required=(lsblk findmnt grep umount mkdir udevadm rm partprobe sleep
+                       blkid cp mv id logname)
+    if [[ "$part" != part ]]; then
+        required+=(parted dd sed)
+    fi
+    case "$format" in
+        vfat)  required+=(mkfs.fat sfdisk); label_tool=fatlabel ;;
+        ntfs)  required+=(mkfs.ntfs sfdisk); label_tool=ntfslabel ;;
+        exfat) required+=(mkfs.exfat sfdisk); label_tool=exfatlabel ;;
+        ext4)  required+=(mkfs.ext4 mount getent cut mktemp chown chmod rmdir); label_tool=e2label ;;
+    esac
+    [[ -n "$label" ]] && required+=("$label_tool")
+    for tool in "${required[@]}"; do
+        if ! command -v "$tool" >/dev/null; then
+            echo "Missing required tool: $tool" >&2
+            exit 1
+        fi
+    done
+}
+
 check_disk_identity()
 {
     [[ -n "$expected_diskseq" ]] || return 0
@@ -545,6 +568,7 @@ main(){
 
 trap _cleanup EXIT
 
+check_required_tools
 check_disk_identity
 unmount_partitions
 disable_automount

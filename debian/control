@@ -15,7 +15,13 @@ Vcs-Browser: https://github.com/DolphinOracle/formatusb
 Package: formatusb
 Architecture: any
 Depends: cli-shell-utils,
+         dosfstools,
+         e2fsprogs,
+         exfatprogs,
+         fdisk,
+         ntfs-3g,
          parted,
+         udev | eudev,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: mx-launcher-l10n,

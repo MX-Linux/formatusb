@@ -9,6 +9,10 @@ license=('GPL3')
 depends=(
     'qt6-base'
     'parted'
+    'dosfstools'
+    'e2fsprogs'
+    'exfatprogs'
+    'ntfs-3g'
     'coreutils'
     'util-linux'
 )
