@@ -100,14 +100,18 @@ echo label is $label
 
 unmount_partitions()
 {
-	local umount_device=$device*
-	# df /dev/$device returns 0 for any existing block device, mounted or not, so
-	# it can't gate this; check the actual mountpoints of the device + partitions.
-	if [ -n "$(lsblk -nro MOUNTPOINT "/dev/$device" 2>/dev/null)" ]; then
-	    umount -q /dev/$umount_device 2>/dev/null
-	    sleep 1
-	    checkerrorcode "unmount partitions"
+	local nodes node mountpoint remaining
+	nodes=$(lsblk -nrpo KNAME,MOUNTPOINT "/dev/$device") || exit 1
+	while read -r node mountpoint; do
+		[ -n "$mountpoint" ] || continue
+		umount --all-targets -- "$node"
+		checkerrorcode "unmount $node"
+	done <<< "$nodes"
 
+	remaining=$(lsblk -nro MOUNTPOINT "/dev/$device") || exit 1
+	if [[ "$remaining" =~ [^[:space:]] ]]; then
+		echo "Device /dev/$device still has mounted filesystems" >&2
+		exit 1
 	fi
 }
 
