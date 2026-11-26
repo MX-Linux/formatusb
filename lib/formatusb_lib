@@ -362,8 +362,11 @@ echo "partition to mark $partition_to_mark"
             esac
             ;;
         *)
-            echo "Unrecognized partition table on /dev/$refreshdevice" >&2
-            exit 1
+            if [[ "$format" != ext4 ]]; then
+                echo "Unrecognized partition table on /dev/$refreshdevice" >&2
+                exit 1
+            fi
+            # No ext4 type mapping is defined here for other partition tables.
             ;;
     esac
     if [[ -n "$mark" ]]; then
