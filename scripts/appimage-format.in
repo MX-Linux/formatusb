@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu
+
+# Open the bundled helper as the desktop user. Root may not see the FUSE mount.
+helper_dir=$(dirname -- "$0")
+elevate=()
+if (( EUID != 0 )); then
+    elevate=(/usr/bin/pkexec)
+fi
+# The privileged shell expands these variables after pkexec has authenticated.
+# shellcheck disable=SC2016
+exec "${elevate[@]}" /bin/sh -eu -c '
+    work=$(mktemp -d /run/formatusb-helper.XXXXXXXX)
+    cleanup() { rm -rf -- "$work"; }
+    trap cleanup EXIT
+    trap "exit 1" HUP INT TERM
+    cd "$work"
+    cat > formatusb_lib
+    echo "@FORMATTER_SHA256@  formatusb_lib" | sha256sum --check --quiet
+    /bin/bash ./formatusb_lib "$@"
+' formatusb_lib "$@" < "$helper_dir/formatusb_lib"

@@ -54,6 +54,22 @@ target_include_directories(formatusb PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
+option(APPIMAGE_BUILD "Bundle the formatting and device detection scripts" OFF)
+if(APPIMAGE_BUILD)
+    if(NOT Qt6_FOUND)
+        message(FATAL_ERROR "The AppImage build requires Qt 6")
+    endif()
+    target_compile_definitions(formatusb PRIVATE APPIMAGE_BUILD)
+    set(formatter "${CMAKE_CURRENT_SOURCE_DIR}/lib/formatusb_lib")
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${formatter}")
+    file(SHA256 "${formatter}" FORMATTER_SHA256)
+    configure_file(scripts/appimage-format.in appimage-format @ONLY)
+    install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/appimage-format" DESTINATION lib/formatusb)
+    install(FILES "${formatter}" DESTINATION lib/formatusb)
+    install(FILES scripts/cli-shell-utils.bash DESTINATION lib/cli-shell-utils)
+    install(PROGRAMS scripts/vmlinuz-version DESTINATION lib/cli-shell-utils/bin)
+endif()
+
 # Install target
 install(TARGETS formatusb
     BUNDLE DESTINATION .

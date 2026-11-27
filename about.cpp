@@ -23,6 +23,7 @@
  **********************************************************************/
 
 #include "about.h"
+#include "apppaths.h"
 
 #include <QApplication>
 #include <QDialog>
@@ -104,8 +105,7 @@ void displayAboutMsgBox(const QString &title, const QString &message, const QStr
         auto *text = new QTextEdit(&changelog);
         text->setReadOnly(true);
         QProcess proc;
-        const QString appName = QFileInfo(QCoreApplication::applicationFilePath()).fileName();
-        const QString changelogPath = QStringLiteral("/usr/share/doc/") + appName + QStringLiteral("/changelog.gz");
+        const QString changelogPath = appPath(QStringLiteral("share/doc/formatusb/changelog.gz"));
         proc.start(QStringLiteral("zcat"), {changelogPath}, QIODevice::ReadOnly);
         if (proc.waitForStarted(3000) && proc.waitForFinished(3000)) {
             text->setText(proc.readAllStandardOutput());

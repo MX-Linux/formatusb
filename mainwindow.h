@@ -31,11 +31,6 @@
 
 #include <cmd.h>
 
-const QString cli_utils = QString(". ")
-                          + (QFile::exists("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash")
-                                 ? "/usr/local/lib/cli-shell-utils/cli-shell-utils.bash;"
-                                 : "/usr/lib/cli-shell-utils/cli-shell-utils.bash;");
-
 // Per-session log path kept out of world-writable /tmp:
 //   running as root -> /run (root-only)
 //   running as the user -> private per-user runtime dir ($XDG_RUNTIME_DIR)
@@ -56,9 +51,9 @@ public:
     ~MainWindow();
 
     void reject() override;
-    void makeUsb(const QString &options);
+    void makeUsb(QStringList options);
     void setup();
-    QString buildOptionList();
+    QStringList buildOptionList();
     void buildUsbList();
     void validate_name();
     QStringList

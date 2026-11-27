@@ -26,6 +26,7 @@
 #include <QDateTime>
 #include <QIcon>
 #include <QLocale>
+#include <QLibraryInfo>
 #include <QScopedPointer>
 #include <QTranslator>
 #include <QDebug>
@@ -68,7 +69,12 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon::fromTheme("media-removable"));
 
     QTranslator qtTran;
+#ifdef APPIMAGE_BUILD
+    if (qtTran.load(QLocale(), QStringLiteral("qtbase"), QStringLiteral("_"),
+                    QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+#else
     if (qtTran.load(QStringLiteral("qt_") + QLocale::system().name())) {
+#endif
         a.installTranslator(&qtTran);
     }
 
@@ -88,7 +94,12 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(messageHandler);
 
     QTranslator appTran;
-    if (appTran.load(QStringLiteral("formatusb_") + QLocale::system().name(), "/usr/share/formatusb/locale")) {
+#ifdef APPIMAGE_BUILD
+    const QString localePath = QStringLiteral(":/i18n");
+#else
+    const QString localePath = QStringLiteral("/usr/share/formatusb/locale");
+#endif
+    if (appTran.load(QLocale(), QStringLiteral("formatusb"), QStringLiteral("_"), localePath)) {
         a.installTranslator(&appTran);
     }
 

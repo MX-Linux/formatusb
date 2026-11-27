@@ -35,6 +35,7 @@ public:
     explicit Cmd(QObject *parent = nullptr);
     bool run(const QString &cmd, bool quiet = false);
     bool run(const QString &cmd, QString &output, bool quiet = false);
+    bool runProgram(const QString &program, const QStringList &args, QString &output, bool quiet = false);
     QString getCmdOut(const QString &cmd, bool quiet = false);
 
 signals:

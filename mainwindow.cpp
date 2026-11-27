@@ -24,6 +24,7 @@
 
 #include "mainwindow.h"
 #include "about.h"
+#include "apppaths.h"
 #include "ui_mainwindow.h"
 #include <version.h>
 
@@ -68,13 +69,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::makeUsb(const QString &options)
+void MainWindow::makeUsb(QStringList options)
 {
     formatting = true;
     ui->buttonCancel->setEnabled(false);
     connect(cmd, &Cmd::outputAvailable, this, &MainWindow::updateOutput);
     connect(cmd, &Cmd::errorAvailable, this, &MainWindow::updateOutput);
-    const bool success = cmd->run(options);
+#ifdef APPIMAGE_BUILD
+    const QString program = appPath(QStringLiteral("lib/formatusb/appimage-format"));
+#else
+    QString program = QStringLiteral("/usr/lib/formatusb/formatusb_lib");
+    if (getuid() != 0) {
+        options.prepend(program);
+        program = !QFile::exists("/usr/bin/pkexec") && QFile::exists("/usr/bin/gksu")
+                      ? QStringLiteral("/usr/bin/gksu") : QStringLiteral("/usr/bin/pkexec");
+    }
+#endif
+    QString output;
+    const bool success = cmd->runProgram(program, options, output);
     cmd->disconnect(this);
     formatting = false;
     ui->buttonCancel->setEnabled(true);
@@ -100,12 +112,11 @@ void MainWindow::setup()
 }
 
 // Build the option list to be passed to live-usb-maker
-QString MainWindow::buildOptionList()
+QStringList MainWindow::buildOptionList()
 {
     device = ui->comboBoxUsbList->currentText().split(" ").at(0);
     label = ui->lineEditFSlabel->text();
     QString partOption;
-    QString options;
 
     QString format = ui->comboBoxDataFormat->currentText();
     if (format.contains("fat32")) {
@@ -130,22 +141,7 @@ QString MainWindow::buildOptionList()
         partOption = "part";
     }
 
-    QString authentication = "pkexec";
-
-    if (!QFile::exists("/usr/bin/pkexec") && QFile::exists("/usr/bin/gksu")) {
-        authentication = "gksu";
-    }
-
-    if (getuid() == 0) {
-        authentication = "";
-    }
-
-    QString prefix = authentication.isEmpty() ? QString() : authentication + " ";
-    options = prefix + "/usr/lib/formatusb/formatusb_lib \"" + device + "\" " + format + " \"" + label
-              + "\" " + partOption + " " + ui->comboBoxUsbList->currentData().toString();
-    qDebug() << "partition is" << device << "label " << label;
-    qDebug() << "Options: " << options;
-    return options;
+    return {device, format, label, partOption, ui->comboBoxUsbList->currentData().toString()};
 }
 
 // build the USB list
@@ -189,23 +185,31 @@ void MainWindow::buildUsbList()
 QStringList MainWindow::removeUnsuitable(const QStringList &devices)
 {
     QStringList list;
-    QString name;
-    bool showAll = ui->checkBoxShowAll->isChecked();
+    QString library = appPath(QStringLiteral("lib/cli-shell-utils/cli-shell-utils.bash"));
+#ifndef APPIMAGE_BUILD
+    const QString localLibrary = QStringLiteral("/usr/local/lib/cli-shell-utils/cli-shell-utils.bash");
+    if (QFile::exists(localLibrary)) {
+        library = localLibrary;
+    }
+#endif
+    const QString bash = QStringLiteral("/bin/bash");
+    QString liveDrive;
+    if (!cmd->runProgram(bash, {"-c", R"sh(. "$1" && get_drive "$(get_live_dev)")sh", "formatusb", library},
+                         liveDrive, true)) {
+        return {};
+    }
+    const bool showAll = ui->checkBoxShowAll->isChecked();
     for (const QString &line : devices) {
-        name = line.split(" ").at(0);
-        if (!showAll) {
-            if (system(cli_utils.toUtf8() + "is_usb_or_removable " + name.toUtf8()) == 0) {
-                if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
-                    list << line;
-                }
-            }
-        } else {
-            if (cmd->getCmdOut(cli_utils + "get_drive $(get_live_dev) ") != name) {
-                list << line;
-            }
+        const QString name = line.section(' ', 0, 0);
+        if (name.isEmpty() || name == liveDrive) {
+            continue;
+        }
+        QString output;
+        if (showAll || cmd->runProgram(bash, {"-c", R"(. "$1" && is_usb_or_removable "$2")", "formatusb", library, name},
+                                       output, true)) {
+            list << line;
         }
     }
-
     return list;
 }
 
@@ -305,14 +309,14 @@ void MainWindow::on_buttonAbout_clicked()
                            + "</h3></p><p align=\"center\"><a href=\"http://mxlinux.org\">http://mxlinux.org</a><br "
                              "/></p><p align=\"center\">"
                             + tr("Copyright (c) MX Linux") + "<br /><br /></p>",
-                       "/usr/share/doc/formatusb/license.html", tr("%1 License").arg(windowTitle()), true);
+                       appPath(QStringLiteral("share/doc/formatusb/license.html")), tr("%1 License").arg(windowTitle()), true);
     show();
 }
 
 // Help button clicked
 void MainWindow::on_buttonHelp_clicked()
 {
-    QString url = "/usr/share/doc/formatusb/help/formatusb.html";
+    const QString url = appPath(QStringLiteral("share/doc/formatusb/help/formatusb.html"));
     displayDoc(url, tr("%1 Help").arg(windowTitle()), true);
 }
 

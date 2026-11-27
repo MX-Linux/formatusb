@@ -54,13 +54,18 @@ QString Cmd::getCmdOut(const QString &cmd, bool quiet)
 
 bool Cmd::run(const QString &cmd, QString &output, bool quiet)
 {
+    return runProgram(QStringLiteral("/bin/bash"), {QStringLiteral("-c"), cmd}, output, quiet);
+}
+
+bool Cmd::runProgram(const QString &program, const QStringList &args, QString &output, bool quiet)
+{
     outBuffer.clear();
     connect(this, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &Cmd::finished, Qt::UniqueConnection);
     if (this->state() != QProcess::NotRunning) {
         qDebug() << "Process already running:" << this->program() << this->arguments();
         return false;
     }
-    if (!quiet) qDebug().noquote() << cmd;
+    if (!quiet) qDebug() << program << args;
     QEventLoop loop;
     connect(this, &Cmd::finished, &loop, &QEventLoop::quit, Qt::UniqueConnection);
     connect(this, &QProcess::errorOccurred, &loop, [&loop](QProcess::ProcessError error) {
@@ -68,7 +73,7 @@ bool Cmd::run(const QString &cmd, QString &output, bool quiet)
             loop.quit();
         }
     });
-    start("/bin/bash", QStringList() << "-c" << cmd);
+    start(program, args);
     if (error() != QProcess::FailedToStart) {
         loop.exec();
     }
