@@ -30,10 +30,8 @@ makedepends=('qt6-tools' 'cmake' 'ninja')
 source=("${pkgname}_${pkgver}.tar.xz")
 sha256sums=('SKIP')
 
-# Unlike the other MX repositories, whose tarballs unpack to "src", dpkg-source
-# packed this one from a directory called "formatusb", so that - and not
-# ${pkgname}-${pkgver} - is what it unpacks to.
-_srcdir="formatusb"
+# Top-level directory in the Debian source tarball.
+_srcdir="src"
 
 build() {
     cd "${srcdir}/${_srcdir}"
