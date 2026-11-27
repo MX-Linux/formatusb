@@ -10,7 +10,7 @@
 # Keep pkgver in step with debian/changelog: it names the tarball.
 
 pkgname=formatusb
-pkgver=26.11
+pkgver=26.11.1
 pkgrel=1
 pkgdesc="USB Device Formatting Utility"
 arch=('x86_64' 'i686')

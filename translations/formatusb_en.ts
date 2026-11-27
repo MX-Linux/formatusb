@@ -123,38 +123,38 @@
         <translation>Back</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="83"/>
+        <location filename="../mainwindow.cpp" line="95"/>
         <source>Success</source>
         <translation>Success</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="83"/>
+        <location filename="../mainwindow.cpp" line="95"/>
         <source>Format successful!</source>
         <translation>Format successful!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="85"/>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="97"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Failure</source>
         <translation>Failure</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="85"/>
+        <location filename="../mainwindow.cpp" line="97"/>
         <source>Error encountered in the Format process</source>
         <translation>Error encountered in the Format process</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="240"/>
+        <location filename="../mainwindow.cpp" line="244"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="240"/>
+        <location filename="../mainwindow.cpp" line="244"/>
         <source>Please select a USB device to write to</source>
         <translation>Please select a USB device to write to</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="245"/>
+        <location filename="../mainwindow.cpp" line="249"/>
         <source>These actions will destroy all data on 
 
 </source>
@@ -163,42 +163,42 @@
 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="246"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Do you wish to continue?</source>
         <translation>Do you wish to continue?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>About %1</source>
         <translation>About %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>Version: </source>
         <translation>Version: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>Program for formatting USB devices</source>
         <translation>Program for formatting USB devices</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="311"/>
         <source>Copyright (c) MX Linux</source>
         <translation>Copyright (c) MX Linux</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>%1 License</source>
         <translation>%1 License</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="320"/>
         <source>%1 Help</source>
         <translation>%1 Help</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Invalid Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -206,23 +206,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../about.cpp" line="75"/>
+        <location filename="../about.cpp" line="76"/>
         <source>Could not load %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="90"/>
+        <location filename="../about.cpp" line="91"/>
         <source>License</source>
         <translation>License</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="91"/>
-        <location filename="../about.cpp" line="101"/>
+        <location filename="../about.cpp" line="92"/>
+        <location filename="../about.cpp" line="102"/>
         <source>Changelog</source>
         <translation>Changelog</translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="92"/>
+        <location filename="../about.cpp" line="93"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
@@ -232,7 +232,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../about.cpp" line="55"/>
+        <location filename="../about.cpp" line="56"/>
         <location filename="../about.cpp" line="116"/>
         <source>&amp;Close</source>
         <translation>&amp;Close</translation>

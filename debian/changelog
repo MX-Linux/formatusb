@@ -1,3 +1,9 @@
+formatusb (26.11.1) mx; urgency=medium
+
+  * Provide an x86-64 AppImage with each GitHub release.
+
+ -- Adrian <adrian@mxlinux.org>  Fri, 27 Nov 2026 16:24:07 -0500
+
 formatusb (26.11) mx; urgency=medium
 
   * Stop before erasing a drive if any of its partitions cannot be unmounted.

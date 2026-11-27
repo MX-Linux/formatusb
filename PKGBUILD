@@ -1,6 +1,6 @@
 # Maintainer: Adrian <adrian@mxlinux.org>
 pkgname=formatusb
-pkgver=${PKGVER:-26.11}
+pkgver=${PKGVER:-26.11.1}
 pkgrel=1
 pkgdesc="USB Device Formatting Utility"
 arch=('x86_64' 'i686')
